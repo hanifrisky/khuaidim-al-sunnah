@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Kitabs\RelationManagers;
 
-use App\Filament\Resources\Kitabs\KitabResource;
+
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
@@ -13,6 +13,11 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Filters\TrashedFilter;
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
+
 
 
 
@@ -20,7 +25,19 @@ class BabsRelationManager extends RelationManager
 {
     protected static string $relationship = 'babs';
 
-    protected static ?string $relatedResource = KitabResource::class;
+    public function form(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                TextInput::make('name')
+                    ->required(),
+                Textarea::make('description'),
+                FileUpload::make('media')
+                    ->label('Bab Cover')
+                    ->directory('kitabs/babs')
+                    ->image(),
+            ]);
+    }
 
     public function table(Table $table): Table
     {
