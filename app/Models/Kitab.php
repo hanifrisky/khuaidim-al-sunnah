@@ -15,4 +15,9 @@ class Kitab extends Model
         'description',
         'media'
     ];
+
+    public function babs()
+    {
+        return $this->hasMany(Bab::class, 'kitab_id');
+    }
 }

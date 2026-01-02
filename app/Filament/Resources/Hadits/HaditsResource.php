@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\Babs;
+namespace App\Filament\Resources\Hadits;
 
-use App\Filament\Resources\Babs\Pages\CreateBab;
-use App\Filament\Resources\Babs\Pages\EditBab;
-use App\Filament\Resources\Babs\Pages\ListBabs;
-use App\Filament\Resources\Babs\Schemas\BabForm;
-use App\Filament\Resources\Babs\Tables\BabsTable;
-use App\Models\Bab;
+use App\Filament\Resources\Hadits\Pages\CreateHadits;
+use App\Filament\Resources\Hadits\Pages\EditHadits;
+use App\Filament\Resources\Hadits\Pages\ListHadits;
+use App\Filament\Resources\Hadits\Schemas\HaditsForm;
+use App\Filament\Resources\Hadits\Tables\HaditsTable;
+use App\Models\Hadits;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -17,26 +17,24 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use UnitEnum;
 
-class BabResource extends Resource
+class HaditsResource extends Resource
 {
-    protected static ?string $model = Bab::class;
+    protected static ?string $model = Hadits::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static string | UnitEnum | null $navigationGroup = 'Manajemen Hadits';
 
-    protected static ?int $navigationSort = 2;
-
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {
-        return BabForm::configure($schema);
+        return HaditsForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return BabsTable::configure($table);
+        return HaditsTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -49,9 +47,9 @@ class BabResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListBabs::route('/'),
-            'create' => CreateBab::route('/create'),
-            'edit' => EditBab::route('/{record}/edit'),
+            'index' => ListHadits::route('/'),
+            'create' => CreateHadits::route('/create'),
+            'edit' => EditHadits::route('/{record}/edit'),
         ];
     }
 

@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Babs\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
 
 class BabForm
 {
@@ -12,13 +14,18 @@ class BabForm
     {
         return $schema
             ->components([
-                Select::make('kitab_id')->relationship('kitab')
-                    ->required(),
-
+                Select::make('kitab_id')
+                    ->relationship('kitab', 'name')
+                    ->searchable()
+                    ->required()
+                    ->preload(),
                 TextInput::make('name')
                     ->required(),
-                TextInput::make('description'),
-                TextInput::make('media'),
+                Textarea::make('description'),
+                FileUpload::make('media')
+                    ->label('Bab Cover')
+                    ->directory('kitabs/babs')
+                    ->image(),
             ]);
     }
 }
