@@ -15,4 +15,9 @@ class Bab extends Model
         'description',
         'media'
     ];
+
+    public function kitab()
+    {
+        return $this->belongsTo(Kitab::class);
+    }
 }
