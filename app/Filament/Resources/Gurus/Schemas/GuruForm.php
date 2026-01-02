@@ -16,19 +16,11 @@ class GuruForm
         return $schema
             ->components([
                 Hidden::make('user_id'),
-                TextInput::make('name')
-                    ->required()
-                    ->default(function ($get) {
-                        $user = User::find($get('user_id'));
-                        return $user ? $user->name : '';
-                    }),
-                TextInput::make('email')
+                TextInput::make('user.name')
+                    ->required(),
+                TextInput::make('user.email')
                     ->email()
-                    ->required()
-                    ->default(function ($get) {
-                        $user = User::find($get('user_id'));
-                        return $user ? $user->email : '';
-                    }),
+                    ->required(),
                 TextInput::make('identitas'),
                 Select::make('jenis_kelamin')->options([
                     'laki-laki' => 'Pria',
