@@ -15,13 +15,21 @@ class GurusTable
         return $table
             ->columns([
                 TextColumn::make('user.name')
-                    ->numeric()
+                    ->label('Nama Guru')
+                    ->placeholder('-')
                     ->sortable(),
+                TextColumn::make('user.email')
+                    ->label('Email Guru')
+                    ->placeholder('-')
+                    ->searchable(),
                 TextColumn::make('identitas')
+                    ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('jenis_kelamin')
+                    ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('telp')
+                    ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('tugas_hafalans', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->foreignId('siswa_id')->nullable()->constrained('siswas')->nullOnDelete();
             $table->foreignId('kelas_id')->nullable()->constrained('kelas')->nullOnDelete();
             $table->foreignId('hadits_id')->nullable()->constrained('hadits')->nullOnDelete();
+            $table->foreignId('bab_id')->nullable()->constrained('babs')->nullOnDelete();
             $table->foreignId('guru_id')->nullable()->constrained('users')->nullOnDelete();
             $table->date('deadline')->nullable();
-            $table->enum('status', ['draft', 'publish', 'archieve', 'completed', 'rejected'])->default('draft');
+            $table->enum('status', ['draft', 'publish', 'archieve',])->default('draft');
             $table->timestamps();
         });
     }

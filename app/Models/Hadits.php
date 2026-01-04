@@ -18,6 +18,8 @@ class Hadits extends Model
         'translate',
         'media'
     ];
+    protected $with = ['bab', 'kitab'];
+
     public function bab()
     {
         return $this->belongsTo(Bab::class, 'bab_id');

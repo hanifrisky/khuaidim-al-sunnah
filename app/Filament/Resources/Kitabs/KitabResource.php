@@ -8,6 +8,7 @@ use App\Filament\Resources\Kitabs\Pages\ListKitabs;
 use App\Filament\Resources\Kitabs\RelationManagers\BabsRelationManager;
 use App\Filament\Resources\Kitabs\Schemas\KitabForm;
 use App\Filament\Resources\Kitabs\Tables\KitabsTable;
+use App\Helper\Authorization\AksesMenu;
 use App\Models\Kitab;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -20,13 +21,14 @@ use UnitEnum;
 
 class KitabResource extends Resource
 {
+    use AksesMenu;
     protected static ?string $model = Kitab::class;
 
     protected static ?string $navigationLabel = 'Kitab';
 
     protected static string | UnitEnum | null $navigationGroup = 'Manajemen Hadits';
 
-    protected static ?int $navigationSort = 1;
+    // protected static ?int $navigationSort = 1;
 
     protected static string|BackedEnum|null $navigationIcon = "heroicon-s-book-open";
 

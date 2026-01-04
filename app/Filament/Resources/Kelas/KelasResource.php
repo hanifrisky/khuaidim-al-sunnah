@@ -5,20 +5,34 @@ namespace App\Filament\Resources\Kelas;
 use App\Filament\Resources\Kelas\Pages\CreateKelas;
 use App\Filament\Resources\Kelas\Pages\EditKelas;
 use App\Filament\Resources\Kelas\Pages\ListKelas;
+use App\Filament\Resources\Kelas\RelationManagers\SiswaRelationManager;
 use App\Filament\Resources\Kelas\Schemas\KelasForm;
 use App\Filament\Resources\Kelas\Tables\KelasTable;
+use App\Helper\Authorization\AksesMenu;
 use App\Models\Kelas;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class KelasResource extends Resource
 {
+    use AksesMenu;
     protected static ?string $model = Kelas::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingOffice2;
+    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Kelas';
+    protected static ?string $label = 'Kelas';
+    protected static ?string $pluralLabel = 'Kelas';
+    protected static ?string $navigationLabel = 'Kelas';
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static function menuRole(): array
+    {
+        return ['admin', 'guru'];
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -33,7 +47,7 @@ class KelasResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'siswa' => SiswaRelationManager::class,
         ];
     }
 

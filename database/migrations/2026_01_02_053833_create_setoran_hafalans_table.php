@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('tugas_hafalan_id')->nullable()->constrained('tugas_hafalans')->nullOnDelete();
             $table->foreignId('siswa_id')->nullable()->constrained('siswas')->nullOnDelete();
             $table->string('media')->nullable();
-            $table->enum('status', ['draft', 'review', 'accepted', 'rejected'])->default('draft');
+            $table->enum('status', ['assigned', 'draft', 'review', 'accepted', 'rejected'])->default('assigned');
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

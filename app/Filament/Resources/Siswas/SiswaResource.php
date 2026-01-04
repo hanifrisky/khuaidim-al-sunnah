@@ -7,19 +7,25 @@ use App\Filament\Resources\Siswas\Pages\EditSiswa;
 use App\Filament\Resources\Siswas\Pages\ListSiswas;
 use App\Filament\Resources\Siswas\Schemas\SiswaForm;
 use App\Filament\Resources\Siswas\Tables\SiswasTable;
+use App\Helper\Authorization\AksesMenu;
 use App\Models\Siswa;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SiswaResource extends Resource
 {
+    use AksesMenu;
     protected static ?string $model = Siswa::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::AcademicCap;
+    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Pengguna';
+    protected static ?string $label = 'Siswa';
+    protected static ?string $pluralLabel = 'Siswa';
+    protected static ?string $navigationLabel = 'Siswa';
     public static function form(Schema $schema): Schema
     {
         return SiswaForm::configure($schema);

@@ -19,6 +19,15 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
+                TextColumn::make('role')
+                    ->searchable()
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'siswa' => 'info',
+                        'admin' => 'warning',
+                        'guru' => 'success',
+                        default => 'primary',
+                    }),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

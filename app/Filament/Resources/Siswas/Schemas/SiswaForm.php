@@ -2,8 +2,12 @@
 
 namespace App\Filament\Resources\Siswas\Schemas;
 
+use App\Models\User;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 class SiswaForm
 {
@@ -11,16 +15,29 @@ class SiswaForm
     {
         return $schema
             ->components([
-                TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
+                Hidden::make('user_id'),
+                TextInput::make('user.name')
+                    ->required(),
+                TextInput::make('user.email')
+                    ->email()
+                    ->unique(User::class, 'email', ignoreRecord: false, modifyRuleUsing: function (Unique $rule, $record) {
+                        $rule->whereNot('id', $record->user_id);
+                    })
+                    ->required(),
                 TextInput::make('identitas'),
-                TextInput::make('jenis_kelamin'),
+                Select::make('jenis_kelamin')
+                    ->options([
+                        'laki-laki' => 'Pria',
+                        'perempuan' => 'Wanita',
+                    ])
+                    ->default('laki-laki'),
                 TextInput::make('telp')
                     ->tel(),
-                TextInput::make('kelas_id')
+                Select::make('kelas_id')
+                    ->searchable()
                     ->required()
-                    ->numeric(),
+                    ->preload()
+                    ->relationship('kelas', 'name'),
             ]);
     }
 }

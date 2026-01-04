@@ -20,4 +20,8 @@ class Kitab extends Model
     {
         return $this->hasMany(Bab::class, 'kitab_id');
     }
+    public function getCoverUrlAttribute()
+    {
+        return asset('storage/' . $this->media);
+    }
 }

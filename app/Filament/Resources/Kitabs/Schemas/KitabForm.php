@@ -18,11 +18,11 @@ class KitabForm
                 TextInput::make('author')
                     ->required(),
                 Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
+                    ->required(),
                 FileUpload::make('media')
                     ->label('Cover Kitab')
-                    ->directory('kitabs/covers')
+                    ->disk('public')
+                    ->directory('kitabs/cover')
                     ->image(),
             ]);
     }

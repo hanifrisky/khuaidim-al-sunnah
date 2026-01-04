@@ -7,6 +7,7 @@ use App\Filament\Resources\Hadits\Pages\EditHadits;
 use App\Filament\Resources\Hadits\Pages\ListHadits;
 use App\Filament\Resources\Hadits\Schemas\HaditsForm;
 use App\Filament\Resources\Hadits\Tables\HaditsTable;
+use App\Helper\Authorization\AksesMenu;
 use App\Models\Hadits;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -19,11 +20,13 @@ use UnitEnum;
 
 class HaditsResource extends Resource
 {
+    use AksesMenu;
     protected static ?string $model = Hadits::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static string | UnitEnum | null $navigationGroup = 'Manajemen Hadits';
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?int $navigationSort = 3;
 

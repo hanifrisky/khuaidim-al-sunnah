@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Siswas\Tables;
 
+use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -14,18 +15,20 @@ class SiswasTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->numeric()
+                TextColumn::make('user.name')
+                    ->label('Nama')
                     ->sortable(),
+                TextColumn::make('user.email')
+                    ->label('Email')
+                    ->searchable(),
                 TextColumn::make('identitas')
                     ->searchable(),
                 TextColumn::make('jenis_kelamin')
                     ->searchable(),
                 TextColumn::make('telp')
                     ->searchable(),
-                TextColumn::make('kelas_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('kelas.guru.name')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

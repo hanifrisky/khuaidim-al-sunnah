@@ -2,24 +2,28 @@
 
 namespace App\Filament\Resources\Kitabs\RelationManagers;
 
-
+use App\Models\Bab;
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
-
-
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BabsRelationManager extends RelationManager
 {
@@ -36,7 +40,8 @@ class BabsRelationManager extends RelationManager
                     ->label('Bab Cover')
                     ->directory('kitabs/babs')
                     ->image(),
-            ]);
+            ])
+            ->columns(1);
     }
 
     public function table(Table $table): Table
@@ -46,9 +51,11 @@ class BabsRelationManager extends RelationManager
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('description')
-                    ->searchable(),
+                    ->searchable()
+                    ->placeholder('-'),
                 TextColumn::make('media')
-                    ->searchable(),
+                    ->searchable()
+                    ->placeholder('-'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -62,15 +69,23 @@ class BabsRelationManager extends RelationManager
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->headerActions([
-                CreateAction::make()->label('Tambah Bab'),
-
-            ])
             ->filters([
                 TrashedFilter::make(),
             ])
+            ->headerActions([
+                CreateAction::make()
+                    ->modalWidth('md'),
+            ])
             ->recordActions([
+                Action::make('view')
+                    ->label('View')
+                    ->color('secondary')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn(Bab $record): string => route('filament.admin.resources.babs.edit', $record)),
                 EditAction::make(),
+                DeleteAction::make(),
+                ForceDeleteAction::make(),
+                RestoreAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -78,6 +93,10 @@ class BabsRelationManager extends RelationManager
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(fn(Builder $query) => $query
+                ->withoutGlobalScopes([
+                    SoftDeletingScope::class,
+                ]));
     }
 }

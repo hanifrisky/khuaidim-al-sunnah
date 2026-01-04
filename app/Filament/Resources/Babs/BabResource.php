@@ -5,8 +5,11 @@ namespace App\Filament\Resources\Babs;
 use App\Filament\Resources\Babs\Pages\CreateBab;
 use App\Filament\Resources\Babs\Pages\EditBab;
 use App\Filament\Resources\Babs\Pages\ListBabs;
+use App\Filament\Resources\Babs\Pages\ViewBabs;
+use App\Filament\Resources\Babs\RelationManagers\HaditsRelationManager;
 use App\Filament\Resources\Babs\Schemas\BabForm;
 use App\Filament\Resources\Babs\Tables\BabsTable;
+use App\Helper\Authorization\AksesMenu;
 use App\Models\Bab;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -19,6 +22,7 @@ use UnitEnum;
 
 class BabResource extends Resource
 {
+    use AksesMenu;
     protected static ?string $model = Bab::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
@@ -26,7 +30,7 @@ class BabResource extends Resource
     protected static string | UnitEnum | null $navigationGroup = 'Manajemen Hadits';
 
     protected static ?int $navigationSort = 2;
-
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
@@ -42,7 +46,7 @@ class BabResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            "hadits" => HaditsRelationManager::class,
         ];
     }
 
@@ -52,6 +56,7 @@ class BabResource extends Resource
             'index' => ListBabs::route('/'),
             'create' => CreateBab::route('/create'),
             'edit' => EditBab::route('/{record}/edit'),
+            'view' => ViewBabs::route('/{record}'),
         ];
     }
 

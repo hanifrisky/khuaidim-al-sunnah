@@ -10,10 +10,10 @@ class Kelas extends Model
         'name',
         'guru_id',
     ];
-
+    protected $with = ['guru'];
     public function guru()
     {
-        return $this->belongsTo(User::class, 'guru_id');
+        return $this->belongsTo(Guru::class, 'guru_id');
     }
 
     public function siswa()

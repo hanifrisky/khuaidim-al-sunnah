@@ -15,9 +15,14 @@ class Bab extends Model
         'description',
         'media'
     ];
+    protected $with = ['kitab'];
 
     public function kitab()
     {
         return $this->belongsTo(Kitab::class);
+    }
+    public function hadits()
+    {
+        return $this->hasMany(Hadits::class);
     }
 }

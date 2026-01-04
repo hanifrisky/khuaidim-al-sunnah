@@ -1,0 +1,223 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+@theme {
+    --color-main-primary: rgb(12, 117, 111);
+    --color-main-secondary: rgb(95, 237, 189);
+    --color-main-black: rgb(40, 43, 47);
+    --color-main-white: rgb(255, 255, 255);
+    --color-main-accent: rgb(233, 233, 233);
+}
+
+.fi-body {
+    @apply bg-main-white text-main-black;
+}
+
+/* ================================ FILAMENT BUTTON ================================ */
+/*  */
+/*  */
+.fi-btn.fi-color-primary {
+    @apply bg-gradient-to-l from-green-600 via-green-500 to-emerald-400 hover:from-green-700 hover:via-green-600 hover:to-emerald-500 hover:shadow-green-500/30;
+}
+
+
+.fi-btn {
+    @apply rounded-2xl font-semibold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg active:scale-95;
+}
+
+/* ================================ FILAMENT Input ================================ */
+/*  */
+/*  */
+.fi-input-wrp {
+    @apply rounded-2xl;
+}
+
+/* ================================ FILAMENT SEARCH TABLE ================================ */
+/*  */
+/*  */
+.fi-ta-search-field .fi-input-wrp {
+    @apply rounded-2xl ring-1;
+}
+.fi-ta-header-toolbar {
+    @apply relative p-10 flex items-center;
+}
+
+.fi-ta-search-field {
+    @apply absolute left-1/2 -translate-x-1/2 w-full max-w-md;
+}
+
+
+/* ================================ FILAMENT TOPBAR ================================ */
+/*  */
+/*  */
+.fi-logo {
+    @apply text-main-white;
+}
+
+.fi-topbar {
+    @apply bg-main-primary text-main-white;
+}
+
+
+
+/* ================================ FILAMENT SIDEBAR ================================ */
+/*  */
+/*  */
+.fi-sidebar {
+    @apply bg-main-accent rounded-2xl ml-5 mt-5 p-2;
+}
+
+.fi-body-has-topbar .fi-sidebar {
+    height: calc(100vh - 200px);
+    min-height: 200px;
+}
+
+.fi-sidebar-item>.fi-sidebar-item-btn {
+    @apply rounded-2xl hover:bg-main-secondary/50 pl-5;
+}
+
+.fi-sidebar-item {
+    &.fi-active {
+        &>.fi-sidebar-item-btn {
+            @apply bg-gradient-to-l from-green-600 via-green-500 to-emerald-400 hover:from-green-700 hover:via-green-600 hover:to-emerald-500 hover:shadow-green-500/30;
+        }
+    }
+}
+.fi-sidebar-item {
+    &>.fi-sidebar-item-btn {
+        &>.fi-icon {
+            @apply text-main-primary hover:text-main-primary;
+        }
+    }
+}
+
+.fi-sidebar-item {
+    &.fi-active {
+        &>.fi-sidebar-item-btn {
+            &>.fi-icon {
+                @apply text-main-white hover:text-main-white;
+            }
+        }
+    }
+}
+
+.fi-sidebar-item {
+    &.fi-active {
+        &>.fi-sidebar-item-btn {
+            &>.fi-sidebar-item-label {
+                @apply text-main-white hover:text-main-white;
+            }
+        }
+    }
+}
+
+/* ================================ Glass Table Card ================================ */
+/*  */
+/*  */
+
+/* Remove Table view */
+.card-glass-record>.fi-ta-ctn {
+    @apply ring-0 shadow-none bg-transparent;
+}
+
+.card-glass-record>.fi-ta-ctn {
+    &>.fi-ta-main {
+        &>.fi-ta-content-ctn {
+            overflow: visible;
+        }
+    }
+}
+
+.card-glass-record>.fi-ta-ctn {
+    & .fi-ta-header-toolbar {
+        @apply border-b-0;
+    }
+}
+
+.card-glass-record .fi-pagination {
+    @apply mt-10;
+}
+.card-hidden-content{
+    display:none;
+}
+
+/* ================================
+     FILAMENT RECORD AS GLASS CARD
+     ================================ */
+
+.card-glass-record .fi-ta-record {
+    @apply relative bg-amber-100/20 rounded-3xl ring-0 transition-all duration-500 ease-out;
+    overflow: visible !important;
+}
+
+
+/* Hover scale */
+.card-glass-record .fi-ta-record:hover {
+    transform: scale(1.04);
+    z-index: 20;
+}
+
+/* .card-glass-record .fi-ta-record-content-ctn {
+    @apply bg-main-black;
+} */
+
+/* Shadow layer (tidak ke-clip) */
+.card-glass-record .fi-ta-record::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    /* rounded-3xl */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .25);
+    opacity: .6;
+    transition: opacity .4s ease;
+    z-index: -1;
+}
+
+.card-glass-record .fi-ta-record:hover::before {
+    opacity: 1;
+}
+
+/* ================================ 
+     BACKGROUND IMAGE FULL
+     ================================ */
+.card-wrapper {
+    @apply relative h-100 rounded-3xl;
+    margin: -16px -16px -16px -16px;
+    width: 'max-content';
+}
+
+.glass-card-bg {
+    @apply absolute inset-0 rounded-3xl bg-cover bg-center;
+    z-index: 0;
+}
+
+/* Dark overlay for readability */
+.glass-card-overlay {
+    @apply absolute inset-0 rounded-3xl bg-gradient-to-t from-green-400/30 via-black/30 to-transparent;
+    z-index: 1;
+}
+
+.card-glass-record .fi-ta-actions {
+    z-index: 3;
+}
+
+/* ================================
+     CONTENT (GLASS EFFECT)
+     ================================ */
+
+.glass-card-content {
+    @apply absolute bottom-4 left-4 right-4 rounded-2xl px-4 py-3 bg-white/20 backdrop-blur-lg border border-white/30 text-white;
+    /* margin-bottom: 50px; */
+    z-index: 2;
+}
+
+.glass-card-title {
+    @apply text-lg font-semibold;
+}
+
+.glass-card-desc {
+    @apply mt-1 text-sm text-white/90;
+}

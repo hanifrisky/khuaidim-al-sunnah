@@ -8,6 +8,7 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
+use Illuminate\Validation\Rules\Unique;
 
 class GuruForm
 {
@@ -20,6 +21,9 @@ class GuruForm
                     ->required(),
                 TextInput::make('user.email')
                     ->email()
+                    ->unique(User::class, 'email', ignoreRecord: false, modifyRuleUsing: function (Unique $rule, $record) {
+                        $rule->whereNot('id', $record->user_id);
+                    })
                     ->required(),
                 TextInput::make('identitas'),
                 Select::make('jenis_kelamin')->options([

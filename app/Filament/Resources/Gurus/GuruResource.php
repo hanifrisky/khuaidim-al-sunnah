@@ -7,18 +7,34 @@ use App\Filament\Resources\Gurus\Pages\EditGuru;
 use App\Filament\Resources\Gurus\Pages\ListGurus;
 use App\Filament\Resources\Gurus\Schemas\GuruForm;
 use App\Filament\Resources\Gurus\Tables\GurusTable;
+use App\Helper\Authorization\AksesMenu;
+use App\Helper\Authorization\MenuAdmin;
+use App\Helper\Authorization\MenuGuru;
+use App\Helper\Authorization\MenuSiswa;
 use App\Models\Guru;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class GuruResource extends Resource
 {
+    use AksesMenu;
+
     protected static ?string $model = Guru::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Users;
+    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Pengguna';
+    protected static ?string $label = 'Guru';
+    protected static ?string $pluralLabel = 'Guru';
+    protected static ?string $navigationLabel = 'Guru';
+
+    protected static function menuRole(): array
+    {
+        return ['admin'];
+    }
 
     public static function form(Schema $schema): Schema
     {

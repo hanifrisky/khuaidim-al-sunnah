@@ -12,10 +12,12 @@ class TugasHafalan extends Model
         'siswa_id',
         'kelas_id',
         'hadits_id',
+        'bab_id',
         'guru_id',
         'deadline',
         'status'
     ];
+    protected $with = ['guru', 'kelas', 'siswa', 'hadits', 'bab'];
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'siswa_id');
@@ -28,8 +30,24 @@ class TugasHafalan extends Model
     {
         return $this->belongsTo(Hadits::class, 'hadits_id');
     }
+    public function bab()
+    {
+        return $this->belongsTo(Bab::class, 'bab_id');
+    }
     public function guru()
     {
-        return $this->belongsTo(User::class, 'guru_id');
+        return $this->belongsTo(Guru::class, 'guru_id');
+    }
+    public function getGuruNameAttribute()
+    {
+        return $this->guru->name;
+    }
+    public function getSiswaNameAttribute()
+    {
+        return $this->siswa->name;
+    }
+    public function getKelasNameAttribute()
+    {
+        return $this->kelas->name;
     }
 }
