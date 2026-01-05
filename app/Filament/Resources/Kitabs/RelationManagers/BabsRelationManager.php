@@ -22,6 +22,8 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\Layout\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -38,7 +40,8 @@ class BabsRelationManager extends RelationManager
                 Textarea::make('description'),
                 FileUpload::make('media')
                     ->label('Bab Cover')
-                    ->directory('kitabs/babs')
+                    ->disk('public')
+                    ->directory('kitabs/bab')
                     ->image(),
             ])
             ->columns(1);
@@ -47,52 +50,61 @@ class BabsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->extraAttributes([
+                'class' => 'card-glass-record'
+            ])
             ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('description')
-                    ->searchable()
-                    ->placeholder('-'),
-                TextColumn::make('media')
-                    ->searchable()
-                    ->placeholder('-'),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Stack::make([
+                    TextColumn::make('name')
+                        ->searchable(),
+                    TextColumn::make('description')
+                        ->searchable()
+                        ->placeholder('-'),
+                    // TextColumn::make('created_at')
+                    //     ->dateTime()
+                    //     ->sortable()
+                    //     ->toggleable(isToggledHiddenByDefault: true),
+                    // TextColumn::make('updated_at')
+                    //     ->dateTime()
+                    //     ->sortable()
+                    //     ->toggleable(isToggledHiddenByDefault: true),
+                    // TextColumn::make('deleted_at')
+                    //     ->dateTime()
+                    //     ->sortable()
+                    //     ->toggleable(isToggledHiddenByDefault: true),
+                ])->extraAttributes(['class' => 'card-hidden-content']),
+                View::make('filament.components.card')
+            ])
+            ->recordUrl(fn(Bab $record): string => route('filament.admin.resources.babs.edit', $record))
+            ->contentGrid([
+                'md' => 2,
+                'xl' => 3,
+                '2xl' => 4
             ])
             ->filters([
-                TrashedFilter::make(),
+                //TrashedFilter::make(),
             ])
             ->headerActions([
                 CreateAction::make()
                     ->modalWidth('md'),
             ])
             ->recordActions([
-                Action::make('view')
-                    ->label('View')
-                    ->color('secondary')
-                    ->icon('heroicon-o-eye')
-                    ->url(fn(Bab $record): string => route('filament.admin.resources.babs.edit', $record)),
-                EditAction::make(),
-                DeleteAction::make(),
-                ForceDeleteAction::make(),
-                RestoreAction::make(),
+                // Action::make('view')
+                //     ->label('View')
+                //     ->color('secondary')
+                //     ->icon('heroicon-o-eye')
+                //     ->url(fn(Bab $record): string => route('filament.admin.resources.babs.edit', $record)),
+                // EditAction::make(),
+                // DeleteAction::make(),
+                // ForceDeleteAction::make(),
+                // RestoreAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
+                // BulkActionGroup::make([
+                //     DeleteBulkAction::make(),
+                //     ForceDeleteBulkAction::make(),
+                //     RestoreBulkAction::make(),
+                // ]),
             ])
             ->modifyQueryUsing(fn(Builder $query) => $query
                 ->withoutGlobalScopes([

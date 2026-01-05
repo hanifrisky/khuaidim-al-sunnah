@@ -24,7 +24,8 @@ class BabForm
                 Textarea::make('description'),
                 FileUpload::make('media')
                     ->label('Bab Cover')
-                    ->directory('kitabs/babs')
+                    ->disk('public')
+                    ->directory('kitabs/bab')
                     ->image(),
             ]);
     }

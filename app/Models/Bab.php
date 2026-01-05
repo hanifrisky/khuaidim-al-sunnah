@@ -25,4 +25,8 @@ class Bab extends Model
     {
         return $this->hasMany(Hadits::class);
     }
+    public function getCoverUrlAttribute()
+    {
+        return asset('storage/' . $this->media);
+    }
 }

@@ -25,24 +25,23 @@ class KitabsTable
             ])
             ->columns([
                 Stack::make([
+                    TextColumn::make('name')
+                        ->searchable(),
                     TextColumn::make('author')
                         ->searchable(),
-                    TextColumn::make('created_at')
-                        ->dateTime()
-                        ->sortable()
-                        ->toggleable(isToggledHiddenByDefault: true),
-                    TextColumn::make('updated_at')
-                        ->dateTime()
-                        ->sortable()
-                        ->toggleable(isToggledHiddenByDefault: true),
-                    TextColumn::make('deleted_at')
-                        ->dateTime()
-                        ->sortable()
-                        ->toggleable(isToggledHiddenByDefault: true),
-                ])
-                    ->extraAttributes([
-                        'class' => 'card-hidden-content'
-                    ]),
+                    // TextColumn::make('created_at')
+                    //     ->dateTime()
+                    //     ->sortable()
+                    //     ->toggleable(isToggledHiddenByDefault: true),
+                    // TextColumn::make('updated_at')
+                    //     ->dateTime()
+                    //     ->sortable()
+                    //     ->toggleable(isToggledHiddenByDefault: true),
+                    // TextColumn::make('deleted_at')
+                    //     ->dateTime()
+                    //     ->sortable()
+                    //     ->toggleable(isToggledHiddenByDefault: true),
+                ])->extraAttributes(['class' => 'card-hidden-content']),
                 View::make('filament.components.card')
             ])
             ->contentGrid([

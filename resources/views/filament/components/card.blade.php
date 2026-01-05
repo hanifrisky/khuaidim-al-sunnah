@@ -15,6 +15,9 @@
             {{ $getRecord()->name }}
         </h3>
         <p class="glass-card-desc">
+            {{ $getRecord()->description }}
+        </p>
+        <p class="glass-card-desc">
             {{ $getRecord()->author }}
         </p>
 
