@@ -11,7 +11,7 @@ class Hadits extends Model
     protected $fillable = [
         'bab_id',
         'kitab_id',
-        'title',
+        'name',
         'content',
         'keterangan',
         'source',
