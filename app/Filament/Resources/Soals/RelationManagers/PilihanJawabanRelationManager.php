@@ -13,6 +13,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -26,6 +27,7 @@ class PilihanJawabanRelationManager extends RelationManager
             ->components([
                 TextInput::make('jawaban')
                     ->required()
+                    ->columnSpanFull()
                     ->maxLength(255),
             ]);
     }
@@ -42,17 +44,19 @@ class PilihanJawabanRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                CreateAction::make(),
-                AssociateAction::make(),
+                CreateAction::make()
+                    ->icon(Heroicon::Plus)
+                    ->label('Pilihan Jawaban')
+                    ->createAnother(false)
+                    ->modalWidth('md')
             ])
             ->recordActions([
-                EditAction::make(),
-                DissociateAction::make(),
+                EditAction::make()
+                    ->modalWidth('md'),
                 DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DissociateBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
             ]);

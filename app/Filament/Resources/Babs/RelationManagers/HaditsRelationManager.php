@@ -39,7 +39,8 @@ class HaditsRelationManager extends RelationManager
             ->components([
                 Hidden::make('kitab_id')
                     ->default($this->ownerRecord->kitab_id),
-                TextInput::make('title')
+                TextInput::make('name')
+                    ->label('Nama Hadits')
                     ->columnSpanFull()
                     ->required(),
                 Textarea::make('content')
@@ -60,7 +61,7 @@ class HaditsRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextEntry::make('title'),
+                TextEntry::make('name'),
                 TextEntry::make('content')
                     ->columnSpanFull(),
                 TextEntry::make('keterangan')
@@ -87,9 +88,9 @@ class HaditsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('title')
+            ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('keterangan')
                     ->searchable(),

@@ -221,3 +221,52 @@
 .glass-card-desc {
     @apply mt-1 text-sm text-white/90;
 }
+
+
+/* ================================ Footer Nav ================================ */
+/*  */
+/*  */
+/* Footer container */
+.footer-nav {
+    @apply fixed bottom-4 left-1/2 -translate-x-1/2
+           border border-gray-200/80 py-3 px-2
+           flex gap-2 rounded-xl
+           bg-white/80 backdrop-blur-sm
+           shadow-lg hover:shadow-xl
+           transition-all duration-300 z-5;
+  }
+
+  /* Item wrapper */
+  .footer-item {
+    @apply relative px-3 cursor-pointer;
+  }
+
+  /* Icon button */
+  .footer-icon {
+    @apply flex h-10 w-10 items-center justify-center
+           rounded-lg
+           transition-colors duration-300
+           hover:bg-blue-50 hover:text-blue-600;
+  }
+
+  /* SVG animation */
+  .footer-svg {
+    @apply transition-transform duration-300
+           group-hover:scale-110;
+  }
+
+  /* Tooltip */
+  .footer-tooltip {
+    @apply absolute -top-12 left-1/2 -translate-x-1/2
+           z-20 origin-bottom scale-0
+           px-3 py-1.5 rounded-lg
+           border border-gray-200
+           bg-white text-xs font-medium
+           shadow-lg
+           transition-all duration-300 ease-in-out
+           group-hover:scale-100
+           before:absolute before:bottom-[-5px]
+           before:left-1/2 before:-translate-x-1/2
+           before:border-[6px] before:border-transparent
+           before:border-t-white;
+  }

@@ -16,6 +16,8 @@ class SoalForm
             ->components([
                 Select::make('hadits_id')
                     ->label('Hadits')
+                    ->relationship('hadits', 'name')
+                    ->preload()
                     ->searchable(),
                 Select::make('tipe')
                     ->options([
