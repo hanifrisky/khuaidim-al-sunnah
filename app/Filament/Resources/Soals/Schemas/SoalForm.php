@@ -3,9 +3,12 @@
 namespace App\Filament\Resources\Soals\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class SoalForm
@@ -33,7 +36,25 @@ class SoalForm
                 FileUpload::make('media')
                     ->label('Soal Media')
                     ->disk('public')
+                    ->columnSpanFull()
                     ->directory('soalmedia'),
+                Section::make('Pilihan Jawaban')
+                    ->columnSpanFull()
+                    ->schema([
+                        Repeater::make('pilihanJawaban')
+                            ->label('')
+                            ->reorderable(false)
+                            ->defaultItems(4)
+                            ->addActionLabel('Tambah Jawaban')
+                            ->schema([
+                                TextInput::make('jawaban')
+                                    ->placeholder('Masukkan Pilihan Jawaban')
+                                    ->required(),
+                                Toggle::make('benar')
+                                    ->label('Jawaban Benar')
+                            ])
+
+                    ])
             ]);
     }
 }

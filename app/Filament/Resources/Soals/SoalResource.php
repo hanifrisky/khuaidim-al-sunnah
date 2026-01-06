@@ -34,7 +34,7 @@ class SoalResource extends Resource
     public static function getRelations(): array
     {
         return [
-            "pilihanJawaban" => PilihanJawabanRelationManager::class,
+            // "pilihanJawaban" => PilihanJawabanRelationManager::class,
         ];
     }
 
