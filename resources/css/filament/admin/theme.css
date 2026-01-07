@@ -10,11 +10,13 @@
     --color-main-white: rgb(255, 255, 255);
     --color-main-accent: rgb(233, 233, 233);
 }
-
 .fi-body {
-    @apply bg-main-white text-main-black;
+    @apply bg-main-white text-main-black;   
 }
-
+.fi-main {
+    max-width: calc(100vw - var(--sidebar-width));
+    overflow-x: auto;
+}
 /* ================================ FILAMENT BUTTON ================================ */
 /*  */
 /*  */
@@ -71,7 +73,7 @@
 
 .fi-body-has-topbar .fi-sidebar {
     height: calc(100vh - 200px);
-    min-height: 200px;
+    min-height: 500px;
 }
 
 .fi-sidebar-item>.fi-sidebar-item-btn {

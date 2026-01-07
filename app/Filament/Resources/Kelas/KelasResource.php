@@ -23,7 +23,6 @@ class KelasResource extends Resource
     protected static ?string $model = Kelas::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingOffice2;
-    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Kelas';
     protected static ?string $label = 'Kelas';
     protected static ?string $pluralLabel = 'Kelas';
     protected static ?string $navigationLabel = 'Kelas';

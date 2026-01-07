@@ -1,7 +1,7 @@
-<div style="margin-top:150px">
-
-</div>
-<footer class="footer-nav">
+<footer class="footer-nav"
+    @if(!Auth::check())
+    style="display: none"
+    @endif>
     <!-- Home -->
     <div class="footer-item">
         <div class="footer-icon">

@@ -27,7 +27,6 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->viteTheme('resources/css/filament/admin/theme.css')
             ->brandLogo(asset('AppLogo.png'))
             ->login()
             ->registration()
@@ -48,7 +47,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -63,11 +61,13 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->renderHook(
-                // This line tells us where to render it
-                'panels::body.end',
-                // This is the view that will be rendered
-                fn() => view('navfooter'),
-            );
+            ])
+            ->viteTheme('resources/css/filament/admin/theme.css');
+        // ->renderHook(
+        //     // This line tells us where to render it
+        //     'panels::body.end',
+        //     // This is the view that will be rendered
+        //     fn() => view('navfooter'),
+        // );
     }
 }

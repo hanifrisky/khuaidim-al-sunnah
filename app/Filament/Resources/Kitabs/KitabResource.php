@@ -26,8 +26,6 @@ class KitabResource extends Resource
 
     protected static ?string $navigationLabel = 'Kitab';
 
-    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Hadits';
-
     // protected static ?int $navigationSort = 1;
 
     protected static string|BackedEnum|null $navigationIcon = "heroicon-s-book-open";

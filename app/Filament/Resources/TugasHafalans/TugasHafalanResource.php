@@ -22,7 +22,7 @@ class TugasHafalanResource extends Resource
     protected static ?string $model = TugasHafalan::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
-    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
+    // protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
     protected static ?string $label = 'Tugas Hafalan';
     protected static ?string $pluralLabel = 'Tugas Hafalan';
     protected static ?string $navigationLabel = 'Tugas Hafalan';

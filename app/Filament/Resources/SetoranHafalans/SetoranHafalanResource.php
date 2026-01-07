@@ -22,7 +22,8 @@ class SetoranHafalanResource extends Resource
     protected static ?string $model = SetoranHafalan::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
+    // protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $label = 'Setoran Hafalan';
     protected static ?string $pluralLabel = 'Setoran Hafalan';
     protected static ?string $navigationLabel = 'Setoran Hafalan';
