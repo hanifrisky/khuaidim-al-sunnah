@@ -58,6 +58,11 @@
     @apply bg-main-primary text-main-white;
 }
 
+.fi-topbar-open-sidebar-btn{
+    &.fi-icon{
+        color: white;
+    }
+}
 
 
 /* ================================ FILAMENT SIDEBAR ================================ */
