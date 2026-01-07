@@ -13,10 +13,6 @@
 .fi-body {
     @apply bg-main-white text-main-black;   
 }
-.fi-main {
-    max-width: calc(100vw - var(--sidebar-width));
-    overflow-x: auto;
-}
 /* ================================ FILAMENT BUTTON ================================ */
 /*  */
 /*  */
