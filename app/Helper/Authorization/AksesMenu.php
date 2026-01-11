@@ -46,12 +46,12 @@ trait AksesMenu
         return $value;
     }
 
-    public static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(array $parameters = []): bool
     {
         return self::hasAccess() && static::$shouldRegisterNavigation;
     }
 
-    public static function canAccess(): bool
+    public static function canAccess(array $parameters = []): bool
     {
         return self::hasAccess();
     }

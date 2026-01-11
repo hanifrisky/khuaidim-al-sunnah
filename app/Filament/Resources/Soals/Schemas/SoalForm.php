@@ -41,7 +41,8 @@ class SoalForm
                 Section::make('Pilihan Jawaban')
                     ->columnSpanFull()
                     ->schema([
-                        Repeater::make('pilihanJawaban')
+                        Repeater::make('jawaban')
+                            ->relationship('jawaban')
                             ->label('')
                             ->reorderable(false)
                             ->defaultItems(4)

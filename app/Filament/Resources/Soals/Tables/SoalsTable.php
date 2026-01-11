@@ -14,12 +14,11 @@ class SoalsTable
     {
         return $table
             ->columns([
-                TextColumn::make('hadits_id')
+                TextColumn::make('hadits.name')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('tipe')
-                    ->searchable(),
-                TextColumn::make('media')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

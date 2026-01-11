@@ -22,7 +22,9 @@ class GuruForm
                 TextInput::make('user.email')
                     ->email()
                     ->unique(User::class, 'email', ignoreRecord: false, modifyRuleUsing: function (Unique $rule, $record) {
-                        $rule->whereNot('id', $record->user_id);
+                        if (isset($record->user_id)) {
+                            $rule->whereNot('id', $record->user_id);
+                        }
                     })
                     ->required(),
                 TextInput::make('identitas'),

@@ -91,7 +91,7 @@ class TugasHafalanForm
                     ->preload()
                     ->visible(fn($get) => $get('type') === 'hadits')
                     ->required(fn($get) => $get('type') === 'hadits')
-                    ->relationship('hadits', 'title'),
+                    ->relationship('hadits', 'name'),
                 Select::make('bab_id')
                     ->searchable()
                     ->preload()

@@ -22,7 +22,6 @@ use UnitEnum;
 
 class BabResource extends Resource
 {
-    use AksesMenu;
     protected static ?string $model = Bab::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

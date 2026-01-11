@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Babs\Pages;
 
 use App\Filament\Resources\Babs\BabResource;
+use App\Helper\Authorization\AksesMenu;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -15,5 +16,10 @@ class ListBabs extends ListRecords
         return [
             CreateAction::make(),
         ];
+    }
+    use AksesMenu;
+    protected static function menuRole(): array
+    {
+        return ['admin'];
     }
 }

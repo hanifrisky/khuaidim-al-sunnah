@@ -23,7 +23,7 @@ class Soal extends Model
         return $this->hadits ? $this->hadits->name : '-';
     }
 
-    public function pilihanJawaban()
+    public function jawaban()
     {
         return $this->hasMany(PilihanJawaban::class, 'soal_id');
     }

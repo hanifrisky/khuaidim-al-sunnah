@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Kitabs;
 use App\Filament\Resources\Kitabs\Pages\CreateKitab;
 use App\Filament\Resources\Kitabs\Pages\EditKitab;
 use App\Filament\Resources\Kitabs\Pages\ListKitabs;
+use App\Filament\Resources\Kitabs\Pages\ViewKitab;
 use App\Filament\Resources\Kitabs\RelationManagers\BabsRelationManager;
 use App\Filament\Resources\Kitabs\Schemas\KitabForm;
 use App\Filament\Resources\Kitabs\Tables\KitabsTable;
@@ -21,7 +22,6 @@ use UnitEnum;
 
 class KitabResource extends Resource
 {
-    use AksesMenu;
     protected static ?string $model = Kitab::class;
 
     protected static ?string $navigationLabel = 'Kitab';
@@ -35,6 +35,10 @@ class KitabResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return KitabForm::configure($schema);
+    }
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema->components([]);
     }
 
     public static function table(Table $table): Table
@@ -55,6 +59,7 @@ class KitabResource extends Resource
             'index' => ListKitabs::route('/'),
             'create' => CreateKitab::route('/create'),
             'edit' => EditKitab::route('/{record}/edit'),
+            'view' => ViewKitab::route('/{record}'),
         ];
     }
 

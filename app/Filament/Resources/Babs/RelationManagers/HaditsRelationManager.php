@@ -23,11 +23,13 @@ use Filament\Forms\Components\Textarea;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Support\Enums\FontWeight;
 
 class HaditsRelationManager extends RelationManager
 {
@@ -90,37 +92,58 @@ class HaditsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('keterangan')
-                    ->searchable(),
-                TextColumn::make('source')
-                    ->searchable(),
-                TextColumn::make('media')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Stack::make([
+                    TextColumn::make('name')
+                        ->alignCenter()
+                        ->weight(FontWeight::Bold)
+                        ->searchable(),
+                    TextColumn::make('content')
+                        ->searchable()
+                        ->alignRight(),
+                    TextColumn::make('translate')
+                        ->searchable()
+                        ->alignJustify(),
+                    TextColumn::make('keterangan')
+                        ->searchable(),
+                    TextColumn::make('source')
+                        ->searchable()
+                        ->alignCenter(),
+                ]),
+                // TextColumn::make('name')
+                //     ->searchable(),
+                // TextColumn::make('keterangan')
+                //     ->searchable(),
+                // TextColumn::make('source')
+                //     ->searchable(),
+                // TextColumn::make('media')
+                //     ->searchable(),
+                // TextColumn::make('created_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('updated_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('deleted_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                TrashedFilter::make(),
+            ->contentGrid([
+                'md' => 1,
+                'xl' => 1,
             ])
+            // ->filters([
+            //     TrashedFilter::make(),
+            // ])
             ->headerActions([
                 CreateAction::make()
                     ->createAnother(false)
                     ->modalWidth('xl'),
             ])
             ->recordActions([
-                ViewAction::make(),
+                // ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
                 ForceDeleteAction::make(),

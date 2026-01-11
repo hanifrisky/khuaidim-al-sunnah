@@ -75,7 +75,7 @@ class BabsRelationManager extends RelationManager
                 ])->extraAttributes(['class' => 'card-hidden-content']),
                 View::make('filament.components.card')
             ])
-            ->recordUrl(fn(Bab $record): string => route('filament.admin.resources.babs.edit', $record))
+            ->recordUrl(fn(Bab $record): string => route('filament.admin.resources.babs.view', $record))
             ->contentGrid([
                 'md' => 2,
                 'xl' => 3,
