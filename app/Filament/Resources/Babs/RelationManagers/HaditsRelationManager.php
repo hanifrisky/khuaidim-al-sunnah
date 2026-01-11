@@ -102,7 +102,7 @@ class HaditsRelationManager extends RelationManager
                         ->alignRight(),
                     TextColumn::make('translate')
                         ->searchable()
-                        ->alignJustify(),
+                        ->alignCenter(),
                     TextColumn::make('keterangan')
                         ->searchable(),
                     TextColumn::make('source')

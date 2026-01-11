@@ -5,12 +5,14 @@ namespace App\Filament\Resources\Kitabs;
 use App\Filament\Resources\Kitabs\Pages\CreateKitab;
 use App\Filament\Resources\Kitabs\Pages\EditKitab;
 use App\Filament\Resources\Kitabs\Pages\ListKitabs;
+use App\Filament\Resources\Kitabs\Pages\MengerjakanSoal;
 use App\Filament\Resources\Kitabs\Pages\ViewKitab;
 use App\Filament\Resources\Kitabs\RelationManagers\BabsRelationManager;
 use App\Filament\Resources\Kitabs\Schemas\KitabForm;
 use App\Filament\Resources\Kitabs\Tables\KitabsTable;
 use App\Helper\Authorization\AksesMenu;
 use App\Models\Kitab;
+use App\Models\Soal;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -60,6 +62,7 @@ class KitabResource extends Resource
             'create' => CreateKitab::route('/create'),
             'edit' => EditKitab::route('/{record}/edit'),
             'view' => ViewKitab::route('/{record}'),
+            'soal' => MengerjakanSoal::route('/{record}/soal'),
         ];
     }
 

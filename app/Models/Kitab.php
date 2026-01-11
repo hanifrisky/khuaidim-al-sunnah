@@ -24,4 +24,8 @@ class Kitab extends Model
     {
         return asset('storage/' . $this->media);
     }
+    public function soal()
+    {
+        return $this->hasMany(Soal::class);
+    }
 }
