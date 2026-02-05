@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('nilai_soals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('siswa_id')->nullable()->constrained('siswas')->nullOnDelete();
+            $table->foreignId('kelas_id')->nullable()->constrained('kelas')->nullOnDelete();
             $table->integer('nilai')->default(0);
             $table->foreignId('kitab_id')->nullable()->constrained('kitabs')->nullOnDelete();
             $table->enum('tipe', ['melanjutkan', 'pemahaman'])->default('pemahaman');

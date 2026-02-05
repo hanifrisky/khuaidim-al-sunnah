@@ -9,6 +9,7 @@ class NilaiSoal extends Model
     protected $fillable = [
         'siswa_id',
         'nilai',
+        'kelas_id',
         'kitab_id',
     ];
 

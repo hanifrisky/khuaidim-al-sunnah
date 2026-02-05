@@ -74,6 +74,7 @@ class MengerjakanSoal extends Page
                 'tipe' => 'pemahaman'
             ],
             [
+                'kelas_id' => $siswa->kelas_id,
                 'nilai' => $nilai,
             ]
         );
