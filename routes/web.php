@@ -10,5 +10,5 @@ Route::get('/', function () {
     return redirect('/app');
 });
 
-Route::get('/video-bab/{id}/upload', UploadVideo::class)
-    ->name('filament.admin.pages.video-bab.upload');
+// Route::get('/video-bab/{id}/upload', UploadVideo::class)
+//     ->name('filament.admin.pages.video-bab.upload');

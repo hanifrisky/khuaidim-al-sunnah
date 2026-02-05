@@ -7,7 +7,7 @@ use App\Filament\Resources\Babs\Pages\EditBab;
 use App\Filament\Resources\Babs\Pages\ListBabs;
 use App\Filament\Resources\Babs\Pages\ListHaditsKitab;
 use App\Filament\Resources\Babs\Pages\UploadVideo;
-use App\Filament\Resources\Babs\Pages\ViewBabs;
+use App\Filament\Resources\Babs\Pages\ViewBab;
 use App\Filament\Resources\Babs\RelationManagers\HaditsRelationManager;
 use App\Filament\Resources\Babs\Schemas\BabForm;
 use App\Filament\Resources\Babs\Tables\BabsTable;
@@ -57,7 +57,7 @@ class BabResource extends Resource
             'index' => ListBabs::route('/'),
             'create' => CreateBab::route('/create'),
             'edit' => EditBab::route('/{record}/edit'),
-            'view' => ViewBabs::route('/{record}'),
+            'view' => ViewBab::route('/{record}'),
             'hadits' => ListHaditsKitab::route('/{record}/hadits'),
         ];
     }

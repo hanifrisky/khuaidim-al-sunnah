@@ -9,7 +9,7 @@ use Filament\Actions\CreateAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewBabs extends ViewRecord
+class ViewBab extends ViewRecord
 {
     protected static string $resource = BabResource::class;
     public function getBreadcrumbs(): array
