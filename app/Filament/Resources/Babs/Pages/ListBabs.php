@@ -9,15 +9,17 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListBabs extends ListRecords
 {
+    use AksesMenu;
     protected static string $resource = BabResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->visible(fn(): bool => !$this->isRole('siswa')),
         ];
     }
-    use AksesMenu;
+
     protected static function menuRole(): array
     {
         return ['admin'];

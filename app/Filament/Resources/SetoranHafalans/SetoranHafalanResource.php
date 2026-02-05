@@ -23,11 +23,13 @@ class SetoranHafalanResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
     // protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
-    protected static bool $shouldRegisterNavigation = false;
+    //protected static bool $shouldRegisterNavigation = false;
     protected static ?string $label = 'Setoran Hafalan';
     protected static ?string $pluralLabel = 'Setoran Hafalan';
     protected static ?string $navigationLabel = 'Setoran Hafalan';
     protected static ?int $navigationSort = 2;
+    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Schema $schema): Schema
     {

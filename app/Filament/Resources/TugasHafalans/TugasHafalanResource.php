@@ -5,6 +5,8 @@ namespace App\Filament\Resources\TugasHafalans;
 use App\Filament\Resources\TugasHafalans\Pages\CreateTugasHafalan;
 use App\Filament\Resources\TugasHafalans\Pages\EditTugasHafalan;
 use App\Filament\Resources\TugasHafalans\Pages\ListTugasHafalans;
+use App\Filament\Resources\TugasHafalans\Pages\ViewTugasHafalan;
+use App\Filament\Resources\TugasHafalans\RelationManagers\SetoranHafalanRelationManager;
 use App\Filament\Resources\TugasHafalans\Schemas\TugasHafalanForm;
 use App\Filament\Resources\TugasHafalans\Tables\TugasHafalansTable;
 use App\Helper\Authorization\AksesMenu;
@@ -14,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use UnitEnum;
 
 class TugasHafalanResource extends Resource
@@ -26,12 +29,26 @@ class TugasHafalanResource extends Resource
     protected static ?string $label = 'Tugas Hafalan';
     protected static ?string $pluralLabel = 'Tugas Hafalan';
     protected static ?string $navigationLabel = 'Tugas Hafalan';
+    protected static ?int $navigationSort = 1;
+    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        if (Auth()->user()->role == 'siswa') {
+            return false;
+        }
+        return true;
+    }
 
     protected static function menuRole(): array
     {
-        return ['admin', 'guru'];
+        return ['admin', 'guru', 'siswa'];
     }
 
+    public static function canView(Model $record): bool
+    {
+        return true;
+    }
     public static function form(Schema $schema): Schema
     {
         return TugasHafalanForm::configure($schema);
@@ -45,7 +62,11 @@ class TugasHafalanResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'Unggahan' => SetoranHafalanRelationManager
+
+
+
+            ::class
         ];
     }
 
@@ -55,6 +76,7 @@ class TugasHafalanResource extends Resource
             'index' => ListTugasHafalans::route('/'),
             'create' => CreateTugasHafalan::route('/create'),
             'edit' => EditTugasHafalan::route('/{record}/edit'),
+            'view' => ViewTugasHafalan::route('/{record}/view'),
         ];
     }
 }

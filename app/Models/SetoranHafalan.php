@@ -9,9 +9,12 @@ class SetoranHafalan extends Model
     protected $fillable = [
         'tugas_hafalan_id',
         'siswa_id',
+        'hadit_id',
         'media',
         'status',
-        'keterangan'
+        'keterangan',
+        'kelas_id',
+        'bab_id'
     ];
 
     public function tugasHafalan()
@@ -21,5 +24,9 @@ class SetoranHafalan extends Model
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'siswa_id');
+    }
+    public function hadits()
+    {
+        return $this->belongsTo(Hadits::class, 'hadit_id');
     }
 }

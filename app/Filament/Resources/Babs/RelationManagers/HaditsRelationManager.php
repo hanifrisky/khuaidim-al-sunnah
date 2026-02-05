@@ -18,6 +18,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Infolists\Components\TextEntry;
@@ -45,7 +46,7 @@ class HaditsRelationManager extends RelationManager
                     ->label('Nama Hadits')
                     ->columnSpanFull()
                     ->required(),
-                Textarea::make('content')
+                RichEditor::make('content')
                     ->required()
                     ->columnSpanFull(),
                 TextInput::make('keterangan'),
@@ -99,7 +100,7 @@ class HaditsRelationManager extends RelationManager
                         ->searchable(),
                     TextColumn::make('content')
                         ->searchable()
-                        ->alignRight(),
+                        ->html(),
                     TextColumn::make('translate')
                         ->searchable()
                         ->alignCenter(),

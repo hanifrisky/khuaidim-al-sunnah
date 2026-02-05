@@ -19,9 +19,9 @@ class CreateSiswa extends CreateRecord
             'password' => bcrypt('password'),
             'role' => 'siswa',
         ]);
+        $data['user_id'] = $user->id;
         $data['name'] = $data['user']['name'];
         unset($data['user']);
-        $data['user_id'] = $user->id;
         return $data;
     }
 }

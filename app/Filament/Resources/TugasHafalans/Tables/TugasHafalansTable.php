@@ -9,6 +9,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class TugasHafalansTable
@@ -28,18 +29,18 @@ class TugasHafalansTable
                 TextColumn::make('title')
                     ->wrap()
                     ->searchable(),
-                TextColumn::make('siswa.name')
-                    ->toggleable(isToggledHiddenByDefault: true)
+                // TextColumn::make('siswa.name')
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->searchable(),
+                TextColumn::make('bab.name')
                     ->searchable(),
                 TextColumn::make('kelas.name')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('Dikirim ke')
+                    ->label('Kelas')
                     ->default(function ($record) {
-                        if ($record->siswa_id == null) {
-                            return $record->kelas_name;
-                        }
-                        return $record->siswa_name;
+                        return $record->kelas_name;
                     }),
                 TextColumn::make('guru.name')
                     ->label('Guru')
@@ -69,7 +70,34 @@ class TugasHafalansTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // Filter berdasarkan Kelas
+                SelectFilter::make('kelas_id')
+                    ->label('Kelas')
+                    ->options(function () {
+                        if (self::isRole('guru')) {
+                            return \App\Models\Kelas::where('guru_id', self::guruId())->pluck('name', 'id')->toArray();
+                        }
+                        return \App\Models\Kelas::pluck('name', 'id')->toArray();
+                    })
+                    ->searchable(),
+
+                // Filter berdasarkan Bab
+                SelectFilter::make('bab_id')
+                    ->label('Bab')
+                    ->options(function () {
+                        return \App\Models\Bab::pluck('name', 'id')->toArray();
+                    })
+                    ->searchable(),
+
+                // Filter berdasarkan Guru (hanya untuk admin / bukan guru)
+                // SelectFilter::make('guru_id')
+                //     ->label('Guru')
+                //     ->visible(fn(): bool => self::isRole('admin'))
+                //     ->options(function () {
+                //         return \App\Models\Guru::pluck('name', 'id')->toArray();
+                //     })
+                //     ->hidden(fn(): bool => self::isRole('guru'))
+                //     ->searchable(),
             ])
             ->recordActions([
                 EditAction::make(),

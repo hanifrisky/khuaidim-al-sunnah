@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\Kitabs;
 
+use App\Filament\Resources\Babs\Pages\ListBabs;
 use App\Filament\Resources\Kitabs\Pages\CreateKitab;
 use App\Filament\Resources\Kitabs\Pages\EditKitab;
+use App\Filament\Resources\Kitabs\Pages\ListBabKitab;
 use App\Filament\Resources\Kitabs\Pages\ListKitabs;
 use App\Filament\Resources\Kitabs\Pages\MengerjakanSoal;
 use App\Filament\Resources\Kitabs\Pages\ViewKitab;
@@ -34,6 +36,13 @@ class KitabResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        if (Auth()->user()->role == 'siswa') {
+            return false;
+        }
+        return true;
+    }
     public static function form(Schema $schema): Schema
     {
         return KitabForm::configure($schema);
@@ -62,7 +71,9 @@ class KitabResource extends Resource
             'create' => CreateKitab::route('/create'),
             'edit' => EditKitab::route('/{record}/edit'),
             'view' => ViewKitab::route('/{record}'),
+            'babs' => ListBabKitab::route('/{record}/bab'),
             'soal' => MengerjakanSoal::route('/{record}/soal'),
+
         ];
     }
 

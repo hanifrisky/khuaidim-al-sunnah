@@ -26,6 +26,10 @@ class TugasHafalan extends Model
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
+    public function SetoranHafalan()
+    {
+        return $this->hasMany(SetoranHafalan::class);
+    }
     public function hadits()
     {
         return $this->belongsTo(Hadits::class, 'hadits_id');

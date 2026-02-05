@@ -6,16 +6,21 @@ use App\Filament\Resources\Kitabs\KitabResource;
 use App\Helper\Authorization\AksesMenu;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Contracts\Support\Htmlable;
 
 class ListKitabs extends ListRecords
 {
+    use AksesMenu;
     protected static string $resource = KitabResource::class;
 
     public function getBreadcrumbs(): array
     {
         return [];
     }
-    use AksesMenu;
+    public function getTitle(): string|Htmlable
+    {
+        return '';
+    }
     protected static function menuRole(): array
     {
         return ['admin', 'guru', 'siswa'];
@@ -23,7 +28,8 @@ class ListKitabs extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->visible(fn(): bool => !$this->isRole('siswa')),
         ];
     }
 }

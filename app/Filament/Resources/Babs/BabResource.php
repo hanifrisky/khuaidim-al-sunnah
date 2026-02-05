@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Babs;
 use App\Filament\Resources\Babs\Pages\CreateBab;
 use App\Filament\Resources\Babs\Pages\EditBab;
 use App\Filament\Resources\Babs\Pages\ListBabs;
+use App\Filament\Resources\Babs\Pages\ListHaditsKitab;
+use App\Filament\Resources\Babs\Pages\UploadVideo;
 use App\Filament\Resources\Babs\Pages\ViewBabs;
 use App\Filament\Resources\Babs\RelationManagers\HaditsRelationManager;
 use App\Filament\Resources\Babs\Schemas\BabForm;
@@ -56,6 +58,7 @@ class BabResource extends Resource
             'create' => CreateBab::route('/create'),
             'edit' => EditBab::route('/{record}/edit'),
             'view' => ViewBabs::route('/{record}'),
+            'hadits' => ListHaditsKitab::route('/{record}/hadits'),
         ];
     }
 

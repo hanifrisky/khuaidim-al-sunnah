@@ -34,8 +34,6 @@ class ViewKitab extends ViewRecord
         return [
             EditAction::make()
                 ->visible(fn() => self::isRole('admin')),
-            Action::make('Soal')
-                ->url(fn() => KitabResource::getUrl('soal', ['record' => $this->record]))
 
         ];
     }

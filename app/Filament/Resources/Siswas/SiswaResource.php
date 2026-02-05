@@ -26,6 +26,8 @@ class SiswaResource extends Resource
     protected static ?string $label = 'Siswa';
     protected static ?string $pluralLabel = 'Siswa';
     protected static ?string $navigationLabel = 'Siswa';
+    protected static ?int $navigationSort = 3;
+
     public static function form(Schema $schema): Schema
     {
         return SiswaForm::configure($schema);

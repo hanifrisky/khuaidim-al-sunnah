@@ -18,49 +18,50 @@ class TugasHafalanForm
     {
         return $schema
             ->components([
-                Select::make('assign')
-                    ->label('Dikirim ke')
-                    ->options([
-                        'individu' => 'Individu',
-                        'kelas' => 'Kelas',
-                    ])
-                    ->live()
-                    ->formatStateUsing(function ($get) {
-                        if ($get('siswa_id') != null) {
-                            return 'individu';
-                        }
-                        return 'kelas';
-                    })
-                    ->default('kelas'),
+                // Select::make('assign')
+                //     ->label('Dikirim ke')
+                //     ->options([
+                //         'individu' => 'Individu',
+                //         'kelas' => 'Kelas',
+                //     ])
+                //     ->live()
+                //     ->formatStateUsing(function ($get) {
+                //         if ($get('siswa_id') != null) {
+                //             return 'individu';
+                //         }
+                //         return 'kelas';
+                //     })
+                //     ->default('kelas'),
 
-                Select::make('siswa_id')
-                    ->label('Siswa')
-                    ->searchable()
-                    ->preload()
-                    ->visible(fn($get) => $get('assign') === 'individu')
-                    ->required(fn($get) => $get('assign') === 'individu')
-                    ->options(function () {
-                        if (self::isRole('guru')) {
-                            $kelasIds = Kelas::where('guru_id', self::guruId())
-                                ->pluck('id');
+                // Select::make('siswa_id')
+                //     ->label('Siswa')
+                //     ->searchable()
+                //     ->preload()
+                //     ->visible(fn($get) => $get('assign') === 'individu')
+                //     ->required(fn($get) => $get('assign') === 'individu')
+                //     ->options(function () {
+                //         if (self::isRole('guru')) {
+                //             $kelasIds = Kelas::where('guru_id', self::guruId())
+                //                 ->pluck('id');
 
-                            return Siswa::whereIn('kelas_id', $kelasIds)
-                                ->get()
-                                ->mapWithKeys(fn($siswa) => [
-                                    $siswa->id => $siswa->user->name,
-                                ]);
-                        }
+                //             return Siswa::whereIn('kelas_id', $kelasIds)
+                //                 ->get()
+                //                 ->mapWithKeys(fn($siswa) => [
+                //                     $siswa->id => $siswa->user->name,
+                //                 ]);
+                //         }
 
-                        return Siswa::with('user')
-                            ->get()
-                            ->mapWithKeys(fn($siswa) => [
-                                $siswa->id => $siswa->user->name,
-                            ]);
-                    }),
+                //         return Siswa::with('user')
+                //             ->get()
+                //             ->mapWithKeys(fn($siswa) => [
+                //                 $siswa->id => $siswa->user->name,
+                //             ]);
+                //     }),
                 Select::make('kelas_id')
                     ->label('Kelas')
-                    ->visible(fn($get) => $get('assign') === 'kelas')
-                    ->required(fn($get) => $get('assign') === 'kelas')
+                    ->required()
+                    // ->visible(fn($get) => $get('assign') === 'kelas')
+                    // ->required(fn($get) => $get('assign') === 'kelas')
                     ->options(function () {
                         if (self::isRole('guru')) {
                             return Kelas::where('guru_id', self::guruId())
@@ -70,34 +71,36 @@ class TugasHafalanForm
                     })
                     ->searchable()
                     ->preload(),
-                Textarea::make('description')
-                    ->label('Keterangan')
-                    ->columnSpanFull(),
-                Select::make('type')
-                    ->options([
-                        'hadits' => 'Hadits',
-                        'bab' => 'Bab',
-                    ])
-                    ->live()
-                    ->formatStateUsing(function ($get) {
-                        if ($get('hadits_id') != null) {
-                            return 'hadits';
-                        }
-                        return 'bab';
-                    })
-                    ->default('bab'),
-                Select::make('hadits_id')
-                    ->searchable()
-                    ->preload()
-                    ->visible(fn($get) => $get('type') === 'hadits')
-                    ->required(fn($get) => $get('type') === 'hadits')
-                    ->relationship('hadits', 'name'),
                 Select::make('bab_id')
                     ->searchable()
                     ->preload()
-                    ->visible(fn($get) => $get('type') === 'bab')
-                    ->required(fn($get) => $get('type') === 'bab')
+                    ->required()
+                    //->visible(fn($get) => $get('type') === 'bab')
+                    //->required(fn($get) => $get('type') === 'bab')
                     ->relationship('bab', 'name'),
+                Textarea::make('description')
+                    ->label('Keterangan')
+                    ->columnSpanFull(),
+                // Select::make('type')
+                //     ->options([
+                //         'hadits' => 'Hadits',
+                //         'bab' => 'Bab',
+                //     ])
+                //     ->live()
+                //     ->formatStateUsing(function ($get) {
+                //         if ($get('hadits_id') != null) {
+                //             return 'hadits';
+                //         }
+                //         return 'bab';
+                //     })
+                //     ->default('bab'),
+                // Select::make('hadits_id')
+                //     ->searchable()
+                //     ->preload()
+                //     ->visible(fn($get) => $get('type') === 'hadits')
+                //     ->required(fn($get) => $get('type') === 'hadits')
+                //     ->relationship('hadits', 'name'),
+
                 DatePicker::make('deadline')
                     ->default(now()),
                 Select::make('status')

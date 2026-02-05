@@ -77,7 +77,7 @@ class BabsRelationManager extends RelationManager
             ])
             ->recordUrl(fn(Bab $record): string => route('filament.admin.resources.babs.view', $record))
             ->contentGrid([
-                'md' => 2,
+                'md' => 3,
                 'xl' => 3,
                 '2xl' => 4
             ])

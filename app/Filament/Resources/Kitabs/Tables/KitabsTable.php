@@ -45,8 +45,9 @@ class KitabsTable
                 View::make('filament.components.card')
             ])
             ->contentGrid([
-                'md' => 2,
-                'xl' => 3,
+                'sm' => 2,
+                'md' => 3,
+                'xl' => 4,
                 '2xl' => 4
             ]);
     }

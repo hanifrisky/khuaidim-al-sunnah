@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Soals\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -30,14 +31,10 @@ class SoalForm
                     ->label('Tipe Soal')
                     ->required()
                     ->default('melanjutkan'),
-                Textarea::make('soal')
+                RichEditor::make('soal')
                     ->required()
+
                     ->columnSpanFull(),
-                FileUpload::make('media')
-                    ->label('Soal Media')
-                    ->disk('public')
-                    ->columnSpanFull()
-                    ->directory('soalmedia'),
                 Section::make('Pilihan Jawaban')
                     ->columnSpanFull()
                     ->schema([
