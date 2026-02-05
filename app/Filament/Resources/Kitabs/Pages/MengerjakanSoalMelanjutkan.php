@@ -12,15 +12,13 @@ use Filament\Resources\Pages\Page;
 use Livewire\Attributes\On;
 
 
-class MengerjakanSoal extends Page
+class MengerjakanSoalMelanjutkan extends Page
 {
     use InteractsWithRecord;
 
     protected static string $resource = KitabResource::class;
 
     protected string $view = 'filament.resources.kitabs.pages.mengerjakan-soal';
-
-    protected static ?string $title = '';
 
     public function getBreadcrumbs(): array
     {
@@ -46,7 +44,7 @@ class MengerjakanSoal extends Page
             ->toArray();
 
         // 2. Ambil soal berdasarkan hadits_id tersebut
-        $soal = Soal::where('tipe', 'pemahaman')
+        $soal = Soal::where('tipe', 'melanjutkan')
             ->whereIn('hadits_id', $haditsIds)
             ->with('jawaban')
             ->limit(20)
@@ -54,7 +52,7 @@ class MengerjakanSoal extends Page
 
         return $soal;
     }
-
+    protected static ?string $title = '';
     #[On('selesai-kuis')]
     public function selesai(int $nilai)
     {
@@ -71,13 +69,12 @@ class MengerjakanSoal extends Page
             [
                 'siswa_id' => $siswa->id,
                 'kitab_id' => $this->record->id,
-                'tipe' => 'pemahaman'
+                'tipe' => 'melanjutkan'
             ],
             [
                 'nilai' => $nilai,
             ]
         );
-
         Notification::make()
             ->title('Berhasil!')
             ->body('Nilai sudah masuk!')

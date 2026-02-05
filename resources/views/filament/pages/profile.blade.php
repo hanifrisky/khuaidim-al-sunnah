@@ -16,6 +16,7 @@
             <x-filament::button type="submit">Simpan</x-filament::button>
         </div>
     </form>
+    @if(auth()->user()->role === 'siswa')
     {{-- MOBILE NAV --}}
     <div class="bottom-nav">
         <a href="/app" class="nav-item">
@@ -38,4 +39,5 @@
             <small>Profile</small>
         </a>
     </div>
+    @endif
 </div>

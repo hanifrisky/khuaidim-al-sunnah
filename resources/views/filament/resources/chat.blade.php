@@ -62,11 +62,20 @@
 
 
         .hadits-badge {
-            background: #dcfce7;
-            color: #166534;
+
             padding: 4px 10px;
             border-radius: 999px;
             font-weight: 600;
+        }
+
+        .badge-read {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-unread {
+            background: #F7F7B1;
+            color: #F7B400;
         }
     </style>
     <style>
@@ -99,18 +108,20 @@
         @else
         {{-- List Notifikasi --}}
         @foreach ($results as $item)
-        <a href="{{$item->action}}" class="hadits-card">
-            <div class="hadits-content">
+        <button href="{{$item->action}}"
+            wire:click="aksiPesan({{ $item }})"
+            class="hadits-card">
+            <div class="hadits-title">
                 {!! $item->pesan !!}
             </div>
             <div class="hadits-meta">
                 @if($item->status)
-                <span class="hadits-badge">
+                <span class="hadits-badge badge-{{$item->status}}">
                     {{ $item->status }}
                 </span>
                 @endif
             </div>
-        </a>
+        </button>
         @endforeach
         @endif
     </div>

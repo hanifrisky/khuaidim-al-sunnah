@@ -11,6 +11,8 @@ use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Infolists\Components\TextEntry;
@@ -27,54 +29,62 @@ class SetoranHafalanRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextInput::make('siswa_id')
-                    ->numeric(),
-                TextInput::make('media'),
-                TextInput::make('status')
+                TextEntry::make('siswa.name')
+                    ->label('Nama Siswa'),
+                TextEntry::make('hadits.name')
+                    ->label('Hadits'),
+
+                FileUpload::make('media')
+                    ->disabled()
+                    ->directory('setoran-hafalan')
+                    ->disk('public'),
+                Select::make('status')
+                    ->options([
+                        'accepted' => 'Diterima',
+                        'rejected' => 'Ditolak',
+                    ])
                     ->required()
                     ->default('assigned'),
                 Textarea::make('keterangan')
+                    ->placeholder('Masukkan keterangan ditolak')
+                    ->label('Keterangan ditolak')
                     ->columnSpanFull(),
-                TextInput::make('hadit_id')
-                    ->numeric(),
             ]);
     }
 
-    public function infolist(Schema $schema): Schema
-    {
-        return $schema
-            ->components([
-                TextEntry::make('siswa.name')
-                    ->numeric()
-                    ->placeholder('-'),
-                TextEntry::make('media')
-                    ->placeholder('-'),
-                TextEntry::make('status'),
-                TextEntry::make('keterangan')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('hadit_id')
-                    ->numeric()
-                    ->placeholder('-'),
-            ]);
-    }
+    // public function infolist(Schema $schema): Schema
+    // {
+    //     return $schema
+    //         ->components([
+    //             TextEntry::make('siswa.name')
+    //                 ->numeric()
+    //                 ->placeholder('-'),
+    //             TextEntry::make('media')
+    //                 ->placeholder('-'),
+    //             TextEntry::make('status'),
+    //             TextEntry::make('keterangan')
+    //                 ->placeholder('-')
+    //                 ->columnSpanFull(),
+    //             TextEntry::make('created_at')
+    //                 ->dateTime()
+    //                 ->placeholder('-'),
+    //             TextEntry::make('updated_at')
+    //                 ->dateTime()
+    //                 ->placeholder('-'),
+    //             TextEntry::make('hadit_id')
+    //                 ->numeric()
+    //                 ->placeholder('-'),
+    //         ]);
+    // }
 
     public function table(Table $table): Table
     {
         return $table
             ->recordTitleAttribute('hadits_id')
             ->columns([
-                TextColumn::make('siswa_id')
+                TextColumn::make('siswa.name')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('media')
-                    ->searchable(),
                 TextColumn::make('status')
                     ->searchable(),
                 TextColumn::make('created_at')
@@ -85,10 +95,13 @@ class SetoranHafalanRelationManager extends RelationManager
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('hadit_id')
-                    ->numeric()
+                TextColumn::make('hadits.name')
+                    ->label('Hadits')
                     ->sortable(),
             ])
+            ->modifyQueryUsing(function ($query) {
+                return $query->where('status', '<>', 'assigned')->where('status', '<>', 'draft');
+            })
             ->filters([
                 //
             ])
@@ -97,7 +110,7 @@ class SetoranHafalanRelationManager extends RelationManager
                 // AssociateAction::make(),
             ])
             ->recordActions([
-                ViewAction::make(),
+                //ViewAction::make(),
                 EditAction::make(),
                 // DissociateAction::make(),
                 // DeleteAction::make(),

@@ -50,30 +50,35 @@ class BabsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->extraAttributes([
-                'class' => 'card-glass-record'
-            ])
+            // ->extraAttributes([
+            //     'class' => 'card-glass-record'
+            // ])
             ->columns([
-                Stack::make([
-                    TextColumn::make('name')
-                        ->searchable(),
-                    TextColumn::make('description')
-                        ->searchable()
-                        ->placeholder('-'),
-                    // TextColumn::make('created_at')
-                    //     ->dateTime()
-                    //     ->sortable()
-                    //     ->toggleable(isToggledHiddenByDefault: true),
-                    // TextColumn::make('updated_at')
-                    //     ->dateTime()
-                    //     ->sortable()
-                    //     ->toggleable(isToggledHiddenByDefault: true),
-                    // TextColumn::make('deleted_at')
-                    //     ->dateTime()
-                    //     ->sortable()
-                    //     ->toggleable(isToggledHiddenByDefault: true),
-                ])->extraAttributes(['class' => 'card-hidden-content']),
-                View::make('filament.components.card')
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('description')
+                    ->searchable()
+                    ->placeholder('-'),
+                // Stack::make([
+                //     TextColumn::make('name')
+                //         ->searchable(),
+                //     TextColumn::make('description')
+                //         ->searchable()
+                //         ->placeholder('-'),
+                //     // TextColumn::make('created_at')
+                //     //     ->dateTime()
+                //     //     ->sortable()
+                //     //     ->toggleable(isToggledHiddenByDefault: true),
+                //     // TextColumn::make('updated_at')
+                //     //     ->dateTime()
+                //     //     ->sortable()
+                //     //     ->toggleable(isToggledHiddenByDefault: true),
+                //     // TextColumn::make('deleted_at')
+                //     //     ->dateTime()
+                //     //     ->sortable()
+                //     //     ->toggleable(isToggledHiddenByDefault: true),
+                // ])->extraAttributes(['class' => 'card-hidden-content']),
+                // View::make('filament.components.card')
             ])
             ->recordUrl(fn(Bab $record): string => route('filament.admin.resources.babs.view', $record))
             ->contentGrid([
@@ -94,17 +99,15 @@ class BabsRelationManager extends RelationManager
                 //     ->color('secondary')
                 //     ->icon('heroicon-o-eye')
                 //     ->url(fn(Bab $record): string => route('filament.admin.resources.babs.edit', $record)),
-                // EditAction::make(),
-                // DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
                 // ForceDeleteAction::make(),
                 // RestoreAction::make(),
             ])
             ->toolbarActions([
-                // BulkActionGroup::make([
-                //     DeleteBulkAction::make(),
-                //     ForceDeleteBulkAction::make(),
-                //     RestoreBulkAction::make(),
-                // ]),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ])
             ->modifyQueryUsing(fn(Builder $query) => $query
                 ->withoutGlobalScopes([

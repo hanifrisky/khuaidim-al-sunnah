@@ -4,13 +4,16 @@ namespace App\Filament\Resources\TugasHafalans\Pages;
 
 use App\Filament\Resources\TugasHafalans\TugasHafalanResource;
 use App\Models\Kelas;
+use App\Models\Pesan;
 use App\Models\Siswa;
 use App\Models\TugasHafalan;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateTugasHafalan extends CreateRecord
 {
     protected static string $resource = TugasHafalanResource::class;
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         //set tipe mengirim ke individu atau kelas
@@ -54,6 +57,22 @@ class CreateTugasHafalan extends CreateRecord
 
         return $data;
     }
+    public function create(bool $another = false): void
+    {
+        $data = $this->form->getState();
+        $bab_id = $data['bab_id'];
+        $kelas_id = $data['kelas_id'];
+        if (TugasHafalan::where('bab_id', $bab_id)->where('kelas_id', $kelas_id)->exists()) {
+            Notification::make()
+                ->title('Gagal!')
+                ->body('Sudah membuat Tugas untuk bab ini')
+                ->danger()
+                ->send();
+            return;
+        }
+
+        parent::create($another);
+    }
     public function afterCreate()
     {
         $record = $this->record;
@@ -63,20 +82,18 @@ class CreateTugasHafalan extends CreateRecord
         $bab = $record->bab;
 
         $hadits = $record->hadits;
-        $kelas = Kelas::find($record->kelas_id);
-        $siswas = Siswa::where('kelas_id', $kelas->id)->get();
-
-        dd($kelas, $siswas);
-
+        //$kelas = Kelas::find($record->kelas_id);
+        $siswas = Siswa::where('kelas_id', $record->kelas_id)->get();
         foreach ($siswas as $siswa) {
-            foreach ($hadits as $hadit) {
-                TugasHafalan::create([
-                    'tugas_hafalan_id' => $record->id,
-                    'siswa_id' => $siswa->id,
-                    'hadit_id' => $hadit->id,
-                    'status' => 'draft'
-                ]);
-            }
+            Pesan::create([
+                'siswa_id' => $siswa->id,
+                'pesan' => $record->title,
+                'action' => route(
+                    'filament.admin.pages.video-bab.upload',
+                    ['id' => $bab->id]
+                ),
+                'status' => 'unread'
+            ]);
         }
     }
 }

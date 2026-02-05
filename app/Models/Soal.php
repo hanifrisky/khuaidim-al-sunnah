@@ -27,6 +27,11 @@ class Soal extends Model
     {
         return $this->belongsTo(Hadits::class, 'hadits_id');
     }
+    public function setoranHafalan()
+    {
+        return $this->hasMany(SetoranHafalan::class, 'hadit_id', 'hadits_id');
+    }
+
 
     public function getHaditsNameAttribute()
     {

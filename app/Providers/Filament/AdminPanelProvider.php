@@ -29,7 +29,6 @@ class AdminPanelProvider extends PanelProvider
             ->path('app')
             ->brandLogo(asset('AppLogo.png'))
             ->login()
-            ->registration()
             ->darkMode(false)
             ->colors([
                 'danger' => Color::Rose,
@@ -37,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Orange,
                 'success' => Color::Amber,
                 'info' => Color::Blue,
-                'primary' => Color::Gray,
+                'primary' => Color::Teal,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

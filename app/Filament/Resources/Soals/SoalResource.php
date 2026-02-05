@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SoalResource extends Resource
 {
@@ -22,6 +23,7 @@ class SoalResource extends Resource
     protected static ?string $model = Soal::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Tugas';
 
     protected static ?string $label = "Bank Soal";
     protected static ?string $pluralLabel = "Bank Soal";

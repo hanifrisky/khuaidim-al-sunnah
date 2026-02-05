@@ -20,9 +20,9 @@ class TugasHafalansTable
         return $table
             ->modifyQueryUsing(function ($query) {
                 if (self::isRole('guru')) {
-                    $query->where('guru_id', self::guruId())->with(['guru', 'kelas', 'siswa', 'hadits', 'bab']);
+                    $query->where('guru_id', self::guruId())->with(['bab']);
                 } else {
-                    $query->with(['guru', 'kelas', 'siswa', 'hadits', 'bab']);
+                    $query->with(['bab']);
                 }
             })
             ->columns([

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Kitabs\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -20,29 +21,43 @@ class KitabsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->extraAttributes([
-                'class' => 'card-glass-record'
-            ])
+            // ->extraAttributes([
+            //     'class' => 'card-glass-record'
+            // ])
             ->columns([
-                Stack::make([
-                    TextColumn::make('name')
-                        ->searchable(),
-                    TextColumn::make('author')
-                        ->searchable(),
-                    // TextColumn::make('created_at')
-                    //     ->dateTime()
-                    //     ->sortable()
-                    //     ->toggleable(isToggledHiddenByDefault: true),
-                    // TextColumn::make('updated_at')
-                    //     ->dateTime()
-                    //     ->sortable()
-                    //     ->toggleable(isToggledHiddenByDefault: true),
-                    // TextColumn::make('deleted_at')
-                    //     ->dateTime()
-                    //     ->sortable()
-                    //     ->toggleable(isToggledHiddenByDefault: true),
-                ])->extraAttributes(['class' => 'card-hidden-content']),
-                View::make('filament.components.card')
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('author')
+                    ->searchable(),
+                // Stack::make([
+                //     // TextColumn::make('name')
+                //     //     ->searchable(),
+                //     // TextColumn::make('author')
+                //     //     ->searchable(),
+                //     // TextColumn::make('created_at')
+                //     //     ->dateTime()
+                //     //     ->sortable()
+                //     //     ->toggleable(isToggledHiddenByDefault: true),
+                //     // TextColumn::make('updated_at')
+                //     //     ->dateTime()
+                //     //     ->sortable()
+                //     //     ->toggleable(isToggledHiddenByDefault: true),
+                //     // TextColumn::make('deleted_at')
+                //     //     ->dateTime()
+                //     //     ->sortable()
+                //     //     ->toggleable(isToggledHiddenByDefault: true),
+                // ])->extraAttributes(['class' => 'card-hidden-content']),
+                // View::make('filament.components.card')
+            ])
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                    // ForceDeleteBulkAction::make(),
+                    // RestoreBulkAction::make(),
+                ]),
             ])
             ->contentGrid([
                 'sm' => 2,

@@ -32,7 +32,9 @@ class ProfileUser extends Page implements HasSchemas
     use AksesMenu;
     protected string $view = 'filament.pages.profile';
     protected static ?string $slug = 'profile';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUser;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::User;
+    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationLabel = 'Profil';
 
     public ?array $data = [];
 

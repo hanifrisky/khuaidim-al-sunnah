@@ -14,10 +14,23 @@ class SiswasTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function ($query) {
+                $guru = auth()->user()->guru;
+
+                if (auth()->user()->role == 'guru') {
+                    return $query->whereHas('kelas', function ($q) use ($guru) {
+                        $q->where('guru_id', $guru->id);
+                    });
+                } else {
+                    return $query;
+                }
+            })
             ->columns([
                 TextColumn::make('user.name')
                     ->label('Nama')
                     ->sortable(),
+                TextColumn::make('kelas.name')
+                    ->searchable(),
                 TextColumn::make('user.email')
                     ->label('Email')
                     ->searchable(),
@@ -27,7 +40,9 @@ class SiswasTable
                     ->searchable(),
                 TextColumn::make('telp')
                     ->searchable(),
+
                 TextColumn::make('kelas.guru.name')
+                    ->visible(fn(): bool => auth()->user()->role == 'admin')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

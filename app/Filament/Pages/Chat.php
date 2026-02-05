@@ -12,8 +12,9 @@ use Illuminate\Contracts\Support\Htmlable;
 class Chat extends Page
 {
     protected string $view = 'filament.resources.chat';
+    protected static ?int $navigationSort = 3;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::MagnifyingGlass;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ChatBubbleLeft;
     /** query pencarian */
 
     public function mount() {}
@@ -39,5 +40,11 @@ class Chat extends Page
         return Pesan::where('siswa_id', $siswa->id)
             ->orderBy('updated_at', 'desc')
             ->get();
+    }
+    public function aksiPesan(Pesan $pesan)
+    {
+        $pesan->status = 'read';
+        $pesan->save();
+        return redirect($pesan->action);
     }
 }

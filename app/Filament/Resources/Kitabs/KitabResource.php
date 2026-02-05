@@ -8,6 +8,7 @@ use App\Filament\Resources\Kitabs\Pages\EditKitab;
 use App\Filament\Resources\Kitabs\Pages\ListBabKitab;
 use App\Filament\Resources\Kitabs\Pages\ListKitabs;
 use App\Filament\Resources\Kitabs\Pages\MengerjakanSoal;
+use App\Filament\Resources\Kitabs\Pages\MengerjakanSoalMelanjutkan;
 use App\Filament\Resources\Kitabs\Pages\ViewKitab;
 use App\Filament\Resources\Kitabs\RelationManagers\BabsRelationManager;
 use App\Filament\Resources\Kitabs\Schemas\KitabForm;
@@ -73,6 +74,7 @@ class KitabResource extends Resource
             'view' => ViewKitab::route('/{record}'),
             'babs' => ListBabKitab::route('/{record}/bab'),
             'soal' => MengerjakanSoal::route('/{record}/soal'),
+            'melanjutkan' => MengerjakanSoalMelanjutkan::route('/{record}/melanjutkan')
 
         ];
     }

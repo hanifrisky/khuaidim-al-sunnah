@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Htmlable;
 class Search extends Page
 {
     protected string $view = 'filament.resources.search';
+    protected static ?int $navigationSort = 2;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::MagnifyingGlass;
     /** query pencarian */
@@ -19,6 +20,13 @@ class Search extends Page
     protected $queryString = [
         'q' => ['except' => ''],
     ];
+    public static function shouldRegisterNavigation(): bool
+    {
+        if (auth()->user()->siswa) {
+            return true;
+        }
+        return false;
+    }
 
     public function mount()
     {

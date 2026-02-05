@@ -26,20 +26,28 @@ class SiswaForm
                         }
                     })
                     ->required(),
-                TextInput::make('identitas'),
+                Select::make('kelas_id')
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->relationship(
+                        'kelas',
+                        'name',
+                        fn($query) => auth()->user()->role === 'guru'
+                            ? $query->where('guru_id', auth()->user()->guru->id)
+                            : $query
+                    ),
                 Select::make('jenis_kelamin')
                     ->options([
                         'laki-laki' => 'Pria',
                         'perempuan' => 'Wanita',
                     ])
                     ->default('laki-laki'),
+                TextInput::make('identitas'),
+
                 TextInput::make('telp')
                     ->tel(),
-                Select::make('kelas_id')
-                    ->searchable()
-                    ->required()
-                    ->preload()
-                    ->relationship('kelas', 'name'),
+
             ]);
     }
 }

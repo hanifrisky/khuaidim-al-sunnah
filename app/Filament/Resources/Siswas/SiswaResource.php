@@ -28,6 +28,11 @@ class SiswaResource extends Resource
     protected static ?string $navigationLabel = 'Siswa';
     protected static ?int $navigationSort = 3;
 
+    protected static function menuRole(): array
+    {
+        return ['admin', 'guru'];
+    }
+
     public static function form(Schema $schema): Schema
     {
         return SiswaForm::configure($schema);

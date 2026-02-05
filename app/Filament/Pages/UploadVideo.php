@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\Hadits;
 use App\Models\SetoranHafalan;
+use App\Models\TugasHafalan;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
@@ -50,6 +51,7 @@ class UploadVideo extends Page implements HasSchemas
         }
         // Ambil semua Hadits di bab ini
         $hadits = Hadits::where('bab_id', $bab_id)->get();
+        $tugas_hafalan = TugasHafalan::where('bab_id', $bab_id)->where('kelas_id', $kelas_id)->first();
 
 
         $dataRepeater = [];
@@ -60,6 +62,7 @@ class UploadVideo extends Page implements HasSchemas
             //dd($setoran, $kelas_id, $siswa_id, $itemHadits);
             if (!$setoran) {
                 $setoran = SetoranHafalan::create([
+                    'tugas_hafalan_id' => $tugas_hafalan->id,
                     'hadit_id' => $itemHadits->id,
                     'siswa_id' => $siswa_id,
                     'kelas_id' => $kelas_id,
@@ -107,7 +110,7 @@ class UploadVideo extends Page implements HasSchemas
                     ->required()
                     ->options([
                         'draft' => 'Draft',
-                        'publish' => 'Publish'
+                        'review' => 'Publish'
                     ])
             ])
             ->statePath('data');
@@ -122,7 +125,7 @@ class UploadVideo extends Page implements HasSchemas
         foreach ($data['setoran'] as $item) {
             SetoranHafalan::where('id', $item['id'])->update([
                 'media' => $item['media'],
-                'status' => $status
+                'status' => $data['status']
             ]);
         }
 

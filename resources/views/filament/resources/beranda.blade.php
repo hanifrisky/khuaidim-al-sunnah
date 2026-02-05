@@ -131,7 +131,14 @@
         opacity: .8;
     }
 
-
+    .header-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, .45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     /* BOOK LIST */
     .books {
@@ -151,27 +158,62 @@
         display: block;
     }
 
+    /* CARD */
     .book-card {
-        cursor: pointer;
-        transition: transform .2s ease, box-shadow .2s ease;
-        padding: 14px;
-        border-radius: 12px;
+        position: relative;
         min-height: 200px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform .25s ease, box-shadow .25s ease;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, .15);
     }
 
-    .book-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+    /* OVERLAY GRADIENT */
+    .book-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top,
+                rgba(0, 0, 0, .90),
+                rgba(0, 0, 0, .35),
+                rgba(0, 0, 0, 0));
+        transition: opacity .25s ease;
+        z-index: 1;
     }
 
+    /* TEKS DI BAWAH */
+    .book-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 12px;
+        z-index: 2;
+        color: #fff;
+    }
+
+    /* TEKS */
     .book-card h3 {
         font-size: 14px;
+        margin: 0 0 4px;
     }
 
     .book-card p {
         font-size: 11px;
+        opacity: .9;
+    }
+
+    /* HOVER */
+    .book-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, .25);
+    }
+
+    .book-card:hover .book-overlay {
         opacity: .85;
     }
+
+
 
 
     /* DESKTOP MODE */
@@ -232,11 +274,14 @@
             <img src="{{ asset('image/book.png') }}" class="book-stack">
 
             <div class="quote">
-                <p>
+                {{$this->getQuote()}}
+                <!--<p>
                     لا يستطيع العلم براحة الجسم
                 </p>
                 <small>رواه مسلم</small>
+                -->
             </div>
+
 
         </div>
         <h2 class="books-title">الكتب المقررة</h2>
@@ -251,23 +296,33 @@
                 if ($siswa) {
                     $stringurl = '/app/kitabs/' . $item->id . '/bab';
                 }
+                $background = $item->media
+                    ? 'url(' . asset($item->media) . ')'
+                    : 'hsl(' . ($item->id * 57 % 360) . ',60%,45%)';
                 ?>
+
                 <a href="{{ url($stringurl) }}" class="book-card-link">
                     <div class="book-card"
                         style="
-                background:
-                {{ $item->media
-                    ? 'url('.asset($item->media).')'
-                    : 'hsl('.($item->id * 57 % 360).',60%,45%)'
-                }};
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-            ">
-                        <h3>{{ $item->name }}</h3>
-                        <p>{{ $item->author }}</p>
+            background:
+            {{ 
+            $background
+            }};
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        ">
+                        {{-- Overlay --}}
+                        <div class="book-overlay"></div>
+
+                        {{-- Konten --}}
+                        <div class="book-content">
+                            <h3>{{ $item->name }}</h3>
+                            <p>{{ $item->author }}</p>
+                        </div>
                     </div>
                 </a>
+
                 @endforeach
 
             </div>
@@ -277,6 +332,7 @@
         </div>
 
 
+        @if(auth()->user()->role === 'siswa')
         {{-- MOBILE NAV --}}
         <div class="bottom-nav">
             <a href="/app" class="nav-item active">
@@ -299,6 +355,6 @@
                 <small>Profile</small>
             </a>
         </div>
-
+        @endif
     </div>
 </div>

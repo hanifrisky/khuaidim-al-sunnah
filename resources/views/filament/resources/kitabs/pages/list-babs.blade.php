@@ -23,7 +23,7 @@
                     asset('image/book.png')
                     }}" class="header-bg">
             <div class="header-overlay">
-                <h1>صحيح مسلم</h1>
+                <h1>{{ $kitab->name }}</h1>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
                 📚 <span>أقسام الحديث</span>
             </a>
 
-            <a href="/app/kitabs/{{$kitab->id}}/soal" class="menu-item">
+            <a href="/app/kitabs/{{$kitab->id}}/melanjutkan" class="menu-item">
                 ❓ <span>أسئلة</span>
             </a>
         </div>
