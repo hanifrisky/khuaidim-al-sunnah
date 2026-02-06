@@ -16,7 +16,7 @@ class EditKitab extends EditRecord
 
     protected static function menuRole(): array
     {
-        return ['admin', 'guru'];
+        return ['admin'];
     }
     protected function getHeaderActions(): array
     {

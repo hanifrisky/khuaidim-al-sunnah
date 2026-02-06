@@ -297,7 +297,7 @@
                     $stringurl = '/app/kitabs/' . $item->id . '/bab';
                 }
                 $background = $item->media
-                    ? 'url(' . asset($item->media) . ')'
+                    ? 'url(' . asset('storage/' . $item->media) . ')'
                     : 'hsl(' . ($item->id * 57 % 360) . ',60%,45%)';
                 ?>
 

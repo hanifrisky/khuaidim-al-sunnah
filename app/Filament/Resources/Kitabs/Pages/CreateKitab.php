@@ -12,7 +12,7 @@ class CreateKitab extends CreateRecord
     protected static string $resource = KitabResource::class;
     protected static function menuRole(): array
     {
-        return ['admin', 'guru'];
+        return ['admin'];
     }
     protected function getRedirectUrl(): string
     {

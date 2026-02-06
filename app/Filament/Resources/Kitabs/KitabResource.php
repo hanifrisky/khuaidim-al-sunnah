@@ -39,10 +39,11 @@ class KitabResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        if (Auth()->user()->role == 'siswa') {
-            return false;
+        $role = Auth()->user()->role;
+        if ($role == 'admin') {
+            return true;
         }
-        return true;
+        return false;
     }
     public static function form(Schema $schema): Schema
     {
