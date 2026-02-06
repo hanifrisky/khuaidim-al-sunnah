@@ -14,4 +14,8 @@ class CreateKitab extends CreateRecord
     {
         return ['admin'];
     }
+    protected function getRedirectUrl(): string
+    {
+        return KitabResource::getUrl('edit');
+    }
 }
