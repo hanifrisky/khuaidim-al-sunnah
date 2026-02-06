@@ -11,6 +11,10 @@ use Filament\Forms\Components\FileUpload;
 class KitabForm
 {
     use AksesMenu;
+    protected static function menuRole(): array
+    {
+        return ['admin', 'guru'];
+    }
     public static function configure(Schema $schema): Schema
     {
         return $schema
