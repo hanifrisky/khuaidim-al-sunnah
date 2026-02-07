@@ -136,7 +136,7 @@ class ProfileUser extends Page implements HasSchemas
 
         Notification::make()
             ->title('Berhasil!')
-            ->body('Video hafalan berhasil disimpan')
+            ->body('Berhasil disimpan')
             ->success()
             ->send();
         //
