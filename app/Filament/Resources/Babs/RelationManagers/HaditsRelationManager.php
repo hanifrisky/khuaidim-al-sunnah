@@ -3,13 +3,10 @@
 namespace App\Filament\Resources\Babs\RelationManagers;
 
 use App\Models\Hadits;
-use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -48,10 +45,12 @@ class HaditsRelationManager extends RelationManager
                     ->required(),
                 RichEditor::make('content')
                     ->required()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->extraInputAttributes(['style' => 'min-height: 20rem; max-height: 50vh; overflow-y: auto;']),
                 TextInput::make('keterangan'),
                 TextInput::make('source'),
-                Textarea::make('translate')
+                RichEditor::make('translate')
+                    ->extraInputAttributes(['style' => 'min-height: 20rem; max-height: 50vh; overflow-y: auto;'])
                     ->columnSpanFull(),
                 FileUpload::make('media')
                     ->label('Hadist Media')
@@ -103,7 +102,7 @@ class HaditsRelationManager extends RelationManager
                         ->html(),
                     TextColumn::make('translate')
                         ->searchable()
-                        ->alignCenter(),
+                        ->html(),
                     TextColumn::make('keterangan')
                         ->searchable(),
                     TextColumn::make('source')
