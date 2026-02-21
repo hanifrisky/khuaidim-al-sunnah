@@ -35,7 +35,7 @@ class BabsRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextInput::make('name')
+                Textarea::make('name')
                     ->required(),
                 Textarea::make('description'),
                 FileUpload::make('media')

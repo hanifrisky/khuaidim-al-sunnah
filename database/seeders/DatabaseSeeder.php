@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@hafalan.id',
             'password' => bcrypt('password'),
             'role' => 'admin',
         ]);
+
+        $this->call(KitabSeeder::class);
+        $this->call(HaditsSeeder::class);
     }
 }

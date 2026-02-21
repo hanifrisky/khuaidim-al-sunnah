@@ -12,6 +12,7 @@ class Soal extends Model
         'hadits_id',
         'tipe',
         'soal',
+        'petunjuk',
         'media'
     ];
 

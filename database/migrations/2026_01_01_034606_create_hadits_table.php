@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('bab_id')->nullable()->constrained('babs')->nullOnDelete();
             $table->foreignId('kitab_id')->nullable()->constrained('kitabs')->nullOnDelete();
-            $table->string('name');
+            $table->text('name');
             $table->text('content');
             $table->string('keterangan')->nullable();
             $table->string('source')->nullable();

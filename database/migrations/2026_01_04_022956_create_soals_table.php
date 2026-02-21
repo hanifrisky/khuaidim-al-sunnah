@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('hadits_id')->nullable()->constrained('hadits')->nullOnDelete();
             $table->enum('tipe', ['melanjutkan', 'pemahaman'])->default('melanjutkan');
             $table->text('soal');
+            $table->text('petunjuk')->nullable();
             $table->string('media')->nullable();
             $table->timestamps();
         });

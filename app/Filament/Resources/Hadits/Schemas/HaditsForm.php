@@ -19,7 +19,7 @@ class HaditsForm
                     ->searchable()
                     ->required()
                     ->preload(),
-                TextInput::make('name')
+                Textarea::make('name')
                     ->required(),
                 Textarea::make('content')
                     ->required()
