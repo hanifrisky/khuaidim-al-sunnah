@@ -22,7 +22,7 @@ class SoalResource extends Resource
     use AksesMenu;
     protected static ?string $model = Soal::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ClipboardDocumentList;
     protected static string|UnitEnum|null $navigationGroup = 'Manajemen Tugas';
 
     protected static ?string $label = "Bank Soal";

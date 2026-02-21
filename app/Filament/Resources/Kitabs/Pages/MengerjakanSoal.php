@@ -35,22 +35,45 @@ class MengerjakanSoal extends Page
     public function GetSoal()
     {
         // 1. Ambil hadits_id dari setoran yang approved
-        $user = Auth()->user()->siswa;
+        $user = auth()->user()->siswa;
+
         if (!$user) {
             return [];
         }
+        $kitab_id = $this->record->id;
 
         $haditsIds = SetoranHafalan::where('status', 'accepted')
             ->where('siswa_id', $user->id)
-            ->pluck('hadit_id') // hasil: Collection
+            ->pluck('hadit_id')
             ->toArray();
 
-        // 2. Ambil soal berdasarkan hadits_id tersebut
+
+        // 2. Ambil 20 soal random berdasarkan hadits_id
         $soal = Soal::where('tipe', 'pemahaman')
             ->whereIn('hadits_id', $haditsIds)
-            ->with('jawaban')
+            ->inRandomOrder()
             ->limit(20)
+            ->with('jawaban')
             ->get();
+
+
+        // 3. Jika kurang dari 20, tambahkan dari kitab yang sama
+        if ($soal->count() < 20) {
+
+            $kurang = 20 - $soal->count();
+
+            $tambahan = Soal::where('tipe', 'pemahaman')
+                ->where('kitab_id', $kitab_id) // <- nanti Anda supply
+                ->whereNotIn('id', $soal->pluck('id')) // hindari duplikat
+                ->inRandomOrder()
+                ->limit($kurang)
+                ->with('jawaban')
+                ->get();
+
+            $soal = $soal->merge($tambahan);
+        }
+
+        return $soal;
 
         return $soal;
     }

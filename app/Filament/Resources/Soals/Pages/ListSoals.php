@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Soals\Pages;
 use App\Filament\Resources\Soals\SoalResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Tabs\Tab;
+use Illuminate\Database\Eloquent\Builder;
 
 class ListSoals extends ListRecords
 {
@@ -14,6 +16,16 @@ class ListSoals extends ListRecords
     {
         return [
             CreateAction::make(),
+        ];
+    }
+    public function getTabs(): array
+    {
+        return [
+            // 'semua' => Tab::make(),
+            'pemahaman' => Tab::make()
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('tipe', 'pemahaman')),
+            'melanjutkan' => Tab::make()
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('tipe', 'melanjutkan')),
         ];
     }
 }

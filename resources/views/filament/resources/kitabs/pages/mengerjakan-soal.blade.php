@@ -44,6 +44,13 @@ $multiplierNilai = 5;
             margin-bottom: 20px;
         }
 
+        .quiz-petunjuk {
+            border-left: 4px solid #22c55e;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
         .quiz-answers {
             display: flex;
             flex-direction: column;
@@ -179,6 +186,7 @@ $multiplierNilai = 5;
             </div>
 
             <div id="soalText" class="quiz-question"></div>
+            <div id="petunjukText" class="quiz-petunjuk"></div>
 
             <div id="jawabanContainer" class="quiz-answers"></div>
 
@@ -222,6 +230,7 @@ $multiplierNilai = 5;
         let sudahMenjawab = false;
 
         const soalText = document.getElementById('soalText');
+        const petunjukText = document.getElementById('petunjukText');
         const jawabanContainer = document.getElementById('jawabanContainer');
         const btnLanjut = document.getElementById('btnLanjut');
         const nomorSoal = document.getElementById('nomorSoal');
@@ -247,6 +256,7 @@ $multiplierNilai = 5;
             const soal = soalData[indexSoal];
             nomorSoal.innerText = indexSoal + 1;
             soalText.innerHTML = soal.soal;
+            petunjukText.innerHTML = 'Petunjuk: ' + soal.petunjuk;
 
             soal.jawaban.forEach(j => {
                 const btn = document.createElement('button');
