@@ -13,7 +13,7 @@
     <form wire:submit="submit">
         {{ $this->form }}
         <div class="mt-6">
-            <x-filament::button type="submit">Simpan</x-filament::button>
+            <x-filament::button type="submit">يحفظ</x-filament::button>
         </div>
     </form>
     @if(auth()->user()->role === 'siswa')

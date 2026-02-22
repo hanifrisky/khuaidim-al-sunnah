@@ -58,7 +58,7 @@ class TugasHafalanForm
                 //             ]);
                 //     }),
                 Select::make('kelas_id')
-                    ->label('Kelas')
+                    ->label('الفصل')
                     ->required()
                     // ->visible(fn($get) => $get('assign') === 'kelas')
                     // ->required(fn($get) => $get('assign') === 'kelas')
@@ -73,6 +73,7 @@ class TugasHafalanForm
                     ->preload(),
                 Select::make('bab_id')
                     ->searchable()
+                    ->label('الباب')
                     ->preload()
                     ->required()
                     //->visible(fn($get) => $get('type') === 'bab')
@@ -80,6 +81,7 @@ class TugasHafalanForm
                     ->relationship('bab', 'name'),
                 Textarea::make('description')
                     ->label('Keterangan')
+                    ->label('الوصف')
                     ->columnSpanFull(),
                 // Select::make('type')
                 //     ->options([
@@ -102,8 +104,10 @@ class TugasHafalanForm
                 //     ->relationship('hadits', 'name'),
 
                 DatePicker::make('deadline')
+                    ->label('الموعد النهائي')
                     ->default(now()),
                 Select::make('status')
+                    ->label('الحالة')
                     ->required()
                     ->options([
                         'draft' => 'Draft',

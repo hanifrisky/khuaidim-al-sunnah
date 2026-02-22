@@ -29,7 +29,9 @@ class KitabResource extends Resource
 {
     protected static ?string $model = Kitab::class;
 
-    protected static ?string $navigationLabel = 'Kitab';
+    protected static ?string $navigationLabel = 'الكتب';
+    protected static ?string $label = 'الكتب';
+    protected static ?string $pluralLabel = 'الكتب';
 
     // protected static ?int $navigationSort = 1;
 

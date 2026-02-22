@@ -19,42 +19,44 @@ class SoalForm
         return $schema
             ->components([
                 Select::make('hadits_id')
-                    ->label('Hadits')
+                    ->label('الحديث')
                     ->relationship('hadits', 'name')
                     ->preload()
                     ->searchable(),
                 Select::make('tipe')
+                    ->label('نوع السؤال')
                     ->options([
-                        'melanjutkan' => 'Melanjutkan',
-                        'pemahaman' => 'Pemahaman',
+                        'melanjutkan' => 'إكمال الحديث',
+                        'pemahaman' => 'الاستيعاب',
                     ])
-                    ->label('Tipe Soal')
                     ->required()
                     ->live()
                     ->default('melanjutkan'),
                 RichEditor::make('soal')
+                    ->label('السؤال')
                     ->required()
                     ->columnSpanFull(),
                 Textarea::make('petunjuk')
                     ->columnSpanFull()
                     ->visible(fn($get): bool => $get('tipe') !== 'melanjutkan'),
-                Section::make('Pilihan Jawaban')
+                Section::make('خيارات الإجابة')
                     ->columnSpanFull()
                     ->schema([
                         Repeater::make('jawaban')
+                            ->label('الإجابة')
                             ->relationship('jawaban')
-                            ->label('')
                             ->reorderable()
                             ->orderColumn('sort')
                             ->defaultItems(4)
-                            ->addActionLabel('Tambah Jawaban')
+                            ->addActionLabel('إضافة إجابة')
                             ->schema([
                                 TextInput::make('jawaban')
-                                    ->placeholder('Masukkan Pilihan Jawaban')
+                                    ->label('الإجابة')
+                                    ->placeholder('أدخل خيار الإجابة')
                                     ->required(),
                                 Toggle::make('benar')
                                     ->visible(fn($get): bool => $get('../../tipe') !== 'melanjutkan')
-                                    ->label('Jawaban Benar')
+                                    ->label('الإجابة الصحيحة')
                             ])
 
                     ])

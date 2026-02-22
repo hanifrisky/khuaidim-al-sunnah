@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\NilaiSoals\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -11,8 +12,12 @@ class NilaiSoalForm
     {
         return $schema
             ->components([
-                TextInput::make('siswa_id')
-                    ->numeric(),
+                Select::make('siswa_id')
+                    ->relationship('siswa', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->label('الطلاب')
+                    ->required(),
                 TextInput::make('nilai')
                     ->required()
                     ->numeric()

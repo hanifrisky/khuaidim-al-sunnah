@@ -20,17 +20,20 @@ class KitabForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('الاسم')
                     ->visible(fn(): bool => self::isRole('admin'))
                     ->required(),
                 TextInput::make('author')
+                    ->label('المؤلف')
                     ->visible(fn(): bool => self::isRole('admin'))
                     ->required(),
                 Textarea::make('description')
+                    ->label('الوصف')
                     ->visible(fn(): bool => self::isRole('admin'))
                     ->required(),
                 FileUpload::make('media')
                     ->visible(fn(): bool => self::isRole('admin'))
-                    ->label('Cover Kitab')
+                    ->label('واجهة الكتاب')
                     ->disk('public')
                     ->directory('kitabs/cover')
                     ->image(),

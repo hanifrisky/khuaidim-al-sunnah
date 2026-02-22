@@ -18,7 +18,9 @@ class MengerjakanSoalMelanjutkan extends Page
 
     protected static string $resource = KitabResource::class;
 
-    protected string $view = 'filament.resources.kitabs.pages.mengerjakan-soal';
+    protected string $view = 'filament.resources.kitabs.pages.mengerjakan-soal-melanjutkan';
+
+    protected $jumlahSoal = 5;
 
     public function getBreadcrumbs(): array
     {
@@ -29,6 +31,14 @@ class MengerjakanSoalMelanjutkan extends Page
     {
         $this->record = $this->resolveRecord($record);
     }
+    public function multiplierNilai()
+    {
+        return 5;
+    }
+    public function getKitabName()
+    {
+        return $this->record->name;
+    }
 
     public function GetSoal()
     {
@@ -38,17 +48,38 @@ class MengerjakanSoalMelanjutkan extends Page
             return [];
         }
 
+        $kitab_id = $this->record->id;
+
         $haditsIds = SetoranHafalan::where('status', 'accepted')
             ->where('siswa_id', $user->id)
-            ->pluck('hadit_id') // hasil: Collection
+            ->pluck('hadit_id')
             ->toArray();
 
-        // 2. Ambil soal berdasarkan hadits_id tersebut
+
+        // 2. Ambil $this->jumlahSoal soal random berdasarkan hadits_id
         $soal = Soal::where('tipe', 'melanjutkan')
             ->whereIn('hadits_id', $haditsIds)
+            ->inRandomOrder()
+            ->limit($this->jumlahSoal)
             ->with('jawaban')
-            ->limit(20)
             ->get();
+
+
+        // 3. Jika kurang dari 20, tambahkan dari kitab yang sama
+        if ($soal->count() < $this->jumlahSoal) {
+
+            $kurang = $this->jumlahSoal - $soal->count();
+
+            $tambahan = Soal::where('tipe', 'melanjutkan')
+                ->where('kitab_id', $kitab_id) // <- nanti Anda supply
+                ->whereNotIn('id', $soal->pluck('id')) // hindari duplikat
+                ->inRandomOrder()
+                ->limit($kurang)
+                ->with('jawaban')
+                ->get();
+
+            $soal = $soal->merge($tambahan);
+        }
 
         return $soal;
     }

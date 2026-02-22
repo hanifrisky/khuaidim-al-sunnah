@@ -74,8 +74,6 @@ class MengerjakanSoal extends Page
         }
 
         return $soal;
-
-        return $soal;
     }
 
     #[On('selesai-kuis')]

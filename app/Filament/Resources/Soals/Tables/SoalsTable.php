@@ -16,17 +16,19 @@ class SoalsTable
         return $table
             ->columns([
                 TextColumn::make('soal')
-                    ->label('Soal')
+                    ->label('السؤال')
                     ->limit(50)
                     ->tooltip(fn($record) => $record->soal)
                     ->wrap()
                     ->searchable(),
                 TextColumn::make('kitab.name')
+                    ->label('الكتب')
                     ->numeric()
                     ->searchable()
                     ->placeholder('-')
                     ->sortable(),
                 TextColumn::make('hadits.name')
+                    ->label('الحديث')
                     ->numeric()
                     ->searchable()
                     ->placeholder('-')
@@ -34,7 +36,7 @@ class SoalsTable
             ])
             ->filters([
                 SelectFilter::make('kitab_id')
-                    ->label('Kitab')
+                    ->label('الكتب')
                     ->relationship('kitab', 'name')
                     ->searchable()
                     ->preload(),

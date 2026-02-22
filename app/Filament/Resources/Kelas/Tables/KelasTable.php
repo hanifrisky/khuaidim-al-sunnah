@@ -24,19 +24,13 @@ class KelasTable
             })
             ->columns([
                 TextColumn::make('name')
+                    ->label('الاسم')
                     ->searchable(),
                 TextColumn::make('guru.name')
+                    ->label('الأستاذ المشرف')
                     ->numeric()
                     ->hidden(fn(): bool => self::isRole('guru'))
                     ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

@@ -26,10 +26,10 @@ class GuruResource extends Resource
     protected static ?string $model = Guru::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Users;
-    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Pengguna';
-    protected static ?string $label = 'Guru';
-    protected static ?string $pluralLabel = 'Guru';
-    protected static ?string $navigationLabel = 'Guru';
+    protected static string | UnitEnum | null $navigationGroup = 'إدارة المستخدمين';
+    protected static ?string $label = 'المعلمون';
+    protected static ?string $pluralLabel = 'المعلمون';
+    protected static ?string $navigationLabel = 'المعلمون';
 
     protected static function menuRole(): array
     {

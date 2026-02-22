@@ -27,31 +27,27 @@ class SiswasTable
             })
             ->columns([
                 TextColumn::make('user.name')
-                    ->label('Nama')
+                    ->label('الاسم')
                     ->sortable(),
                 TextColumn::make('kelas.name')
+                    ->label('فصل')
                     ->searchable(),
                 TextColumn::make('user.email')
-                    ->label('Email')
+                    ->label('البريد الإلكتروني')
                     ->searchable(),
                 TextColumn::make('identitas')
+                    ->label('هوية')
                     ->searchable(),
                 TextColumn::make('jenis_kelamin')
+                    ->label('جنس')
                     ->searchable(),
                 TextColumn::make('telp')
+                    ->label('هاتف')
                     ->searchable(),
-
                 TextColumn::make('kelas.guru.name')
+                    ->label('المعلم')
                     ->visible(fn(): bool => auth()->user()->role == 'admin')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

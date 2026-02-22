@@ -17,8 +17,10 @@ class SiswaForm
             ->components([
                 Hidden::make('user_id'),
                 TextInput::make('user.name')
+                    ->label('الاسم')
                     ->required(),
                 TextInput::make('user.email')
+                    ->label('البريد الإلكتروني')
                     ->email()
                     ->unique(User::class, 'email', ignoreRecord: false, modifyRuleUsing: function (Unique $rule, $record) {
                         if (isset($record->user_id)) {
@@ -27,6 +29,7 @@ class SiswaForm
                     })
                     ->required(),
                 Select::make('kelas_id')
+                    ->label('فصل')
                     ->searchable()
                     ->required()
                     ->preload()
@@ -38,14 +41,17 @@ class SiswaForm
                             : $query
                     ),
                 Select::make('jenis_kelamin')
+                    ->label('جنس')
                     ->options([
-                        'laki-laki' => 'Pria',
-                        'perempuan' => 'Wanita',
+                        'laki-laki' => 'رجل',
+                        'perempuan' => 'امرأة',
                     ])
                     ->default('laki-laki'),
-                TextInput::make('identitas'),
+                TextInput::make('identitas')
+                    ->label('هوية'),
 
                 TextInput::make('telp')
+                    ->label('هاتف')
                     ->tel(),
 
             ]);

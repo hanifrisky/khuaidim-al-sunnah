@@ -15,30 +15,21 @@ class GurusTable
         return $table
             ->columns([
                 TextColumn::make('user.name')
-                    ->label('Nama Guru')
+                    ->label('الاسم')
                     ->placeholder('-')
                     ->sortable(),
                 TextColumn::make('user.email')
-                    ->label('Email Guru')
+                    ->label('البريد الإلكتروني')
                     ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('identitas')
                     ->placeholder('-')
-                    ->searchable(),
-                TextColumn::make('jenis_kelamin')
-                    ->placeholder('-')
+                    ->label('هوية')
                     ->searchable(),
                 TextColumn::make('telp')
+                    ->label('هاتف')
                     ->placeholder('-')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

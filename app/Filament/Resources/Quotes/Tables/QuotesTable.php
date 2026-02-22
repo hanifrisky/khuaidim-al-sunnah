@@ -15,8 +15,10 @@ class QuotesTable
     {
         return $table
             ->columns([
-                TextColumn::make('title'),
+                TextColumn::make('title')
+                    ->label('العنوان'),
                 TextColumn::make('konten')
+                    ->label('المحتوى')
                     ->html()
             ])
             ->filters([

@@ -60,7 +60,7 @@ $multiplierNilai = 5;
         .answer-btn {
             padding: 14px 18px;
             border-radius: 999px;
-            border: 2px solid #16a34a;
+            border: 2px solid #d1d5db;
             background: #ffffff;
             cursor: pointer;
             text-align: left;
@@ -274,8 +274,9 @@ $multiplierNilai = 5;
             const x = event.clientX;
             const y = event.clientY;
 
-            jawabanContainer.querySelectorAll('button')
-                .forEach(b => b.disabled = true);
+            const semuaButton = jawabanContainer.querySelectorAll('button');
+
+            semuaButton.forEach(b => b.disabled = true);
 
             if (benar) {
                 btn.classList.add('answer-correct');
@@ -287,6 +288,14 @@ $multiplierNilai = 5;
                 spawnParticles(x, y, '⭐');
             } else {
                 btn.classList.add('answer-wrong');
+
+                // 🔥 TAMBAHAN: tampilkan jawaban yang benar
+                soalData[indexSoal].jawaban.forEach((j, i) => {
+                    if (j.benar) {
+                        semuaButton[i].classList.add('answer-correct');
+                    }
+                });
+
                 soundWrong.currentTime = 0;
                 soundWrong.play();
 

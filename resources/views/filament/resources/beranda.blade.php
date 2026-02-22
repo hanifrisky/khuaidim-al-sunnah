@@ -286,7 +286,7 @@
         </div>
         <h2 class="books-title">الكتب المقررة</h2>
         {{-- BOOKS --}}
-        <div class="books">
+        <div class="books" style="padding-bottom: 100px;">
 
 
             <div class="book-grid">
@@ -326,9 +326,6 @@
                 @endforeach
 
             </div>
-        </div>
-        <div style="height:200px">
-
         </div>
 
 

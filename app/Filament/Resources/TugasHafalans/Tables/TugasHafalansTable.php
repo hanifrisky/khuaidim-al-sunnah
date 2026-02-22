@@ -27,26 +27,30 @@ class TugasHafalansTable
             })
             ->columns([
                 TextColumn::make('title')
+                    ->label('العنوان')
                     ->wrap()
                     ->searchable(),
                 // TextColumn::make('siswa.name')
                 //     ->toggleable(isToggledHiddenByDefault: true)
                 //     ->searchable(),
                 TextColumn::make('bab.name')
+                    ->label('الباب')
                     ->searchable(),
                 TextColumn::make('kelas.name')
+                    ->label('الفصل')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('Dikirim ke')
-                    ->label('Kelas')
+                    ->label('الفصول ')
                     ->default(function ($record) {
                         return $record->kelas_name;
                     }),
                 TextColumn::make('guru.name')
-                    ->label('Guru')
+                    ->label('المعلمون')
                     ->searchable()
                     ->hidden(fn(): bool => self::isRole('guru')),
                 TextColumn::make('deadline')
+                    ->label('الموعد النهائي')
                     ->date()
                     ->formatStateUsing(function ($state) {
                         return Carbon::parse($state)->format('d M Y');
@@ -54,6 +58,7 @@ class TugasHafalansTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
+                    ->label('الحالة')
                     ->color(fn(string $state): string => match ($state) {
                         'draft' => 'gray',
                         'publish' => 'success',

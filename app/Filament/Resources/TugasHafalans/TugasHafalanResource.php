@@ -25,12 +25,12 @@ class TugasHafalanResource extends Resource
     protected static ?string $model = TugasHafalan::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
-    // protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
-    protected static ?string $label = 'Tugas Hafalan';
-    protected static ?string $pluralLabel = 'Tugas Hafalan';
-    protected static ?string $navigationLabel = 'Tugas Hafalan';
+    // protected static string | UnitEnum | null $navigationGroup = 'إدارة المهام';
+    protected static ?string $label = 'تكاليف الحفظ';
+    protected static ?string $pluralLabel = 'تكاليف الحفظ';
+    protected static ?string $navigationLabel = 'تكاليف الحفظ';
     protected static ?int $navigationSort = 1;
-    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Tugas';
+    protected static string | UnitEnum | null $navigationGroup = 'إدارة المهام';
 
     public static function shouldRegisterNavigation(): bool
     {

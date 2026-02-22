@@ -34,7 +34,7 @@ class ProfileUser extends Page implements HasSchemas
     protected static ?string $slug = 'profile';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::User;
     protected static ?int $navigationSort = 4;
-    protected static ?string $navigationLabel = 'Profil';
+    protected static ?string $navigationLabel = 'الملف الشخصي';
 
     public ?array $data = [];
 
@@ -75,24 +75,30 @@ class ProfileUser extends Page implements HasSchemas
             ->components([
                 Hidden::make('user_id'),
                 TextInput::make('user.name')
+                    ->label('الاسم')
                     ->required(),
                 TextInput::make('user.email')
+                    ->label('البريد الإلكتروني')
                     ->email()
                     ->required(),
                 TextInput::make('identitas')
+                    ->label('هوية')
                     ->hidden(fn(): bool => self::isRole('admin')),
                 Select::make('jenis_kelamin')
                     ->hidden(fn(): bool => self::isRole('admin'))
+                    ->label('جنس')
                     ->options([
-                        'laki-laki' => 'Pria',
-                        'perempuan' => 'Wanita',
+                        'laki-laki' => 'رجل',
+                        'perempuan' => 'امرأة',
                     ])
                     ->default('laki-laki'),
                 TextInput::make('telp')
+                    ->label('هاتف')
                     ->hidden(fn(): bool => self::isRole('admin'))
                     ->tel(),
                 TextInput::make('user.password')
-                    ->label('Kata Sandi Baru')
+                    ->label('كلمة مرور جديدة')
+                    ->placeholder('اترك هذا الحقل فارغًا إذا كنت لا ترغب في الاستبدال')
                     ->password()
                     ->dehydrateStateUsing(fn($state): string => Hash::make($state))
 

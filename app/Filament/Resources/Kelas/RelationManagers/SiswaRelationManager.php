@@ -25,6 +25,7 @@ use Illuminate\Validation\Rules\Unique;
 class SiswaRelationManager extends RelationManager
 {
     protected static string $relationship = 'siswa';
+    protected static ?string $title = 'طالب';
 
     public function form(Schema $schema): Schema
     {
@@ -33,9 +34,11 @@ class SiswaRelationManager extends RelationManager
             ->components([
                 Hidden::make('user_id'),
                 TextInput::make('user.name')
+                    ->label('الاسم')
                     ->required(),
                 TextInput::make('user.email')
                     ->email()
+                    ->label('البريد الإلكتروني')
                     ->unique(User::class, 'email', ignoreRecord: false, modifyRuleUsing: function (Unique $rule, $record) {
                         if (!isset($record->user_id)) {
                             return $rule;
@@ -44,14 +47,19 @@ class SiswaRelationManager extends RelationManager
                         return $rule->whereNot('id', $user_id);
                     })
                     ->required(),
-                TextInput::make('identitas'),
-                Select::make('jenis_kelamin')->options([
-                    'laki-laki' => 'Pria',
-                    'perempuan' => 'Wanita',
-                ]),
+                TextInput::make('identitas')
+                    ->label('هوية'),
+                Select::make('jenis_kelamin')
+                    ->label('جنس')
+                    ->options([
+                        'laki-laki' => 'رجل',
+                        'perempuan' => 'امرأة',
+                    ]),
                 TextInput::make('telp')
+                    ->label('هاتف')
                     ->tel(),
                 Select::make('kelas_id')
+                    ->label('فصل')
                     ->searchable()
                     ->required()
                     ->preload()
@@ -63,27 +71,22 @@ class SiswaRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('name')
-            ->emptyStateHeading('Tidak Ada Siswa')
-            ->emptyStateDescription('Silahkan masukkan siswa atau tambah siswa baru')
+            ->emptyStateHeading('لا يوجد طلاب')
+            ->emptyStateDescription('يرجى إدخال أسماء الطلاب أو إضافة طلاب جدد')
             ->columns([
                 TextColumn::make('user.name')
-                    ->label('Nama')
+                    ->label('الاسم')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('identitas')
+                    ->label('هوية')
                     ->searchable(),
                 TextColumn::make('jenis_kelamin')
+                    ->label('جنس')
                     ->searchable(),
                 TextColumn::make('telp')
+                    ->label('هاتف')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -93,7 +96,7 @@ class SiswaRelationManager extends RelationManager
                     ->color('info')
                     ->button()
                     ->modalWidth('md')
-                    ->label('Masukkan Siswa')
+                    ->label('أدخل الطلاب')
                     ->schema([
                         Select::make('siswa')
                             ->searchable()
@@ -106,10 +109,10 @@ class SiswaRelationManager extends RelationManager
                             'kelas_id' => $owner->id
                         ]);
                     })
-                    ->modalSubmitActionLabel('Tambahkan')
-                    ->modalCancelActionLabel('Batal'),
+                    ->modalSubmitActionLabel('يضيف')
+                    ->modalCancelActionLabel('تم الإلغاء'),
                 CreateAction::make()
-                    ->label('Tambah Siswa')
+                    ->label('إضافة طالب')
                     ->schema(fn(Schema $schema) => $this->form($schema))
                     ->action(function ($record, array $data) {
                         $user = User::create([
@@ -125,6 +128,10 @@ class SiswaRelationManager extends RelationManager
             ])
             ->recordActions([
                 EditAction::make()
+                    ->label('يتغير')
+                    ->modalHeading('تغيير الطالب')
+                    ->modalSubmitActionLabel('يحفظ')
+                    ->modalCancelActionLabel('تم الإلغاء')
                     ->schema(fn(Schema $schema) => $this->form($schema))
                     ->fillForm(function ($data, $record) {
                         $data = $record->toArray();

@@ -12,7 +12,6 @@ class ListNilaiSoals extends ListRecords
 {
     protected static string $resource = NilaiSoalResource::class;
 
-    protected static ?string $title = 'Nilai Siswa';
     protected function getHeaderActions(): array
     {
         return [
@@ -23,9 +22,9 @@ class ListNilaiSoals extends ListRecords
     {
         return [
             // 'semua' => Tab::make(),
-            'pemahaman' => Tab::make()
+            'إكمال الحديث' => Tab::make()
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('tipe', 'pemahaman')),
-            'melanjutkan' => Tab::make()
+            'الاستيعاب' => Tab::make()
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('tipe', 'melanjutkan')),
         ];
     }

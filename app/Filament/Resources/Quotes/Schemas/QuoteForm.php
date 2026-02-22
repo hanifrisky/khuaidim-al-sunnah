@@ -13,11 +13,13 @@ class QuoteForm
         return $schema
             ->components([
                 TextInput::make('title')
+                    ->label('العنوان')
                     ->required(),
                 RichEditor::make('konten')
                     ->columnSpanFull()
+                    ->label('المحتوى')
                     ->required()
-                    ->placeholder('Tulis quote disini')
+                    ->placeholder('اكتب الاقتباس هنا')
             ]);
     }
 }

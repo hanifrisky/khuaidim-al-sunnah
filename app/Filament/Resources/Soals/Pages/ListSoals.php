@@ -22,9 +22,9 @@ class ListSoals extends ListRecords
     {
         return [
             // 'semua' => Tab::make(),
-            'pemahaman' => Tab::make()
+            'الاستيعاب' => Tab::make()
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('tipe', 'pemahaman')),
-            'melanjutkan' => Tab::make()
+            'إكمال الحديث' => Tab::make()
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('tipe', 'melanjutkan')),
         ];
     }

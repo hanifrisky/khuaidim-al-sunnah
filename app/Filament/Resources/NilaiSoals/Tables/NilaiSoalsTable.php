@@ -18,25 +18,21 @@ class NilaiSoalsTable
         return $table
             ->columns([
                 TextColumn::make('siswa.name')
+                    ->label('الطلاب')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('nilai')
+                    ->label('درجات الاختبارات')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('kitab.name')
+                    ->label('الكتب')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('siswa.kelas.name')
+                    ->label('الفصل')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 // Filter berdasarkan Kelas

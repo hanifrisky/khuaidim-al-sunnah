@@ -26,8 +26,10 @@ class KitabsTable
             // ])
             ->columns([
                 TextColumn::make('name')
+                    ->label('الاسم')
                     ->searchable(),
                 TextColumn::make('author')
+                    ->label('المؤلف')
                     ->searchable(),
                 // Stack::make([
                 //     // TextColumn::make('name')

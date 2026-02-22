@@ -18,8 +18,10 @@ class GuruForm
             ->components([
                 Hidden::make('user_id'),
                 TextInput::make('user.name')
+                    ->label('الاسم')
                     ->required(),
                 TextInput::make('user.email')
+                    ->label('البريد الإلكتروني')
                     ->email()
                     ->unique(User::class, 'email', ignoreRecord: false, modifyRuleUsing: function (Unique $rule, $record) {
                         if (isset($record->user_id)) {
@@ -27,12 +29,16 @@ class GuruForm
                         }
                     })
                     ->required(),
-                TextInput::make('identitas'),
-                Select::make('jenis_kelamin')->options([
-                    'laki-laki' => 'Pria',
-                    'perempuan' => 'Wanita',
-                ]),
+                TextInput::make('identitas')
+                    ->label('هوية'),
+                Select::make('jenis_kelamin')
+                    ->label('جنس')
+                    ->options([
+                        'laki-laki' => 'رجل',
+                        'perempuan' => 'امرأة',
+                    ]),
                 TextInput::make('telp')
+                    ->label('هاتف')
                     ->tel(),
             ]);
     }

@@ -16,6 +16,7 @@ class KelasForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('الاسم')
                     ->required(),
                 Hidden::make('guru_id')
                     ->default(self::guruId())
@@ -27,7 +28,7 @@ class KelasForm
                     ->hidden(fn(): bool => self::isRole('guru'))
                     ->searchable()
                     ->preload()
-                    ->label('Guru Pengampu')
+                    ->label('الأستاذ المشرف')
                     ->required(),
             ])
             ->columns(3);
