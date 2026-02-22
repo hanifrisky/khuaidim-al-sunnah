@@ -41,6 +41,6 @@ class Soal extends Model
 
     public function jawaban()
     {
-        return $this->hasMany(PilihanJawaban::class, 'soal_id');
+        return $this->hasMany(PilihanJawaban::class, 'soal_id')->orderBy('sort');
     }
 }

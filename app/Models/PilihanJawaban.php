@@ -9,7 +9,8 @@ class PilihanJawaban extends Model
     protected $fillable = [
         'soal_id',
         'jawaban',
-        'benar'
+        'benar',
+        'sort',
     ];
 
     public function soal()
