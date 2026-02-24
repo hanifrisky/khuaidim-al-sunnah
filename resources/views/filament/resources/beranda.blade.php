@@ -274,7 +274,7 @@
             <img src="{{ asset('image/book.png') }}" class="book-stack">
 
             <div class="quote">
-                {{$this->getQuote()}}
+                {!! $this->getQuote() !!}
                 <!--<p>
                     لا يستطيع العلم براحة الجسم
                 </p>

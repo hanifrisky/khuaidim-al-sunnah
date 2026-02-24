@@ -150,7 +150,7 @@
 
             @if($item->translate)
             <div class="hadits-translate">
-                {{ $item->translate }}
+                {!! $item->translate !!}
             </div>
             @endif
 
