@@ -18,15 +18,15 @@ class NilaiSoalsTable
         return $table
             ->columns([
                 TextColumn::make('siswa.name')
-                    ->label('الطلاب')
+                    ->label('الطالب')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('nilai')
-                    ->label('درجات الاختبارات')
+                    ->label('درحة الاختبار')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('kitab.name')
-                    ->label('الكتب')
+                    ->label('الكتاب')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('siswa.kelas.name')

@@ -30,19 +30,19 @@ class SiswasTable
                     ->label('الاسم')
                     ->sortable(),
                 TextColumn::make('kelas.name')
-                    ->label('فصل')
+                    ->label('الفصل')
                     ->searchable(),
                 TextColumn::make('user.email')
                     ->label('البريد الإلكتروني')
                     ->searchable(),
                 TextColumn::make('identitas')
-                    ->label('هوية')
+                    ->label('الرقم التعريفي')
                     ->searchable(),
                 TextColumn::make('jenis_kelamin')
-                    ->label('جنس')
+                    ->label('الجنس')
                     ->searchable(),
                 TextColumn::make('telp')
-                    ->label('هاتف')
+                    ->label('رقم الهاتف')
                     ->searchable(),
                 TextColumn::make('kelas.guru.name')
                     ->label('المعلم')
