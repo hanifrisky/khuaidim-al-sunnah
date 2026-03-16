@@ -86,6 +86,7 @@ class ProfileUser extends Page implements HasSchemas
                     ->hidden(fn(): bool => self::isRole('admin')),
                 Select::make('jenis_kelamin')
                     ->hidden(fn(): bool => self::isRole('admin'))
+                    ->selectablePlaceholder(false)
                     ->label('جنس')
                     ->options([
                         'laki-laki' => 'رجل',

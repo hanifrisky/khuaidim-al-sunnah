@@ -42,6 +42,7 @@ class UserForm
                                 'guru' => 'Guru',
                                 'siswa' => 'Siswa',
                             ])
+                            ->selectablePlaceholder(false)
                             ->placeholder('Pilih jenis pengguna')
                             ->required(),
                     ]),

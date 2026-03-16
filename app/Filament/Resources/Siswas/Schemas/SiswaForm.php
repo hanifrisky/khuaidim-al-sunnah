@@ -42,6 +42,7 @@ class SiswaForm
                     ),
                 Select::make('jenis_kelamin')
                     ->label('جنس')
+                    ->selectablePlaceholder(false)
                     ->options([
                         'laki-laki' => 'رجل',
                         'perempuan' => 'امرأة',

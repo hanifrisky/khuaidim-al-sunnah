@@ -107,6 +107,7 @@ class UploadVideo extends Page implements HasSchemas
                     ->columns(1),
                 Select::make('status')
                     ->default('draft')
+                    ->selectablePlaceholder(false)
                     ->required()
                     ->options([
                         'draft' => 'Draft',

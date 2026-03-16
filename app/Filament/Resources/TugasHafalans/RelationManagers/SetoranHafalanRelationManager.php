@@ -43,6 +43,7 @@ class SetoranHafalanRelationManager extends RelationManager
                         'accepted' => 'Diterima',
                         'rejected' => 'Ditolak',
                     ])
+                    ->selectablePlaceholder(false)
                     ->required()
                     ->default('assigned'),
                 Textarea::make('keterangan')

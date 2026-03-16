@@ -25,6 +25,7 @@ class SoalForm
                     ->searchable(),
                 Select::make('tipe')
                     ->label('نوع السؤال')
+                    ->selectablePlaceholder(false)
                     ->options([
                         'melanjutkan' => 'إكمال الحديث',
                         'pemahaman' => 'الاستيعاب',

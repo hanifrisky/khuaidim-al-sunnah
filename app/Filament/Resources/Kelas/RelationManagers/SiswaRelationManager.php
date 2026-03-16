@@ -51,15 +51,11 @@ class SiswaRelationManager extends RelationManager
                     ->label('هوية'),
                 Select::make('jenis_kelamin')
                     ->label('جنس')
+                    ->selectablePlaceholder(false)
                     ->options([
                         'laki-laki' => 'رجل',
                         'perempuan' => 'امرأة',
-                    ])
-                    ->formatStateUsing(fn($state) => match ($state) {
-                        'laki-laki' => 'رجل',
-                        'perempuan' => 'امرأة',
-                        default => $state,
-                    }),
+                    ]),
                 TextInput::make('telp')
                     ->label('هاتف')
                     ->tel(),
