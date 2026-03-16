@@ -99,6 +99,7 @@ class SiswaRelationManager extends RelationManager
                     ->label('أدخل الطالب')
                     ->schema([
                         Select::make('siswa')
+                            ->label('اسم الطالب')
                             ->searchable()
                             ->options(Siswa::all()->pluck('name', 'id'))
                     ])
@@ -124,7 +125,8 @@ class SiswaRelationManager extends RelationManager
                         unset($data['user']);
                         $data['user_id'] = $user->id;
                         Siswa::create($data);
-                    }),
+                    })
+                    ->modalCancelActionLabel('تم الإلغاء'),
             ])
             ->recordActions([
                 EditAction::make()
