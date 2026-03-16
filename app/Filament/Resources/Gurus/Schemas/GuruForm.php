@@ -30,15 +30,16 @@ class GuruForm
                     })
                     ->required(),
                 TextInput::make('identitas')
-                    ->label('هوية'),
+                    ->label('الرقم التعريفي'),
                 Select::make('jenis_kelamin')
-                    ->label('جنس')
+                    ->label('الجنس')
+                    ->selectablePlaceholder(false)
                     ->options([
                         'laki-laki' => 'رجل',
                         'perempuan' => 'امرأة',
                     ]),
                 TextInput::make('telp')
-                    ->label('هاتف')
+                    ->label('رقم الهاتف')
                     ->tel(),
             ]);
     }

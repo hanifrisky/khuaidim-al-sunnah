@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => ':label الفصل',
+    'title' => 'تعديل :label',
 
     'breadcrumb' => 'يتغير',
 

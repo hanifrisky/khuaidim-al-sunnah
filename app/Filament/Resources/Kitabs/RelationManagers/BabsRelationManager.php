@@ -30,14 +30,17 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class BabsRelationManager extends RelationManager
 {
     protected static string $relationship = 'babs';
+    protected static ?string $title = 'الأبواب';
 
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 Textarea::make('name')
+                    ->label('الاسم')
                     ->required(),
-                Textarea::make('description'),
+                Textarea::make('description')
+                    ->label('الوصف'),
                 FileUpload::make('media')
                     ->label('Bab Cover')
                     ->disk('public')

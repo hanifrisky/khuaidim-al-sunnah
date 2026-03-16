@@ -24,10 +24,10 @@ class GurusTable
                     ->searchable(),
                 TextColumn::make('identitas')
                     ->placeholder('-')
-                    ->label('هوية')
+                    ->label('الرقم التعريفي')
                     ->searchable(),
                 TextColumn::make('telp')
-                    ->label('هاتف')
+                    ->label('رقم الهاتف')
                     ->placeholder('-')
                     ->searchable(),
             ])

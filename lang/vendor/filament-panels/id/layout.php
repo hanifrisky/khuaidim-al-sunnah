@@ -11,7 +11,7 @@ return [
         ],
 
         'logout' => [
-            'label' => 'Keluar',
+            'label' => 'تسجيل الخروج',
         ],
 
         'open_database_notifications' => [

@@ -18,7 +18,7 @@ class ViewKitab extends ViewRecord
         $kitabTitle = $kitab->name;
 
         return [
-            KitabResource::getUrl() => 'Kitab',
+            KitabResource::getUrl() => 'الكتاب',
             KitabResource::getUrl('view', ['record' => $kitab]) => $kitabTitle
         ];
     }

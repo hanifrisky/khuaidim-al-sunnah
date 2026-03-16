@@ -4,20 +4,20 @@ return [
 
     'single' => [
 
-        'label' => ':label جديد ',
+        'label' => 'إضافة :label',
 
         'modal' => [
 
-            'heading' => 'جديد :label',
+            'heading' => 'إضافة :label',
 
             'actions' => [
 
                 'create' => [
-                    'label' => 'جديد',
+                    'label' => 'إضافة',
                 ],
 
                 'create_another' => [
-                    'label' => 'إنشاء وإنشاء الآخرين',
+                    'label' => 'إضافة وبدء إضافة المزيد',
                 ],
 
             ],
@@ -27,7 +27,7 @@ return [
         'notifications' => [
 
             'created' => [
-                'title' => 'تم إنشاء البيانات بنجاح',
+                'title' => 'تمت الإضافة',
             ],
 
         ],

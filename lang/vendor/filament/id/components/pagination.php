@@ -2,9 +2,9 @@
 
 return [
 
-    'label' => 'Navigasi halaman',
+    'label' => 'التنقل بين الصفحات',
 
-    'overview' => '{1} Menampilkan 1 hasil|[2,*] Menampilkan :first sampai :last dari :total hasil',
+    'overview' => '{1} عرض نتيجة واحدة|[3,10] عرض :first إلى :last من :total نتائج|[2,*] عرض :first إلى :last من :total نتيجة',
 
     'fields' => [
 
@@ -13,7 +13,7 @@ return [
             'label' => 'لكل صفحة',
 
             'options' => [
-                'all' => 'الجميع',
+                'all' => 'الكل',
             ],
 
         ],
@@ -23,15 +23,15 @@ return [
     'actions' => [
 
         'first' => [
-            'label' => 'Pertama',
+            'label' => 'الأولي',
         ],
 
         'go_to_page' => [
-            'label' => 'Ke halaman :page',
+            'label' => 'انتقل إلى صفحة :page',
         ],
 
         'last' => [
-            'label' => 'Terakhir',
+            'label' => 'الأخيرة',
         ],
 
         'next' => [
@@ -39,7 +39,7 @@ return [
         ],
 
         'previous' => [
-            'label' => 'سابق',
+            'label' => 'السابق',
         ],
 
     ],

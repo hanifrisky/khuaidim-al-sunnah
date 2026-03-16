@@ -12,6 +12,7 @@ class Search extends Page
 {
     protected string $view = 'filament.resources.search';
     protected static ?int $navigationSort = 2;
+    protected static ?string $navigationLabel = 'ابحث';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::MagnifyingGlass;
     /** query pencarian */

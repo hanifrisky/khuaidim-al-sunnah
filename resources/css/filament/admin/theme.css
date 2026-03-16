@@ -30,7 +30,7 @@ html {
 /*  */
 .fi-btn.fi-color-primary {
     color: white;
-    @apply bg-gradient-to-l from-green-600 via-green-500 to-emerald-400 hover:from-green-700 hover:via-green-600 hover:to-emerald-500 hover:shadow-green-500/30;
+    background-color: #0C756F;
 }
 
 
@@ -42,7 +42,8 @@ html {
 /*  */
 /*  */
 .fi-toggle-on{
-    @apply bg-gradient-to-l from-green-600 via-green-500 to-emerald-400 hover:from-green-700 hover:via-green-600 hover:to-emerald-500 hover:shadow-green-500/30;
+    /* @apply bg-gradient-to-l from-green-600 via-green-500 to-emerald-400 hover:from-green-700 hover:via-green-600 hover:to-emerald-500 hover:shadow-green-500/30; */
+    background-color: #0C756F;
 }
 
 /* ================================ FILAMENT Input ================================ */
@@ -227,7 +228,7 @@ html {
 .fi-sidebar-item {
     &.fi-active {
         &>.fi-sidebar-item-btn {
-            @apply bg-gradient-to-l from-green-600 via-green-500 to-emerald-400 hover:from-green-700 hover:via-green-600 hover:to-emerald-500 hover:shadow-green-500/30;
+            background-color: #0C756F;
         }
     }
 }

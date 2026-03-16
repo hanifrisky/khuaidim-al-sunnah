@@ -2,19 +2,19 @@
 
 return [
 
-    'title' => 'Masuk',
+    'title' => ' تسجيل الدخول',
 
-    'heading' => 'Masuk ke akun Anda',
+    'heading' => 'تسجيل الدخول إلى حسابك',
 
     'actions' => [
 
         'register' => [
-            'before' => 'atau',
-            'label' => 'buat akun baru',
+            'before' => 'أو',
+            'label' => 'إنشاء حساب',
         ],
 
         'request_password_reset' => [
-            'label' => 'Lupa kata sandi?',
+            'label' => 'نسيت كلمة المرور؟',
         ],
 
     ],
@@ -22,21 +22,21 @@ return [
     'form' => [
 
         'email' => [
-            'label' => 'Alamat email',
+            'label' => 'البريد الإلكتروني',
         ],
 
         'password' => [
-            'label' => 'Kata sandi',
+            'label' => 'كلمة المرور',
         ],
 
         'remember' => [
-            'label' => 'Ingat saya',
+            'label' => 'تذكرني',
         ],
 
         'actions' => [
 
             'authenticate' => [
-                'label' => 'Masuk',
+                'label' => ' تسجيل الدخول',
             ],
 
         ],
@@ -45,20 +45,20 @@ return [
 
     'multi_factor' => [
 
-        'heading' => 'Verifikasi identitas Anda',
+        'heading' => 'تحقق من هويتك',
 
-        'subheading' => 'Untuk melanjutkan login, Anda perlu memverifikasi identitas Anda.',
+        'subheading' => 'لمتابعة تسجيل الدخول، تحتاج إلى التحقق من هويتك.',
 
         'form' => [
 
             'provider' => [
-                'label' => 'Bagaimana Anda ingin memverifikasi?',
+                'label' => 'كيف تود التحقق؟',
             ],
 
             'actions' => [
 
                 'authenticate' => [
-                    'label' => 'Konfirmasi login',
+                    'label' => 'تأكيد تسجيل الدخول',
                 ],
 
             ],
@@ -69,15 +69,15 @@ return [
 
     'messages' => [
 
-        'failed' => 'Kredensial yang diberikan tidak dapat ditemukan.',
+        'failed' => 'بيانات الاعتماد هذه غير متطابقة مع البيانات المسجلة لدينا.',
 
     ],
 
     'notifications' => [
 
         'throttled' => [
-            'title' => 'Terlalu banyak permintaan',
-            'body' => 'Silakan coba lagi dalam :seconds detik.',
+            'title' => 'لقد قمت بمحاولات تسجيل دخول كثيرة جدًا',
+            'body' => 'يرجى المحاولة مرة أخرى بعد :seconds ثواني.',
         ],
 
     ],

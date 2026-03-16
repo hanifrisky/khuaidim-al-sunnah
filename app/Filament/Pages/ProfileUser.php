@@ -100,7 +100,7 @@ class ProfileUser extends Page implements HasSchemas
                     ->label('كلمة مرور جديدة')
                     ->placeholder('اترك هذا الحقل فارغًا إذا كنت لا ترغب في الاستبدال')
                     ->password()
-                    ->dehydrateStateUsing(fn($state): string => Hash::make($state))
+                //->dehydrateStateUsing(fn($state): string => Hash::make($state))
 
             ])
             ->statePath('data');
@@ -123,7 +123,7 @@ class ProfileUser extends Page implements HasSchemas
         $user->name = $data['user']['name'];
         $user->email = $data['user']['email'];
         if ($data['user']['password'] != null) {
-            $user->password = $data['user']['password'];
+            $user->password = Hash::make($data['user']['password']);
         }
         $user->save();
 

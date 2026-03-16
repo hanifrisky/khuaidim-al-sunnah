@@ -51,11 +51,11 @@
             </button>
 
             <a href="/app/kitabs/{{$kitab->id}}/soal" class="menu-item">
-                📚 <span>أقسام الحديث</span>
+                📚 <span>الاستيعاب</span>
             </a>
 
             <a href="/app/kitabs/{{$kitab->id}}/melanjutkan" class="menu-item">
-                ❓ <span>أسئلة</span>
+                ❓ <span>إكمال الحديث</span>
             </a>
         </div>
 
@@ -78,28 +78,7 @@
             @endforeach
         </div>
         <div style="height:50px"></div>
-        {{-- MOBILE NAV --}}
-        <div class="bottom-nav">
-            <a href="/app" class="nav-item active">
-                <span class="icon">🏠</span>
-                <small>Home</small>
-            </a>
-
-            <a href="/app/search" class="nav-item">
-                <span class="icon">🔍</span>
-                <small>Search</small>
-            </a>
-
-            <a href="/app/chat" class="nav-item">
-                <span class="icon">💬</span>
-                <small>Chat</small>
-            </a>
-
-            <a href="/app/profile" class="nav-item">
-                <span class="icon">👤</span>
-                <small>Profile</small>
-            </a>
-        </div>
+        @include('components.bottom-nav')
 
     </div>
     {{-- MODAL VIDEO --}}

@@ -30,7 +30,7 @@ class ListHaditsKitab extends Page
         $kitabTitle = $kitab->name;
 
         return [
-            route('filament.admin.pages.dashboard') => 'Kitab',
+            route('filament.admin.pages.dashboard') => 'الكتاب',
             KitabResource::getUrl('babs', ['record' => $kitab]) => $kitabTitle,
             $babTitle,
         ];

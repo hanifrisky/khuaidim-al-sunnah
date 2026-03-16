@@ -128,27 +128,6 @@
 
 
     <div style="height:2px"></div>
-    {{-- MOBILE NAV --}}
-    <div class="bottom-nav">
-        <a href="/app" class="nav-item">
-            <span class="icon">🏠</span>
-            <small>Home</small>
-        </a>
-
-        <a href="/app/search" class="nav-item">
-            <span class="icon">🔍</span>
-            <small>Search</small>
-        </a>
-
-        <a href="/app/chat" class="nav-item active">
-            <span class="icon">💬</span>
-            <small>Chat</small>
-        </a>
-
-        <a href="/app/profile" class="nav-item">
-            <span class="icon">👤</span>
-            <small>Profile</small>
-        </a>
-    </div>
+    @include('components.bottom-nav')
 
 </x-filament-panels::page>

@@ -102,10 +102,10 @@
         @if(blank($q))
         <div style="text-align:center; margin-top:40px; color:#6b7280;">
             <div style="font-size:1.1rem; font-weight:600;">
-                🔍 Mulai cari hadits
+                🔍 ابدأ البحث عن حديث
             </div>
             <div style="margin-top:6px; font-size:.9rem;">
-                Ketik kata kunci di atas untuk mencari hadits
+                اكتب الكلمة المفتاحية أعلاه للبحث عن الحديث
             </div>
         </div>
 
@@ -130,8 +130,7 @@
             ">
 
             <div style="color:#6b7280; font-size:1rem;">
-                Tidak ditemukan hasil untuk
-                <strong>“{{ $q }}”</strong>
+                لم يتم العثور على نتائج لـ <strong>“{{ $q }}”</strong>
             </div>
         </div>
 
@@ -172,27 +171,6 @@
 
 
     <div style="height:2px"></div>
-    {{-- MOBILE NAV --}}
-    <div class="bottom-nav">
-        <a href="/app" class="nav-item">
-            <span class="icon">🏠</span>
-            <small>Home</small>
-        </a>
-
-        <a href="/app/search" class="nav-item active">
-            <span class="icon">🔍</span>
-            <small>Search</small>
-        </a>
-
-        <a href="/app/chat" class="nav-item">
-            <span class="icon">💬</span>
-            <small>Chat</small>
-        </a>
-
-        <a href="/app/profile" class="nav-item">
-            <span class="icon">👤</span>
-            <small>Profile</small>
-        </a>
-    </div>
+    @include('components.bottom-nav')
 
 </x-filament-panels::page>

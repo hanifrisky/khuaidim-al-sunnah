@@ -96,7 +96,7 @@ class SiswaRelationManager extends RelationManager
                     ->color('info')
                     ->button()
                     ->modalWidth('md')
-                    ->label('أدخل الطلاب')
+                    ->label('أدخل الطالب')
                     ->schema([
                         Select::make('siswa')
                             ->searchable()
