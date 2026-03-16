@@ -46,12 +46,13 @@ class Search extends Page
             return collect(); // kosongkan kalau tidak ada q
         }
 
-        return Hadits::where('name', 'like', '%' . $this->q . '%')
-            ->orWhere('content', 'like', '%' . $this->q . '%')
-            ->orWhere('keterangan', 'like', '%' . $this->q . '%')
-            ->orWhere('source', 'like', '%' . $this->q . '%')
-            ->orWhere('translate', 'like', '%' . $this->q . '%')
-            ->orderBy('id')
-            ->get();
+        return Hadits::search($this->q)->get();
+        // return Hadits::where('name', 'like', '%' . $this->q . '%')
+        //     ->orWhere('content', 'like', '%' . $this->q . '%')
+        //     ->orWhere('keterangan', 'like', '%' . $this->q . '%')
+        //     ->orWhere('source', 'like', '%' . $this->q . '%')
+        //     ->orWhere('translate', 'like', '%' . $this->q . '%')
+        //     ->orderBy('id')
+        //     ->get();
     }
 }

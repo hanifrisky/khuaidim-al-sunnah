@@ -100,7 +100,7 @@
         @if($results->isEmpty())
         <div style="text-align:center; margin-top:40px; color:#6b7280;">
             <div style="font-size:1.1rem; font-weight:600;">
-                Belum ada notifikasi masuk
+                لم يتم استلام أي إشعارات حتى الآن
             </div>
         </div>
 

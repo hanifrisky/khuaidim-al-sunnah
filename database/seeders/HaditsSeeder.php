@@ -66,17 +66,45 @@ class HaditsSeeder extends Seeder
         $haditsInBab = 0;
         $currentBab = null;
 
+        $babNames = [
+            "القسم الأول",
+            "القسم الثاني",
+            "القسم الثالث",
+            "القسم الرابع",
+            "القسم الخامس",
+            "القسم السادس",
+            "القسم السابع",
+            "القسم الثامن",
+            "القسم التاسع",
+            "القسم العاشر",
+            "القسم الحادي عشر",
+            "القسم الثاني عشر",
+            "القسم الثالث عشر",
+            "القسم الرابع عشر",
+            "القسم الخامس عشر",
+            "القسم السادس عشر",
+            "القسم السابع عشر",
+            "القسم الثامن عشر",
+            "القسم التاسع عشر",
+            "القسم العشرون",
+        ];
+
         for ($i = 0; $i < $total; $i += 4) {
+
             if (!isset($rows[$i + 3])) {
                 break;
             }
 
-            // buat bab baru setiap 5 hadits
-            if ($currentBab === null || $haditsInBab >= 5) {
+            // buat bab baru setiap 2 hadits
+            if ($currentBab === null || $haditsInBab >= 2) {
+
+                $babIndex = $babNumber - 1;
+
+                $babName = $babNames[$babIndex] ?? ("باب " . $babNumber);
 
                 $currentBab = Bab::create([
                     'kitab_id' => $kitabId,
-                    'name' => "bab {$babNumber} kitab {$kitabId}",
+                    'name' => $babName,
                     'description' => 'Description Bab',
                     'media' => null,
                 ]);

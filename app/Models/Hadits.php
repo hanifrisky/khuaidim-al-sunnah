@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Hadits extends Model
 {
+    use Searchable;
     use SoftDeletes;
     protected $fillable = [
         'bab_id',
