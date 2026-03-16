@@ -54,7 +54,12 @@ class SiswaRelationManager extends RelationManager
                     ->options([
                         'laki-laki' => 'رجل',
                         'perempuan' => 'امرأة',
-                    ]),
+                    ])
+                    ->formatStateUsing(fn($state) => match ($state) {
+                        'laki-laki' => 'رجل',
+                        'perempuan' => 'امرأة',
+                        default => $state,
+                    }),
                 TextInput::make('telp')
                     ->label('هاتف')
                     ->tel(),
@@ -83,7 +88,12 @@ class SiswaRelationManager extends RelationManager
                     ->searchable(),
                 TextColumn::make('jenis_kelamin')
                     ->label('جنس')
-                    ->searchable(),
+                    ->searchable()
+                    ->formatStateUsing(fn($state) => match ($state) {
+                        'laki-laki' => 'رجل',
+                        'perempuan' => 'امرأة',
+                        default => $state,
+                    }),
                 TextColumn::make('telp')
                     ->label('هاتف')
                     ->searchable(),

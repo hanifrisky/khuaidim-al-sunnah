@@ -40,7 +40,12 @@ class SiswasTable
                     ->searchable(),
                 TextColumn::make('jenis_kelamin')
                     ->label('الجنس')
-                    ->searchable(),
+                    ->searchable()
+                    ->formatStateUsing(fn($state) => match ($state) {
+                        'laki-laki' => 'رجل',
+                        'perempuan' => 'امرأة',
+                        default => $state,
+                    }),
                 TextColumn::make('telp')
                     ->label('رقم الهاتف')
                     ->searchable(),
