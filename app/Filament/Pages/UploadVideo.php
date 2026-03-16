@@ -92,13 +92,14 @@ class UploadVideo extends Page implements HasSchemas
                     ->deletable(false)
                     ->addable(false)
                     ->reorderable(false)
-                    ->label('Upload Video Hafalan')
+                    ->label('قم بتحميل فيديوهات الحفظ')
                     ->schema([
                         Hidden::make('id'),
                         TextEntry::make('hadits_name')
                             ->label('Hadits'),
                         FileUpload::make('media')
-                            ->label('Video Hafalan')
+                            ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
+                            ->label('وسائط')
                             ->disk('public')
                             ->directory('setoran-hafalan')
                             ->acceptedFileTypes(['video/mp4', 'video/mkv'])

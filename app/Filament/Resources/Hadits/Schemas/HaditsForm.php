@@ -29,7 +29,8 @@ class HaditsForm
                 Textarea::make('translate')
                     ->columnSpanFull(),
                 FileUpload::make('media')
-                    ->label('Hadist Media')
+                    ->label('وسائط')
+                    ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
                     ->directory('hadits'),
             ]);
     }

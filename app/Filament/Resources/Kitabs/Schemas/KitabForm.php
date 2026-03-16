@@ -33,6 +33,7 @@ class KitabForm
                     ->required(),
                 FileUpload::make('media')
                     ->visible(fn(): bool => self::isRole('admin'))
+                    ->placeholder('اسحب ملفاتك وأفلتها أو')
                     ->label('واجهة الكتاب')
                     ->disk('public')
                     ->directory('kitabs/cover')

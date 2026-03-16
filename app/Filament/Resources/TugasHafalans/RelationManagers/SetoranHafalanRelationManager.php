@@ -36,6 +36,8 @@ class SetoranHafalanRelationManager extends RelationManager
 
                 FileUpload::make('media')
                     ->disabled()
+                    ->label('وسائط')
+                    ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
                     ->directory('setoran-hafalan')
                     ->disk('public'),
                 Select::make('status')

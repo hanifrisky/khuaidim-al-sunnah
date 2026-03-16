@@ -42,7 +42,8 @@ class BabsRelationManager extends RelationManager
                 Textarea::make('description')
                     ->label('الوصف'),
                 FileUpload::make('media')
-                    ->label('Bab Cover')
+                    ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
+                    ->label('وسائط')
                     ->disk('public')
                     ->directory('kitabs/bab')
                     ->image(),

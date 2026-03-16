@@ -29,7 +29,8 @@ class BabForm
                     ->visible(fn(): bool => self::isRole('admin')),
                 FileUpload::make('media')
                     ->visible(fn(): bool => self::isRole('admin'))
-                    ->label('Bab Cover')
+                    ->label('وسائط')
+                    ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
                     ->disk('public')
                     ->directory('kitabs/bab')
                     ->image(),

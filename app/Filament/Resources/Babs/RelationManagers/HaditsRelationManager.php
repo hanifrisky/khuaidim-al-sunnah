@@ -53,7 +53,8 @@ class HaditsRelationManager extends RelationManager
                     ->extraInputAttributes(['style' => 'min-height: 20rem; max-height: 50vh; overflow-y: auto;'])
                     ->columnSpanFull(),
                 FileUpload::make('media')
-                    ->label('Hadist Media')
+                    ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
+                    ->label('وسائط')
                     ->columnSpanFull()
                     ->directory('hadits'),
             ]);
