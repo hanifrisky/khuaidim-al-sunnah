@@ -13,8 +13,10 @@ class Hadits extends Model
     protected $fillable = [
         'bab_id',
         'kitab_id',
+        'nomor',
         'name',
         'content',
+        'content_normalized',
         'keterangan',
         'source',
         'translate',

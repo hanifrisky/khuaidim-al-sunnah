@@ -46,13 +46,65 @@ class Search extends Page
             return collect(); // kosongkan kalau tidak ada q
         }
 
-        return Hadits::search($this->q)->get();
-        // return Hadits::where('name', 'like', '%' . $this->q . '%')
-        //     ->orWhere('content', 'like', '%' . $this->q . '%')
-        //     ->orWhere('keterangan', 'like', '%' . $this->q . '%')
-        //     ->orWhere('source', 'like', '%' . $this->q . '%')
-        //     ->orWhere('translate', 'like', '%' . $this->q . '%')
-        //     ->orderBy('id')
-        //     ->get();
+        $search = strtolower($this->q);
+
+        // angka arab → latin
+        $search = $this->arabicToLatinNumber($search);
+
+        // normalisasi arab
+        $searchNormalized = $this->normalizeArabic($search);
+
+        $terms = explode(' ', $searchNormalized);
+
+        $booleanQuery = collect($terms)
+            ->filter()
+            ->map(fn($term) => '+' . $term . '*')
+            ->implode(' ');
+
+        $results = Hadits::selectRaw("
+        *,
+        MATCH(content_normalized, name_normalized, translate, source)
+        AGAINST(? IN BOOLEAN MODE) as score
+    ", [$booleanQuery])
+            ->whereRaw("
+        MATCH(content_normalized, name_normalized, translate, source)
+        AGAINST(? IN BOOLEAN MODE)
+    ", [$booleanQuery])
+            ->orderByDesc('score')
+            ->get();
+
+        return $results;
+    }
+    private function arabicToLatinNumber($text)
+    {
+        $arabic  = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+        $latin   = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+        return str_replace($arabic, $latin, $text);
+    }
+    private function normalizeArabic($text)
+    {
+        $text = str_replace(
+            ['bukhari', 'muslim', 'abu dawud', 'tirmidzi', 'nasai', 'ibnu majah'],
+            ['صحيح البخاري', 'صحيح مسلم', 'سنن ابي داود', 'سنن الترمذي', 'سنن النسائي', 'سنن ابن ماجه'],
+            $text
+        );
+
+        // Hapus harakat (tashkeel)
+        $text = preg_replace('/[\x{064B}-\x{065F}\x{0670}]/u', '', $text);
+
+        // Normalisasi huruf
+        $search  = ['أ', 'إ', 'آ', 'ى', 'ة', 'ؤ', 'ئ'];
+        $replace = ['ا', 'ا', 'ا', 'ي', 'ه', 'و', 'ي'];
+
+        $text = str_replace($search, $replace, $text);
+
+        // Hapus karakter non huruf (opsional tapi bagus untuk search)
+        $text = preg_replace('/[^\p{Arabic}\s]/u', ' ', $text);
+
+        // Rapikan spasi
+        $text = preg_replace('/\s+/', ' ', $text);
+
+        return trim($text);
     }
 }

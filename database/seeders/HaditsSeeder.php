@@ -118,7 +118,30 @@ class HaditsSeeder extends Seeder
             $translate1 = $rows[$i + 2][0] ?? '';
             $translate2 = $rows[$i + 3][0] ?? '';
 
+            $nomor = null;
+
+            // split hanya di <br> pertama
+            $parts = preg_split('/<br\s*\/?>/i', $contentRaw, 2);
+
+            if (count($parts) > 1) {
+                // ambil bagian sebelum <br>
+                $nomorRaw = trim($parts[0]);
+
+                // hapus "-" dan spasi di akhir
+                $nomorRaw = rtrim($nomorRaw, "- \t");
+
+                // convert ke angka arab
+                $nomor = $this->toArabicNumber($nomorRaw);
+
+                // ambil sisa sebagai content
+                $contentRaw = trim($parts[1]);
+            }
+
             $content = '<p style="text-align: end;">' . $contentRaw . '</p>';
+            $contentNormalized = $this->normalizeArabic($contentRaw);
+            $nameNormalized = $this->normalizeArabic($name);
+
+            $kitabName = $currentBab->kitab->name ?? 'Kitab';
 
             $translate =
                 '<p><strong>' . $translate1 . '</strong></p>' .
@@ -126,10 +149,13 @@ class HaditsSeeder extends Seeder
 
             Hadits::create([
                 'name' => $name,
+                'name_normalized' => $nameNormalized,
                 'content' => $content,
+                'content_normalized' => $contentNormalized,
                 'translate' => $translate,
                 'bab_id' => $currentBab->id,
                 'kitab_id' => $kitabId,
+                'source' => $kitabName . " : " . $nomor,
             ]);
 
             $haditsInBab++;
@@ -139,5 +165,31 @@ class HaditsSeeder extends Seeder
         $this->command->info(
             "Import selesai ({$countImport}) dari file: " . basename($filePath)
         );
+    }
+    private function normalizeArabic($text)
+    {
+        // Hapus harakat (tashkeel)
+        $text = preg_replace('/[\x{064B}-\x{065F}\x{0670}]/u', '', $text);
+
+        // Normalisasi huruf
+        $search  = ['أ', 'إ', 'آ', 'ى', 'ة', 'ؤ', 'ئ'];
+        $replace = ['ا', 'ا', 'ا', 'ي', 'ه', 'و', 'ي'];
+
+        $text = str_replace($search, $replace, $text);
+
+        // Hapus karakter non huruf (opsional tapi bagus untuk search)
+        $text = preg_replace('/[^\p{Arabic}\s]/u', ' ', $text);
+
+        // Rapikan spasi
+        $text = preg_replace('/\s+/', ' ', $text);
+
+        return trim($text);
+    }
+    private function toArabicNumber($number)
+    {
+        $western = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $arabic  = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+        return str_replace($western, $arabic, $number);
     }
 }
