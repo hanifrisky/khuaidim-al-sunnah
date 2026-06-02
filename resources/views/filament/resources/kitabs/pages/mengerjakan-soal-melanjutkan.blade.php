@@ -270,6 +270,8 @@ $multiplierNilai = $this->multiplierNilai();
         const quizData = <?php echo \Illuminate\Support\Js::from($kumpulanSoal) ?>;
         const multiplierNilai = <?php echo \Illuminate\Support\Js::from($multiplierNilai) ?>;
 
+        console.log(quizData);
+
         const soundCorrect = new Audio('/sound/correct.mp3');
         const soundWrong = new Audio('/sound/wrong.mp3');
 
@@ -339,7 +341,7 @@ $multiplierNilai = $this->multiplierNilai();
                 `Soal ${currentQIndex + 1} dari ${quizData.length}`;
 
             questionText.textContent = data.soal;
-
+            console.log(data.jawaban);
             // tampilkan jawaban (acak jika perlu)
             const shuffledJawaban = shuffleArray(data.jawaban);
 

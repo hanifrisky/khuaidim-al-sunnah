@@ -20,7 +20,7 @@ class MengerjakanSoalMelanjutkan extends Page
 
     protected string $view = 'filament.resources.kitabs.pages.mengerjakan-soal-melanjutkan';
 
-    protected $jumlahSoal = 5;
+    protected $jumlahSoal = 20;
 
     public function getBreadcrumbs(): array
     {

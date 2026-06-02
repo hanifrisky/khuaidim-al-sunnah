@@ -22,6 +22,8 @@ class MengerjakanSoal extends Page
 
     protected static ?string $title = '';
 
+    protected $jumlahSoal = 20;
+
     public function getBreadcrumbs(): array
     {
         return [];
@@ -48,19 +50,19 @@ class MengerjakanSoal extends Page
             ->toArray();
 
 
-        // 2. Ambil 20 soal random berdasarkan hadits_id
+        // 2. Ambil $this->jumlahSoal soal random berdasarkan hadits_id
         $soal = Soal::where('tipe', 'pemahaman')
             ->whereIn('hadits_id', $haditsIds)
             ->inRandomOrder()
-            ->limit(20)
+            ->limit($this->jumlahSoal)
             ->with('jawaban')
             ->get();
 
 
         // 3. Jika kurang dari 20, tambahkan dari kitab yang sama
-        if ($soal->count() < 20) {
+        if ($soal->count() < $this->jumlahSoal) {
 
-            $kurang = 20 - $soal->count();
+            $kurang = $this->jumlahSoal - $soal->count();
 
             $tambahan = Soal::where('tipe', 'pemahaman')
                 ->where('kitab_id', $kitab_id) // <- nanti Anda supply

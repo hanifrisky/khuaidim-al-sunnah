@@ -21,6 +21,22 @@ class SoalMelanjutkanSeeder extends Seeder
                 'file' => 'melanjutkan/2-muslim.xlsx',
                 'kitab_id' => 2,
             ],
+            [
+                'file' => 'melanjutkan/3-abu-dawud.xlsx',
+                'kitab_id' => 3,
+            ],
+            [
+                'file' => 'melanjutkan/4-tirmidzi.xlsx',
+                'kitab_id' => 4,
+            ],
+            [
+                'file' => 'melanjutkan/5-nasa-i.xlsx',
+                'kitab_id' => 5,
+            ],
+            [
+                'file' => 'melanjutkan/6-ibnu-majah.xlsx',
+                'kitab_id' => 6,
+            ],
         ];
 
         foreach ($imports as $import) {
