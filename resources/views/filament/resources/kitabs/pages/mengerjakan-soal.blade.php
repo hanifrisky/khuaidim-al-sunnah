@@ -262,12 +262,13 @@ $multiplierNilai = 5;
                 const btn = document.createElement('button');
                 btn.className = 'answer-btn';
                 btn.innerText = j.jawaban;
-                btn.onclick = (e) => pilihJawaban(btn, j.benar, e);
+                btn.onclick = (e) => pilihJawaban(btn, Number(j.benar) === 1, e);
                 jawabanContainer.appendChild(btn);
             });
         }
 
         function pilihJawaban(btn, benar, event) {
+            console.log(j.benar, typeof j.benar);
             if (sudahMenjawab) return;
             sudahMenjawab = true;
 
