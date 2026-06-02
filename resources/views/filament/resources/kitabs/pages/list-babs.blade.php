@@ -19,7 +19,7 @@
         <!-- HEADER IMAGE -->
         <div class="home-header">
             <img src="{{ $kitab->media
-                    ? asset($kitab->media) :
+                    ? asset('storage/'.$kitab->media) :
                     asset('image/book.png')
                     }}" class="header-bg">
             <div class="header-overlay">
@@ -66,7 +66,7 @@
             <a href="/app/babs/{{$item->id}}/hadits" class="book-card">
                 <div class="book-card-image">
                     <img src="{{ $item->media
-                    ? asset($item->media) :
+                    ? asset('storage/'. $item->media) :
                     asset('image/book.png')
                     }}">
                 </div>
