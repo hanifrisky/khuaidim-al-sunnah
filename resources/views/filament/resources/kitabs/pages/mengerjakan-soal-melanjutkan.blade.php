@@ -401,25 +401,32 @@ $multiplierNilai = $this->multiplierNilai();
         function checkAnswer() {
             resetBtn.style.display = 'none';
             optionsArea.style.display = 'none';
+
             const correctOrder = [...quizData[currentQIndex].jawaban]
-                .sort((a, b) => a.sort - b.sort)
-                .map(j => j.sort);
+                .sort((a, b) => Number(a.sort) - Number(b.sort))
+                .map(j => Number(j.sort));
+
+            const userOrder = currentSelection.map(Number);
 
             const isCorrect =
-                JSON.stringify(currentSelection) === JSON.stringify(correctOrder);
+                JSON.stringify(userOrder) === JSON.stringify(correctOrder);
 
             feedbackMsg.style.display = 'block';
 
             if (isCorrect) {
                 soundCorrect.currentTime = 0;
                 soundCorrect.play();
+
                 jawabanBenar++;
+
                 feedbackMsg.className = 'feedback correct';
                 feedbackMsg.textContent = 'Benar! Urutan sesuai hadis.';
             } else {
                 soundWrong.currentTime = 0;
                 soundWrong.play();
+
                 feedbackMsg.className = 'feedback wrong';
+
                 const correctLabels = correctOrder.map(sort => labelMapping[sort]);
 
                 feedbackMsg.textContent =
