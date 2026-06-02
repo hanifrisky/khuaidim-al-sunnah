@@ -264,11 +264,11 @@ $multiplierNilai = 5;
                 btn.innerText = j.jawaban;
                 btn.onclick = (e) => pilihJawaban(btn, Number(j.benar) === 1, e);
                 jawabanContainer.appendChild(btn);
+                console.log(j.benar, typeof j.benar);
             });
         }
 
         function pilihJawaban(btn, benar, event) {
-            console.log(j.benar, typeof j.benar);
             if (sudahMenjawab) return;
             sudahMenjawab = true;
 
