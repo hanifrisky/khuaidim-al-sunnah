@@ -264,7 +264,6 @@ $multiplierNilai = 5;
                 btn.innerText = j.jawaban;
                 btn.onclick = (e) => pilihJawaban(btn, Number(j.benar) === 1, e);
                 jawabanContainer.appendChild(btn);
-                console.log(j.benar, typeof j.benar);
             });
         }
 
@@ -290,9 +289,9 @@ $multiplierNilai = 5;
             } else {
                 btn.classList.add('answer-wrong');
 
-                // 🔥 TAMBAHAN: tampilkan jawaban yang benar
+                // TAMBAHAN: tampilkan jawaban yang benar
                 soalData[indexSoal].jawaban.forEach((j, i) => {
-                    if (j.benar) {
+                    if (Number(j.benar) === 1) {
                         semuaButton[i].classList.add('answer-correct');
                     }
                 });
