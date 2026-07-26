@@ -232,41 +232,44 @@ $multiplierNilai = $this->multiplierNilai();
     </style>
     <div class="soal">
         <div class="container">
-            <h2>Kuis {{$this->getKitabName()}}</h2>
-            <div class="progress" id="progressText">Soal 1 dari 40</div>
+            <h2>اختبار {{$this->getKitabName()}}</h2>
+            <div class="progress" id="progressText">السؤال ١ من ٤٠</div>
 
             <div class="question-box" id="questionText">
                 Loading...
             </div>
 
             <div class="answer-area" id="answerArea">
-                <div class="answer-placeholder">Ketuk pilihan di bawah untuk mengurutkan</div>
+                <div class="answer-placeholder">اضغط على الخيارات أدناه للترتيب</div>
             </div>
 
             <div class="options-area" id="optionsArea">
             </div>
             <button class="btn-next" id="resetBtn" onclick="resetSelection()" style="display:none; background:#9e9e9e;">
-                Reset
+                إعادة تعيين
             </button>
             <div class="feedback" id="feedbackMsg"></div>
-            <button class="btn-next" id="nextBtn" onclick="nextQuestion()">Soal Berikutnya</button>
+            <button class="btn-next" id="nextBtn" onclick="nextQuestion()">السؤال التالي</button>
         </div>
     </div>
     <div id="modalSelesai" class="modal-overlay">
         <div class="modal">
-            <h2>🎉 Kuis Selesai</h2>
-            <p>Nilai Akhir Kamu</p>
+            <h2>🎉 انتهى الاختبار</h2>
+            <p>درجتك النهائية</p>
             <div id="nilaiAkhir" class="modal-score"></div>
             <button
                 id="btnSelesai"
                 class="btn-finish"
                 style="margin-top: 20px; position:relative;">
-                <span id="btnSelesaiText">Selesai</span>
+                <span id="btnSelesaiText">إنهاء</span>
                 <div id="btnSpinner" class="spinner"></div>
             </button>
         </div>
     </div>
     <script>
+        function toArabicNum(num) {
+            return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        }
         const quizData = <?php echo \Illuminate\Support\Js::from($kumpulanSoal) ?>;
         const multiplierNilai = <?php echo \Illuminate\Support\Js::from($multiplierNilai) ?>;
 
@@ -311,7 +314,7 @@ $multiplierNilai = $this->multiplierNilai();
         function createPlaceholder() {
             const div = document.createElement('div');
             div.className = 'answer-placeholder';
-            div.textContent = 'Ketuk pilihan di bawah untuk mengurutkan';
+            div.textContent = 'اضغط على الخيارات أدناه للترتيب';
             return div;
         }
 
@@ -338,7 +341,7 @@ $multiplierNilai = $this->multiplierNilai();
             nextBtn.style.display = 'none';
 
             progressText.textContent =
-                `Soal ${currentQIndex + 1} dari ${quizData.length}`;
+                `السؤال ${toArabicNum(currentQIndex + 1)} من ${toArabicNum(quizData.length)}`;
 
             questionText.textContent = data.soal;
             console.log(data.jawaban);
@@ -358,7 +361,8 @@ $multiplierNilai = $this->multiplierNilai();
 
                 const labelSpan = document.createElement('span');
                 labelSpan.className = 'label';
-                const label = String.fromCharCode(65 + index);
+                const arabicLabels = ['أ', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر'];
+                const label = arabicLabels[index] || String.fromCharCode(65 + index);
                 labelSpan.textContent = label;
 
                 // simpan mapping sort -> label
@@ -420,7 +424,7 @@ $multiplierNilai = $this->multiplierNilai();
                 jawabanBenar++;
 
                 feedbackMsg.className = 'feedback correct';
-                feedbackMsg.textContent = 'Benar! Urutan sesuai hadis.';
+                feedbackMsg.textContent = 'صحيح! الترتيب مطابق للحديث.';
             } else {
                 soundWrong.currentTime = 0;
                 soundWrong.play();
@@ -430,7 +434,7 @@ $multiplierNilai = $this->multiplierNilai();
                 const correctLabels = correctOrder.map(sort => labelMapping[sort]);
 
                 feedbackMsg.textContent =
-                    'Kurang Tepat. Urutan Benar: ' +
+                    'غير صحيح. الترتيب الصحيح: ' +
                     correctLabels.join(' - ');
             }
 
@@ -464,7 +468,7 @@ $multiplierNilai = $this->multiplierNilai();
                 loadQuestion();
             } else {
                 const nilai = jawabanBenar * multiplierNilai;
-                nilaiAkhir.textContent = nilai;
+                nilaiAkhir.textContent = toArabicNum(nilai);
                 modalSelesai.style.display = 'flex';
             }
         }
