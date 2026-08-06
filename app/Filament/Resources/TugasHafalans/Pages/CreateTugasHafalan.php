@@ -17,7 +17,7 @@ class CreateTugasHafalan extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         //set tipe mengirim ke individu atau kelas
-        $title = "Tugas Hafalan ";
+        $title = "واجب الحفظ ";
         $kelas_id = $data['kelas_id'];
         // if ($data['assign'] == 'individu') {
         //     $data['kelas_id'] = null;
@@ -64,8 +64,8 @@ class CreateTugasHafalan extends CreateRecord
         $kelas_id = $data['kelas_id'];
         if (TugasHafalan::where('bab_id', $bab_id)->where('kelas_id', $kelas_id)->exists()) {
             Notification::make()
-                ->title('Gagal!')
-                ->body('Sudah membuat Tugas untuk bab ini')
+                ->title('فشل!')
+                ->body('تم إنشاء واجب لهذا الباب بالفعل')
                 ->danger()
                 ->send();
             return;

@@ -117,7 +117,7 @@
             <div class="hadits-meta">
                 @if($item->status)
                 <span class="hadits-badge badge-{{$item->status}}">
-                    {{ $item->status }}
+                    {{ $item->status === 'read' ? 'مقروء' : ($item->status === 'unread' ? 'غير مقروء' : $item->status) }}
                 </span>
                 @endif
             </div>

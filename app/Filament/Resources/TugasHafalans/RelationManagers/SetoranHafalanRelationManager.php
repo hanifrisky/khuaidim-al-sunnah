@@ -24,15 +24,16 @@ use Filament\Tables\Table;
 class SetoranHafalanRelationManager extends RelationManager
 {
     protected static string $relationship = 'SetoranHafalan';
+    protected static ?string $title = 'تسميع الحفظ';
 
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextEntry::make('siswa.name')
-                    ->label('Nama Siswa'),
+                    ->label('الطلاب'),
                 TextEntry::make('hadits.name')
-                    ->label('Hadits'),
+                    ->label('الحديث'),
 
                 FileUpload::make('media')
                     ->disabled()
@@ -41,6 +42,7 @@ class SetoranHafalanRelationManager extends RelationManager
                     ->directory('setoran-hafalan')
                     ->disk('public'),
                 Select::make('status')
+                    ->label('الحالة')
                     ->options([
                         'accepted' => 'Diterima',
                         'rejected' => 'Ditolak',
@@ -86,9 +88,11 @@ class SetoranHafalanRelationManager extends RelationManager
             ->recordTitleAttribute('hadits_id')
             ->columns([
                 TextColumn::make('siswa.name')
+                    ->label('الطلاب')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('status')
+                    ->label('الحالة')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -99,7 +103,7 @@ class SetoranHafalanRelationManager extends RelationManager
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('hadits.name')
-                    ->label('Hadits')
+                    ->label('الحديث')
                     ->sortable(),
             ])
             ->modifyQueryUsing(function ($query) {
@@ -108,6 +112,8 @@ class SetoranHafalanRelationManager extends RelationManager
             ->filters([
                 //
             ])
+            ->emptyStateHeading('لا توجد تسليمات')
+            ->emptyStateDescription('لم يتم رفع أي مقطع فيديو للتسميع بعد.')
             ->headerActions([
                 // CreateAction::make(),
                 // AssociateAction::make(),

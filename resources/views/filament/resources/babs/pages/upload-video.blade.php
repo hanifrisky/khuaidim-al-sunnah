@@ -13,7 +13,7 @@
     <form wire:submit="submit">
         {{ $this->form }}
         <div class="mt-6">
-            <x-filament::button type="submit">Simpan Video</x-filament::button>
+            <x-filament::button type="submit">حفظ الفيديو</x-filament::button>
         </div>
     </form>
     <div style="height: 100px;">

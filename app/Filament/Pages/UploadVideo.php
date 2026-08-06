@@ -76,7 +76,10 @@ class UploadVideo extends Page implements HasSchemas
             ];
         }
 
-        $this->form->fill(['setoran' => $dataRepeater]);
+        $this->form->fill([
+            'setoran' => $dataRepeater,
+            'status' => 'draft',
+        ]);
     }
 
     public function getTitle(): string|Htmlable
@@ -92,28 +95,28 @@ class UploadVideo extends Page implements HasSchemas
                     ->deletable(false)
                     ->addable(false)
                     ->reorderable(false)
-                    ->label(__('Upload Memorization Videos'))
+                    ->label('تحميل فيديوهات التسميع')
                     ->schema([
                         Hidden::make('id'),
                         TextEntry::make('hadits_name')
-                            ->label(__('Hadith')),
+                            ->label('الحديث'),
                         FileUpload::make('media')
-                            ->placeholder(__('Drag and drop your files here or browse'))
-                            ->label(__('Media'))
+                            ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
+                            ->label('فيديو التسميع')
                             ->disk('public')
                             ->directory('setoran-hafalan')
                             ->acceptedFileTypes(['video/mp4', 'video/mkv'])
-                            ->required(),
+                            ->required(fn (callable $get) => $get('../../status') === 'review'),
                     ])
                     ->columns(1),
                 Select::make('status')
-                    ->label(__('Hadith'))
+                    ->label('الحالة')
                     ->default('draft')
                     ->selectablePlaceholder(false)
                     ->required()
                     ->options([
-                        'draft' => __('Draft'),
-                        'review' => __('Publish')
+                        'draft' => 'مسودة',
+                        'review' => 'إرسال للمراجعة'
                     ])
             ])
             ->statePath('data');
@@ -133,8 +136,8 @@ class UploadVideo extends Page implements HasSchemas
         }
 
         Notification::make()
-            ->title('Berhasil!')
-            ->body('Video hafalan berhasil disimpan')
+            ->title('تم بنجاح!')
+            ->body('تم حفظ الفيديو بنجاح')
             ->success()
             ->send();
         //

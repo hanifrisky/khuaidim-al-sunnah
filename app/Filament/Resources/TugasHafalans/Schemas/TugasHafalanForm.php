@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
 
 class TugasHafalanForm
 {
@@ -71,14 +72,44 @@ class TugasHafalanForm
                     })
                     ->searchable()
                     ->preload(),
+                Select::make('kitab_id')
+                    ->label('الكتاب')
+                    ->placeholder('اختر الكتاب')
+                    ->searchPrompt('اكتب للبحث...')
+                    ->loadingMessage('جاري التحميل...')
+                    ->noSearchResultsMessage('لا توجد نتائج')
+                    ->options(\App\Models\Kitab::pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->live()
+                    ->dehydrated(false)
+                    ->afterStateHydrated(function (Select $component, $state, callable $get) {
+                        if (blank($state) && !blank($get('bab_id'))) {
+                            $bab = \App\Models\Bab::find($get('bab_id'));
+                            if ($bab) {
+                                $component->state($bab->kitab_id);
+                            }
+                        }
+                    })
+                    ->afterStateUpdated(function (callable $set) {
+                        $set('bab_id', null);
+                    }),
                 Select::make('bab_id')
                     ->searchable()
                     ->label('الباب')
+                    ->placeholder('اختر الباب')
+                    ->searchPrompt('اكتب للبحث...')
+                    ->loadingMessage('جاري التحميل...')
+                    ->noSearchResultsMessage('لا توجد نتائج')
                     ->preload()
                     ->required()
-                    //->visible(fn($get) => $get('type') === 'bab')
-                    //->required(fn($get) => $get('type') === 'bab')
-                    ->relationship('bab', 'name'),
+                    ->relationship(
+                        name: 'bab',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: fn (Builder $query, callable $get) => $query->where('kitab_id', $get('kitab_id'))
+                    )
+                    ->disabled(fn (callable $get) => empty($get('kitab_id'))),
                 Textarea::make('description')
                     ->label('Keterangan')
                     ->label('الوصف')

@@ -11,6 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
 
 class SoalForm
 {
@@ -18,11 +19,68 @@ class SoalForm
     {
         return $schema
             ->components([
+                Select::make('kitab_id')
+                    ->label('الكتاب')
+                    ->placeholder('اختر الكتاب')
+                    ->searchPrompt('اكتب للبحث...')
+                    ->loadingMessage('جاري التحميل...')
+                    ->noSearchResultsMessage('لا توجد نتائج')
+                    ->relationship('kitab', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->live()
+                    ->afterStateHydrated(function (Select $component, $state, callable $get) {
+                        if (blank($state) && !blank($get('hadits_id'))) {
+                            $hadits = \App\Models\Hadits::find($get('hadits_id'));
+                            if ($hadits) {
+                                $component->state($hadits->kitab_id);
+                            }
+                        }
+                    })
+                    ->afterStateUpdated(function (callable $set) {
+                        $set('bab_id', null);
+                        $set('hadits_id', null);
+                    }),
+                Select::make('bab_id')
+                    ->label('الباب')
+                    ->placeholder('اختر الباب')
+                    ->searchPrompt('اكتب للبحث...')
+                    ->loadingMessage('جاري التحميل...')
+                    ->noSearchResultsMessage('لا توجد نتائج')
+                    ->relationship(
+                        name: 'bab',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: fn (Builder $query, callable $get) => $query->where('kitab_id', $get('kitab_id'))
+                    )
+                    ->searchable()
+                    ->preload()
+                    ->live()
+                    ->afterStateHydrated(function (Select $component, $state, callable $get) {
+                        if (blank($state) && !blank($get('hadits_id'))) {
+                            $hadits = \App\Models\Hadits::find($get('hadits_id'));
+                            if ($hadits) {
+                                $component->state($hadits->bab_id);
+                            }
+                        }
+                    })
+                    ->afterStateUpdated(function (callable $set) {
+                        $set('hadits_id', null);
+                    })
+                    ->disabled(fn (callable $get) => empty($get('kitab_id'))),
                 Select::make('hadits_id')
                     ->label('الحديث')
-                    ->relationship('hadits', 'name')
+                    ->placeholder('اختر الحديث')
+                    ->searchPrompt('اكتب للبحث...')
+                    ->loadingMessage('جاري التحميل...')
+                    ->noSearchResultsMessage('لا توجد نتائج')
+                    ->relationship(
+                        name: 'hadits',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: fn (Builder $query, callable $get) => $query->where('bab_id', $get('bab_id'))
+                    )
+                    ->searchable()
                     ->preload()
-                    ->searchable(),
+                    ->disabled(fn (callable $get) => empty($get('bab_id'))),
                 Select::make('tipe')
                     ->label('نوع السؤال')
                     ->selectablePlaceholder(false)

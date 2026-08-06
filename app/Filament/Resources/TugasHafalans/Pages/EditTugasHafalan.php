@@ -14,7 +14,7 @@ class EditTugasHafalan extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         //set tipe mengirim ke individu atau kelas
-        $title = "Tugas Hafalan ";
+        $title = "واجب الحفظ ";
         // if ($data['assign'] == 'individu') {
         //     $data['kelas_id'] = null;
 
