@@ -84,7 +84,7 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
-    'show_language_switcher' => env('SHOW_LANGUAGE_SWITCHER', true),
+    'show_language_switcher' => env('SHOW_LANGUAGE_SWITCHER', false),
 
     /*
     |--------------------------------------------------------------------------
