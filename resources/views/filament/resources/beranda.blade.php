@@ -266,7 +266,7 @@
         <div class="header">
             <div class="welcome">
                 <h1>أهلاً وسهلاً</h1>
-                <p>زهرة الصالحة النور جنة</p>
+                <p>{{ auth()->user()->name }}</p>
             </div>
         </div>
         {{-- HERO --}}

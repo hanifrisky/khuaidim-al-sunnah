@@ -96,7 +96,7 @@ class UploadVideo extends Page implements HasSchemas
                     ->schema([
                         Hidden::make('id'),
                         TextEntry::make('hadits_name')
-                            ->label('Hadits'),
+                            ->label('الحديث'),
                         FileUpload::make('media')
                             ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
                             ->label('وسائط')
@@ -107,12 +107,13 @@ class UploadVideo extends Page implements HasSchemas
                     ])
                     ->columns(1),
                 Select::make('status')
+                    ->label('الحديث')
                     ->default('draft')
                     ->selectablePlaceholder(false)
                     ->required()
                     ->options([
-                        'draft' => 'Draft',
-                        'review' => 'Publish'
+                        'draft' => 'مسودة',
+                        'review' => 'نشر'
                     ])
             ])
             ->statePath('data');

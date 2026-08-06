@@ -59,6 +59,7 @@ class ProfileUser extends Page implements HasSchemas
         $data['user'] = [
             'name' => $user->name,
             'email' => $user->email,
+            'avatar_url' => $user->avatar_url,
         ];
 
         $this->form->fill($data);
@@ -74,6 +75,13 @@ class ProfileUser extends Page implements HasSchemas
         return $schema
             ->components([
                 Hidden::make('user_id'),
+                FileUpload::make('user.avatar_url')
+                    ->label('الصورة الشخصية')
+                    ->avatar()
+                    ->image()
+                    ->disk('public')
+                    ->directory('avatars')
+                    ->visibility('public'),
                 TextInput::make('user.name')
                     ->label('الاسم')
                     ->required(),
@@ -123,6 +131,7 @@ class ProfileUser extends Page implements HasSchemas
 
         $user->name = $data['user']['name'];
         $user->email = $data['user']['email'];
+        $user->avatar_url = $data['user']['avatar_url'] ?? null;
         if ($data['user']['password'] != null) {
             $user->password = Hash::make($data['user']['password']);
         }
