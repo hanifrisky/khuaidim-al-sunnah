@@ -23,11 +23,27 @@ class KelasResource extends Resource
     protected static ?string $model = Kelas::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingOffice2;
-    protected static ?string $label = 'الفصول';
-    protected static ?string $pluralLabel = 'الفصول';
-    protected static ?string $navigationLabel = 'الفصول';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('User Management');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Classes');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Classes');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Classes');
+    }
+
     protected static ?string $recordTitleAttribute = 'name';
-    protected static string|UnitEnum|null $navigationGroup = "إدارة المستخدمين";
     protected static ?int $navigationSort = 2;
 
     protected static function menuRole(): array

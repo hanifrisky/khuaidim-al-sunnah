@@ -20,9 +20,20 @@ class QuoteResource extends Resource
     use AksesMenu;
 
     protected static ?string $model = Quote::class;
-    protected static ?string $navigationLabel = ' الاقتباسات';
-    protected static ?string $label = 'الاقتباسات';
-    protected static ?string $pluralLabel = 'الاقتباسات';
+    public static function getModelLabel(): string
+    {
+        return __('Quotes');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Quotes');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Quotes');
+    }
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

@@ -88,7 +88,7 @@
                 name="q"
                 wire:model.defer="q"
                 value="{{ request('q') }}"
-                placeholder="ابحث عن حديث، كتاب أو موضوع">
+                placeholder="{{ __('Search Hadith, Book or Topic') }}">
             <button type="submit">🔍</button>
         </form>
     </div>
@@ -102,10 +102,10 @@
         @if(blank($q))
         <div style="text-align:center; margin-top:40px; color:#6b7280;">
             <div style="font-size:1.1rem; font-weight:600;">
-                🔍 ابدأ البحث عن حديث
+                {{ __('Start Search') }}
             </div>
             <div style="margin-top:6px; font-size:.9rem;">
-                اكتب الكلمة المفتاحية أعلاه للبحث عن الحديث
+                {{ __('Start Search Desc') }}
             </div>
         </div>
 
@@ -130,7 +130,7 @@
             ">
 
             <div style="color:#6b7280; font-size:1rem;">
-                لم يتم العثور على نتائج لـ <strong>“{{ $q }}”</strong>
+                {{ __('No results found for') }} <strong>“{{ $q }}”</strong>
             </div>
         </div>
 

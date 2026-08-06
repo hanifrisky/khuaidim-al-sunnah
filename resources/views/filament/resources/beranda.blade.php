@@ -265,7 +265,7 @@
         {{-- HEADER --}}
         <div class="header">
             <div class="welcome">
-                <h1>أهلاً وسهلاً</h1>
+                <h1>{{ __('Welcome') }}</h1>
                 <p>{{ auth()->user()->name }}</p>
             </div>
         </div>
@@ -284,7 +284,7 @@
 
 
         </div>
-        <h2 class="books-title">الكتب المقررة</h2>
+        <h2 class="books-title">{{ __('Required Books') }}</h2>
         {{-- BOOKS --}}
         <div class="books" style="padding-bottom: 100px;">
 

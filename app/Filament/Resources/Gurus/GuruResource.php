@@ -26,10 +26,25 @@ class GuruResource extends Resource
     protected static ?string $model = Guru::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Users;
-    protected static string | UnitEnum | null $navigationGroup = 'إدارة المستخدمين';
-    protected static ?string $label = 'المعلمون';
-    protected static ?string $pluralLabel = 'المعلمون';
-    protected static ?string $navigationLabel = 'المعلمون';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('User Management');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Teachers');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Teachers');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Teachers');
+    }
 
     protected static function menuRole(): array
     {

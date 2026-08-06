@@ -92,14 +92,14 @@ class UploadVideo extends Page implements HasSchemas
                     ->deletable(false)
                     ->addable(false)
                     ->reorderable(false)
-                    ->label('قم بتحميل فيديوهات الحفظ')
+                    ->label(__('Upload Memorization Videos'))
                     ->schema([
                         Hidden::make('id'),
                         TextEntry::make('hadits_name')
-                            ->label('الحديث'),
+                            ->label(__('Hadith')),
                         FileUpload::make('media')
-                            ->placeholder('اسحب ملفاتك وأفلتها هنا أو تصفح')
-                            ->label('وسائط')
+                            ->placeholder(__('Drag and drop your files here or browse'))
+                            ->label(__('Media'))
                             ->disk('public')
                             ->directory('setoran-hafalan')
                             ->acceptedFileTypes(['video/mp4', 'video/mkv'])
@@ -107,13 +107,13 @@ class UploadVideo extends Page implements HasSchemas
                     ])
                     ->columns(1),
                 Select::make('status')
-                    ->label('الحديث')
+                    ->label(__('Hadith'))
                     ->default('draft')
                     ->selectablePlaceholder(false)
                     ->required()
                     ->options([
-                        'draft' => 'مسودة',
-                        'review' => 'نشر'
+                        'draft' => __('Draft'),
+                        'review' => __('Publish')
                     ])
             ])
             ->statePath('data');

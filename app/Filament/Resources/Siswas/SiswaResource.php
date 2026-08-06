@@ -22,10 +22,26 @@ class SiswaResource extends Resource
     protected static ?string $model = Siswa::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::AcademicCap;
-    protected static string | UnitEnum | null $navigationGroup = 'إدارة المستخدمين';
-    protected static ?string $label = 'الطلاب';
-    protected static ?string $pluralLabel = 'الطلاب';
-    protected static ?string $navigationLabel = 'الطلاب';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('User Management');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Students');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Students');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Students');
+    }
+
     protected static ?int $navigationSort = 3;
 
     protected static function menuRole(): array

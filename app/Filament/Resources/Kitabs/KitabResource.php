@@ -29,11 +29,20 @@ class KitabResource extends Resource
 {
     protected static ?string $model = Kitab::class;
 
-    protected static ?string $navigationLabel = 'الكتب';
-    protected static ?string $label = 'الكتب';
-    protected static ?string $pluralLabel = 'الكتب';
+    public static function getModelLabel(): string
+    {
+        return __('Books');
+    }
 
-    // protected static ?int $navigationSort = 1;
+    public static function getPluralModelLabel(): string
+    {
+        return __('Books');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Books');
+    }
 
     protected static string|BackedEnum|null $navigationIcon = "heroicon-s-book-open";
 

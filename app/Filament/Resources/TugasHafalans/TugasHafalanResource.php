@@ -26,11 +26,27 @@ class TugasHafalanResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
     // protected static string | UnitEnum | null $navigationGroup = 'إدارة المهام';
-    protected static ?string $label = 'تكاليف الحفظ';
-    protected static ?string $pluralLabel = 'تكاليف الحفظ';
-    protected static ?string $navigationLabel = 'تكاليف الحفظ';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Task Management');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Memorization Tasks');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Memorization Tasks');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Memorization Tasks');
+    }
+
     protected static ?int $navigationSort = 1;
-    protected static string | UnitEnum | null $navigationGroup = 'إدارة المهام';
 
     public static function shouldRegisterNavigation(): bool
     {

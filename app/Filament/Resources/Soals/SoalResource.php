@@ -23,11 +23,25 @@ class SoalResource extends Resource
     protected static ?string $model = Soal::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ClipboardDocumentList;
-    protected static string|UnitEnum|null $navigationGroup = 'إدارة المهام';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Task Management');
+    }
 
-    protected static ?string $label = 'بنك الأسئلة';
-    protected static ?string $pluralLabel = 'بنك الأسئلة';
-    protected static ?string $navigationLabel = 'بنك الأسئلة';
+    public static function getModelLabel(): string
+    {
+        return __('Question Bank');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Question Bank');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Question Bank');
+    }
 
     protected static function menuRole(): array
     {

@@ -110,9 +110,9 @@ class TugasHafalanForm
                     ->label('الحالة')
                     ->required()
                     ->options([
-                        'draft' => 'Draft',
-                        'publish' => 'Publish',
-                        'archieve' => 'Archieve',
+                        'draft' => __('Draft'),
+                        'publish' => __('Publish'),
+                        'archieve' => __('Archieve'),
                     ])
                     ->default('draft'),
             ]);

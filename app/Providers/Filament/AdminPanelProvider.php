@@ -56,12 +56,19 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                \App\Http\Middleware\LocaleMiddleware::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
             ])
             ->globalSearch(false)
-            ->viteTheme('resources/css/filament/admin/theme.css');
+            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->renderHook(
+                'panels::user-menu.before',
+                fn(): string => config('app.show_language_switcher', true)
+                    ? view('components.language-switcher')->render()
+                    : '',
+            );
         // ->renderHook(
         //     // This line tells us where to render it
         //     'panels::body.end',

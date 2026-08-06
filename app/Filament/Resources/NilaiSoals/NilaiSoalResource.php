@@ -23,11 +23,25 @@ class NilaiSoalResource extends Resource
     protected static ?string $model = NilaiSoal::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static string|UnitEnum|null $navigationGroup = 'إدارة المهام';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Task Management');
+    }
 
-    protected static ?string $label = 'درجات الاختبارات';
-    protected static ?string $pluralLabel = 'درجات الاختبارات';
-    protected static ?string $navigationLabel = 'درجات الاختبارات';
+    public static function getModelLabel(): string
+    {
+        return __('Test Scores');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Test Scores');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Test Scores');
+    }
 
     protected static function menuRole(): array
     {

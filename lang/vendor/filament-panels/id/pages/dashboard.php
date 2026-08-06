@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => 'القائمة الرئيسية',
+    'title' => 'Beranda',
 
     'actions' => [
 

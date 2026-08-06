@@ -59,6 +59,12 @@ class TugasHafalansTable
                 TextColumn::make('status')
                     ->badge()
                     ->label('الحالة')
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'draft' => __('Draft'),
+                        'publish' => __('Publish'),
+                        'archieve' => __('Archieve'),
+                        default => $state,
+                    })
                     ->color(fn(string $state): string => match ($state) {
                         'draft' => 'gray',
                         'publish' => 'success',

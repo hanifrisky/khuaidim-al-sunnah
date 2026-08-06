@@ -24,11 +24,27 @@ class SetoranHafalanResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
     // protected static string | UnitEnum | null $navigationGroup = 'إدارة المهام';
     //protected static bool $shouldRegisterNavigation = false;
-    protected static ?string $label = 'Setoran Hafalan';
-    protected static ?string $pluralLabel = 'Setoran Hafalan';
-    protected static ?string $navigationLabel = 'Setoran Hafalan';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Task Management');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Memorization Submissions');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Memorization Submissions');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Memorization Submissions');
+    }
+
     protected static ?int $navigationSort = 2;
-    protected static string | UnitEnum | null $navigationGroup = 'إدارة المهام';
     protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Schema $schema): Schema

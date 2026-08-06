@@ -25,7 +25,10 @@ class HaditsResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Manajemen Hadits';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Hadith Management');
+    }
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?int $navigationSort = 3;

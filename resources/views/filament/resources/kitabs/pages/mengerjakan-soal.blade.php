@@ -182,7 +182,7 @@ $multiplierNilai = 5;
         <div class="quiz-card">
 
             <div class="quiz-number">
-                السؤال <span id="nomorSoal">١</span> / {{ strtr($kumpulanSoal->count(), ['0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩']) }}
+                {{ __('Question') }} <span id="nomorSoal">1</span> {{ __('of') }} {{ app()->getLocale() === 'ar' ? strtr($kumpulanSoal->count(), ['0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩']) : $kumpulanSoal->count() }}
             </div>
 
             <div id="soalText" class="quiz-question"></div>
@@ -191,7 +191,7 @@ $multiplierNilai = 5;
             <div id="jawabanContainer" class="quiz-answers"></div>
 
             <button id="btnLanjut" class="btn-next">
-                التالي
+                {{ __('Next') }}
             </button>
 
         </div>
@@ -200,14 +200,14 @@ $multiplierNilai = 5;
     {{-- MODAL --}}
     <div id="modalSelesai" class="modal-overlay">
         <div class="modal">
-            <h2>🎉 انتهى الاختبار</h2>
-            <p>درجتك النهائية</p>
+            <h2>{{ __('Quiz Finished') }}</h2>
+            <p>{{ __('Your Final Score') }}</p>
             <div id="nilaiAkhir" class="modal-score"></div>
             <button
                 id="btnSelesai"
                 class="btn-finish"
                 style="margin-top: 20px;">
-                إنهاء
+                {{ __('Finish') }}
             </button>
         </div>
     </div>
@@ -215,7 +215,10 @@ $multiplierNilai = 5;
     {{-- Inject Data --}}
     <script>
         function toArabicNum(num) {
-            return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            if (<?php echo \Illuminate\Support\Js::from(app()->getLocale() === 'ar') ?>) {
+                return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            }
+            return num;
         }
         const soalData = <?php echo \Illuminate\Support\Js::from($kumpulanSoal) ?>;
         const multiplierNilai = <?php echo \Illuminate\Support\Js::from($multiplierNilai) ?>;
@@ -259,7 +262,7 @@ $multiplierNilai = 5;
             const soal = soalData[indexSoal];
             nomorSoal.innerText = toArabicNum(indexSoal + 1);
             soalText.innerHTML = soal.soal;
-            petunjukText.innerHTML = 'إرشاد: ' + soal.petunjuk;
+            petunjukText.innerHTML = <?php echo \Illuminate\Support\Js::from(__('Guidance:')) ?> + ' ' + soal.petunjuk;
 
             soal.jawaban.forEach(j => {
                 const btn = document.createElement('button');

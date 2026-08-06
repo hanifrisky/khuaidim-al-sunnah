@@ -232,43 +232,46 @@ $multiplierNilai = $this->multiplierNilai();
     </style>
     <div class="soal">
         <div class="container">
-            <h2>اختبار {{$this->getKitabName()}}</h2>
-            <div class="progress" id="progressText">السؤال ١ من ٤٠</div>
+            <h2>{{ __('Quiz') }} {{$this->getKitabName()}}</h2>
+            <div class="progress" id="progressText">{{ __('Question') }} {{ app()->getLocale() === 'ar' ? '١' : '1' }} {{ __('of') }} {{ app()->getLocale() === 'ar' ? strtr($kumpulanSoal->count(), ['0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩']) : $kumpulanSoal->count() }}</div>
 
             <div class="question-box" id="questionText">
                 Loading...
             </div>
 
             <div class="answer-area" id="answerArea">
-                <div class="answer-placeholder">اضغط على الخيارات أدناه للترتيب</div>
+                <div class="answer-placeholder">{{ __('Press the options below to arrange') }}</div>
             </div>
 
             <div class="options-area" id="optionsArea">
             </div>
             <button class="btn-next" id="resetBtn" onclick="resetSelection()" style="display:none; background:#9e9e9e;">
-                إعادة تعيين
+                {{ __('Reset') }}
             </button>
             <div class="feedback" id="feedbackMsg"></div>
-            <button class="btn-next" id="nextBtn" onclick="nextQuestion()">السؤال التالي</button>
+            <button class="btn-next" id="nextBtn" onclick="nextQuestion()">{{ __('Next Question') }}</button>
         </div>
     </div>
     <div id="modalSelesai" class="modal-overlay">
         <div class="modal">
-            <h2>🎉 انتهى الاختبار</h2>
-            <p>درجتك النهائية</p>
+            <h2>{{ __('Quiz Finished') }}</h2>
+            <p>{{ __('Your Final Score') }}</p>
             <div id="nilaiAkhir" class="modal-score"></div>
             <button
                 id="btnSelesai"
                 class="btn-finish"
                 style="margin-top: 20px; position:relative;">
-                <span id="btnSelesaiText">إنهاء</span>
+                <span id="btnSelesaiText">{{ __('Finish') }}</span>
                 <div id="btnSpinner" class="spinner"></div>
             </button>
         </div>
     </div>
     <script>
         function toArabicNum(num) {
-            return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            if (<?php echo \Illuminate\Support\Js::from(app()->getLocale() === 'ar') ?>) {
+                return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            }
+            return num;
         }
         const quizData = <?php echo \Illuminate\Support\Js::from($kumpulanSoal) ?>;
         const multiplierNilai = <?php echo \Illuminate\Support\Js::from($multiplierNilai) ?>;
@@ -314,7 +317,7 @@ $multiplierNilai = $this->multiplierNilai();
         function createPlaceholder() {
             const div = document.createElement('div');
             div.className = 'answer-placeholder';
-            div.textContent = 'اضغط على الخيارات أدناه للترتيب';
+            div.textContent = <?php echo \Illuminate\Support\Js::from(__('Press the options below to arrange')) ?>;
             return div;
         }
 
@@ -340,8 +343,10 @@ $multiplierNilai = $this->multiplierNilai();
             feedbackMsg.style.display = 'none';
             nextBtn.style.display = 'none';
 
+            const qWord = <?php echo \Illuminate\Support\Js::from(__('Question')) ?>;
+            const ofWord = <?php echo \Illuminate\Support\Js::from(__('of')) ?>;
             progressText.textContent =
-                `السؤال ${toArabicNum(currentQIndex + 1)} من ${toArabicNum(quizData.length)}`;
+                `${qWord} ${toArabicNum(currentQIndex + 1)} ${ofWord} ${toArabicNum(quizData.length)}`;
 
             questionText.textContent = data.soal;
             console.log(data.jawaban);
@@ -424,7 +429,7 @@ $multiplierNilai = $this->multiplierNilai();
                 jawabanBenar++;
 
                 feedbackMsg.className = 'feedback correct';
-                feedbackMsg.textContent = 'صحيح! الترتيب مطابق للحديث.';
+                feedbackMsg.textContent = <?php echo \Illuminate\Support\Js::from(__('Correct! The order matches the Hadith.')) ?>;
             } else {
                 soundWrong.currentTime = 0;
                 soundWrong.play();
@@ -434,7 +439,7 @@ $multiplierNilai = $this->multiplierNilai();
                 const correctLabels = correctOrder.map(sort => labelMapping[sort]);
 
                 feedbackMsg.textContent =
-                    'غير صحيح. الترتيب الصحيح: ' +
+                    <?php echo \Illuminate\Support\Js::from(__('Incorrect. The correct order is:')) ?> + ' ' +
                     correctLabels.join(' - ');
             }
 

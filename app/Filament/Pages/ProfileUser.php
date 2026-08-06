@@ -34,7 +34,10 @@ class ProfileUser extends Page implements HasSchemas
     protected static ?string $slug = 'profile';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::User;
     protected static ?int $navigationSort = 4;
-    protected static ?string $navigationLabel = 'الملف الشخصي';
+    public static function getNavigationLabel(): string
+    {
+        return __('Profile');
+    }
 
     public ?array $data = [];
 
@@ -76,38 +79,38 @@ class ProfileUser extends Page implements HasSchemas
             ->components([
                 Hidden::make('user_id'),
                 FileUpload::make('user.avatar_url')
-                    ->label('الصورة الشخصية')
+                    ->label(__('Avatar'))
                     ->avatar()
                     ->image()
                     ->disk('public')
                     ->directory('avatars')
                     ->visibility('public'),
                 TextInput::make('user.name')
-                    ->label('الاسم')
+                    ->label(__('Name'))
                     ->required(),
                 TextInput::make('user.email')
-                    ->label('البريد الإلكتروني')
+                    ->label(__('Email'))
                     ->email()
                     ->required(),
                 TextInput::make('identitas')
-                    ->label('هوية')
+                    ->label(__('Identity'))
                     ->hidden(fn(): bool => self::isRole('admin')),
                 Select::make('jenis_kelamin')
                     ->hidden(fn(): bool => self::isRole('admin'))
                     ->selectablePlaceholder(false)
-                    ->label('جنس')
+                    ->label(__('Gender'))
                     ->options([
-                        'laki-laki' => 'رجل',
-                        'perempuan' => 'امرأة',
+                        'laki-laki' => __('Male'),
+                        'perempuan' => __('Female'),
                     ])
                     ->default('laki-laki'),
                 TextInput::make('telp')
-                    ->label('هاتف')
+                    ->label(__('Phone'))
                     ->hidden(fn(): bool => self::isRole('admin'))
                     ->tel(),
                 TextInput::make('user.password')
-                    ->label('كلمة مرور جديدة')
-                    ->placeholder('اترك هذا الحقل فارغًا إذا كنت لا ترغب في الاستبدال')
+                    ->label(__('New Password'))
+                    ->placeholder(__('Leave blank if you do not want to change'))
                     ->password()
                 //->dehydrateStateUsing(fn($state): string => Hash::make($state))
 

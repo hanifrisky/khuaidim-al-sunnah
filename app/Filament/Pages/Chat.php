@@ -13,7 +13,10 @@ class Chat extends Page
 {
     protected string $view = 'filament.resources.chat';
     protected static ?int $navigationSort = 3;
-    protected static ?string $navigationLabel = 'تواصل';
+    public static function getNavigationLabel(): string
+    {
+        return __('Notifications');
+    }
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ChatBubbleLeft;
     /** query pencarian */
