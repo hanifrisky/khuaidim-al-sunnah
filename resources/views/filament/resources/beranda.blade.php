@@ -1,3 +1,7 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Reem+Kufi:wght@400..700&family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+
 <style>
     /* RESET FILAMENT */
     .filament-page,
@@ -60,75 +64,85 @@
     .header {
         display: flex;
         justify-content: space-between;
-        padding: 20px;
+        padding: 24px 20px 16px;
     }
 
     .welcome h1 {
-        font-size: 22px;
-        font-weight: 700;
+        font-family: 'Cairo', sans-serif;
+        font-size: 24px;
+        font-weight: 800;
+        color: #0f172a;
     }
 
     .welcome p {
-        font-size: 12px;
-        color: #555;
+        font-family: 'Cairo', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #475569;
+        margin-top: 2px;
     }
 
     .hero {
         position: relative;
         padding: 20px;
         min-height: 220px;
-        margin-top: -50px;
+        margin-top: -30px;
     }
 
     .books-title {
-        color: black;
+        color: #0f172a;
         font-size: 22px;
-        font-weight: 700;
-
+        font-weight: 800;
+        font-family: 'Cairo', sans-serif;
         padding: 0 20px;
-        margin: 10px 0 12px;
-
-        letter-spacing: .5px;
+        margin: 20px 0 14px;
     }
 
     /* BUKU */
     .book-stack {
         position: absolute;
-        left: -20px;
-        top: 20px;
-        width: 200px;
+        left: -15px;
+        top: 10px;
+        width: 175px;
         z-index: 5;
-        /* di atas quote */
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25));
     }
 
     /* QUOTE */
     .quote {
         position: absolute;
         left: 0;
-        top: 100px;
-        /* di bawah buku */
+        top: 85px;
         right: 200px;
-        /* space dari sisi kanan layar */
 
-        background: #0f3c4c;
+        background: linear-gradient(135deg, rgba(15, 60, 76, 0.95), rgba(8, 43, 56, 0.95));
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         color: white;
-        border-radius: 0 20px 20px 0;
-        padding: 18px 20px 18px 160px;
-        /* geser teks dari buku */
-
+        border-radius: 0 24px 24px 0;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-left: none;
+        padding: 20px 24px 20px 150px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
         z-index: 1;
     }
 
     .quote p {
         margin: 0;
-        font-size: 14px;
-        line-height: 1.4;
+        font-family: 'Amiri', serif;
+        font-size: 1.15rem;
+        line-height: 1.6;
+        direction: rtl;
+        text-align: right;
     }
 
     .quote small {
         display: block;
-        margin-top: 6px;
-        opacity: .8;
+        margin-top: 8px;
+        font-family: 'Cairo', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        opacity: .85;
     }
 
     .header-overlay {
@@ -161,12 +175,14 @@
     /* CARD */
     .book-card {
         position: relative;
-        min-height: 200px;
-        border-radius: 12px;
+        width: 100%;
+        aspect-ratio: 3/4;
+        border-radius: 16px;
         overflow: hidden;
         cursor: pointer;
-        transition: transform .25s ease, box-shadow .25s ease;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, .15);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
 
     /* OVERLAY GRADIENT */
@@ -174,10 +190,10 @@
         position: absolute;
         inset: 0;
         background: linear-gradient(to top,
-                rgba(0, 0, 0, .90),
-                rgba(0, 0, 0, .35),
-                rgba(0, 0, 0, 0));
-        transition: opacity .25s ease;
+                rgba(15, 23, 42, 0.95) 15%,
+                rgba(15, 23, 42, 0.55) 50%,
+                rgba(15, 23, 42, 0) 100%);
+        transition: all 0.3s ease;
         z-index: 1;
     }
 
@@ -187,30 +203,39 @@
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 12px;
+        padding: 16px 12px;
         z-index: 2;
         color: #fff;
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+        backdrop-filter: blur(2px);
     }
 
     /* TEKS */
     .book-card h3 {
-        font-size: 14px;
-        margin: 0 0 4px;
+        font-family: 'Cairo', sans-serif;
+        font-weight: 700;
+        font-size: 13.5px;
+        margin: 0 0 5px;
+        line-height: 1.4;
     }
 
     .book-card p {
+        font-family: 'Cairo', sans-serif;
+        font-weight: 400;
         font-size: 11px;
-        opacity: .9;
+        color: #cbd5e1;
+        opacity: .95;
     }
 
     /* HOVER */
     .book-card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 14px 30px rgba(0, 0, 0, .25);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.22);
+        border-color: rgba(255, 255, 255, 0.25);
     }
 
     .book-card:hover .book-overlay {
-        opacity: .85;
+        opacity: 0.8;
     }
 
 
