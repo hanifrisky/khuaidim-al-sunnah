@@ -145,6 +145,7 @@ class TugasHafalanForm
                         'publish' => __('Publish'),
                         'archieve' => __('Archieve'),
                     ])
+                    ->selectablePlaceholder(false)
                     ->default('draft'),
             ]);
     }

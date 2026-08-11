@@ -154,8 +154,8 @@ class ProfileUser extends Page implements HasSchemas
         }
 
         Notification::make()
-            ->title('Berhasil!')
-            ->body('Berhasil disimpan')
+            ->title('تم بنجاح!')
+            ->body('تم الحفظ بنجاح')
             ->success()
             ->send();
         //

@@ -17,8 +17,9 @@ class SoalsTable
             ->columns([
                 TextColumn::make('soal')
                     ->label('السؤال')
+                    ->html()
                     ->limit(50)
-                    ->tooltip(fn($record) => $record->soal)
+                    ->tooltip(fn($record) => strip_tags($record->soal))
                     ->wrap()
                     ->searchable(),
                 TextColumn::make('kitab.name')

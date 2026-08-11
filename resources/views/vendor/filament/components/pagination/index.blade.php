@@ -10,6 +10,24 @@
 
     $isRtl = __('filament-panels::layout.direction') === 'rtl';
     $isSimple = ! $paginator instanceof \Illuminate\Pagination\LengthAwarePaginator;
+
+    $toArabicNumerals = function ($value) {
+        if (app()->getLocale() !== 'ar') {
+            return $value;
+        }
+        return strtr((string) $value, [
+            '0' => '٠',
+            '1' => '١',
+            '2' => '٢',
+            '3' => '٣',
+            '4' => '٤',
+            '5' => '٥',
+            '6' => '٦',
+            '7' => '٧',
+            '8' => '٨',
+            '9' => '٩',
+        ]);
+    };
 @endphp
 
 <nav
@@ -45,14 +63,16 @@
     @if (! $isSimple)
         <span class="fi-pagination-overview">
             {{
-                trans_choice(
-                    'filament::components/pagination.overview',
-                    $paginator->total(),
-                    [
-                        'first' => \Illuminate\Support\Number::format($paginator->firstItem() ?? 0),
-                        'last' => \Illuminate\Support\Number::format($paginator->lastItem() ?? 0),
-                        'total' => \Illuminate\Support\Number::format($paginator->total()),
-                    ],
+                $toArabicNumerals(
+                    trans_choice(
+                        'filament::components/pagination.overview',
+                        $paginator->total(),
+                        [
+                            'first' => \Illuminate\Support\Number::format($paginator->firstItem() ?? 0),
+                            'last' => \Illuminate\Support\Number::format($paginator->lastItem() ?? 0),
+                            'total' => \Illuminate\Support\Number::format($paginator->total()),
+                        ],
+                    )
                 )
             }}
         </span>
@@ -67,7 +87,7 @@
                     >
                         @foreach ($pageOptions as $option)
                             <option value="{{ $option }}">
-                                {{ $option === 'all' ? __('filament::components/pagination.fields.records_per_page.options.all') : $option }}
+                                {{ $option === 'all' ? __('filament::components/pagination.fields.records_per_page.options.all') : $toArabicNumerals($option) }}
                             </option>
                         @endforeach
                     </x-filament::input.select>
@@ -87,7 +107,7 @@
                     >
                         @foreach ($pageOptions as $option)
                             <option value="{{ $option }}">
-                                {{ $option === 'all' ? __('filament::components/pagination.fields.records_per_page.options.all') : $option }}
+                                {{ $option === 'all' ? __('filament::components/pagination.fields.records_per_page.options.all') : $toArabicNumerals($option) }}
                             </option>
                         @endforeach
                     </x-filament::input.select>
@@ -162,7 +182,7 @@
                         <x-filament::pagination.item
                             :active="$page === $paginator->currentPage()"
                             :aria-label="trans_choice('filament::components/pagination.actions.go_to_page.label', $page, ['page' => \Illuminate\Support\Number::format($page)])"
-                            :label="\Illuminate\Support\Number::format($page)"
+                            :label="$toArabicNumerals(\Illuminate\Support\Number::format($page))"
                             :wire:click="'gotoPage(' . $page . ', \'' . $paginator->getPageName() . '\')'"
                             :wire:key="$this->getId() . '.pagination.' . $paginator->getPageName() . '.' . $page"
                         />

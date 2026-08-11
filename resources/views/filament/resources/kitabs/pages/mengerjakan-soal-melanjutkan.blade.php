@@ -348,7 +348,7 @@ $multiplierNilai = $this->multiplierNilai();
             progressText.textContent =
                 `${qWord} ${toArabicNum(currentQIndex + 1)} ${ofWord} ${toArabicNum(quizData.length)}`;
 
-            questionText.textContent = data.soal;
+            questionText.innerHTML = data.soal;
             console.log(data.jawaban);
             // tampilkan jawaban (acak jika perlu)
             const shuffledJawaban = shuffleArray(data.jawaban);

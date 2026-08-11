@@ -44,15 +44,15 @@ class SetoranHafalanRelationManager extends RelationManager
                 Select::make('status')
                     ->label('الحالة')
                     ->options([
-                        'accepted' => 'Diterima',
-                        'rejected' => 'Ditolak',
+                        'accepted' => 'مقبول',
+                        'rejected' => 'مرفوض',
                     ])
                     ->selectablePlaceholder(false)
                     ->required()
                     ->default('assigned'),
                 Textarea::make('keterangan')
-                    ->placeholder('Masukkan keterangan ditolak')
-                    ->label('Keterangan ditolak')
+                    ->placeholder('أدخل ملاحظات الرفض')
+                    ->label('ملاحظات الرفض')
                     ->columnSpanFull(),
             ]);
     }
@@ -93,6 +93,21 @@ class SetoranHafalanRelationManager extends RelationManager
                     ->sortable(),
                 TextColumn::make('status')
                     ->label('الحالة')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'accepted' => 'مقبول',
+                        'rejected' => 'مرفوض',
+                        'review' => 'قيد المراجعة',
+                        'assigned' => 'مكلف',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'accepted' => 'success',
+                        'rejected' => 'danger',
+                        'review' => 'warning',
+                        'assigned' => 'gray',
+                        default => 'primary',
+                    })
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
